@@ -5,5 +5,3 @@ To set up Rstudio: File -> New Project -> Version Control -> git -> enter: https
 Follow this tutorial: http://www.geo.uzh.ch/microsite/reproducible_research/post/rr-rstudio-git/
 
 Test commit
-
-Test commit erik
