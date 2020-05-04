@@ -30,6 +30,10 @@ addCitationMarks <- function (x){
 formatDate <- function(x){
   return(format(x, "%Y-%m-%d"))
 }
+#function to remove special characters (prevent SQL error)
+removeSpecialCharacters <-function(x){
+  return(iconv(x, to="ASCII//TRANSLIT"))
+}
 myAggregate <- function(x){
   if (typeof(x) == "double" || typeof(x) == "integer"){
     return(mean(x))
@@ -39,8 +43,8 @@ myAggregate <- function(x){
     } else {
       return = ""
       for (element in x){
-        if(!grepl(element, return, fixed=TRUE)){
-          return = paste(return, element, sep= ", ") 
+        if(!grepl(element, return, fixed=TRUE) && length(element) != 0){
+          return = paste(return, element, sep= "; ") 
         }
       }
       return(return)
@@ -73,9 +77,8 @@ saveToDB <- function(data, db, tableName, columns, maxItems){
 call_country = "https://api.openaq.org/v1/countries?limit=10000"
 countries = as.data.frame(fromJSON(content(GET(call_country), "text"), flatten = TRUE))
 
-#retrieve all available locations from the openaq api
-
-for (country in countries$results.code){
+#retrieve all available locations from the openaq api locations in china will be ignored
+for (country in countries$results.code[ countries$results.code != "CN"]){
   print(country)
   locations <- data.frame()
   call_locations = paste("https://api.openaq.org/v1/locations?limit=10000&country[]=", country, sep = "")
@@ -108,6 +111,7 @@ for (country in countries$results.code){
         }
       }else{
         print("    Google API Request failed")
+        state = country
       }
       
       #retrieve openaq information while adhere to the max limit of 10000 samples
@@ -144,13 +148,14 @@ for (country in countries$results.code){
     names(observations)[names(observations) == 'coordinates.longitude'] <- 'longitude'
     names(observations)[names(observations) == 'coordinates.latitude'] <- 'latitude'
     
-    observations = observations[observations$value >= 0, ]
+    observations = observations[observations$value > 0, ]
     observations$date = sapply(as.POSIXct(observations$date.utc,tz='UTC'), formatDate)
     observations = subset(observations, select=-c(date.local, date.utc))
-    observations$location = strtrim( observations$location, 120)
-    observations$state = strtrim( observations$state, 120)
-    observations_location = aggregate(observations[c("value")], by=list(location= observations$location, state = observations$state, parameter = observations$parameter, unit = observations$unit, country = observations$country, city = observations$city, date = observations$date, latitude= observations$latitude, longitude= observations$longitude),FUN=mean, drop = TRUE)
-    observations_state = aggregate(observations[c("value", "latitude", "longitude")], by=list(state = observations$state, parameter = observations$parameter, unit = observations$unit, country = observations$country, date = observations$date),FUN=mean, drop = TRUE)
+    observations$location = sapply(strtrim( observations$location, 120), removeSpecialCharacters)
+    observations$city = sapply(strtrim( observations$city, 120), removeSpecialCharacters)
+    observations$state = sapply(strtrim( observations$state, 120), removeSpecialCharacters)
+    observations_location = aggregate(observations[c("value", "state", "unit", "country", "latitude", "longitude")], by=list(location= observations$location, parameter = observations$parameter, city = observations$city, date = observations$date),FUN=myAggregate, drop = TRUE)
+    observations_state = aggregate(observations[c("value", "latitude", "longitude", "unit")], by=list(state = observations$state, parameter = observations$parameter, country = observations$country, date = observations$date),FUN=myAggregate, drop = TRUE)
     
     #save processed data local as backup
     write.csv(observations_state, paste("D:/Programming/R/BigDataAnalytics/data/openaq/backup_data/",country, "_state.csv"))
