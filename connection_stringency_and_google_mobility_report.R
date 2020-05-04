@@ -140,7 +140,8 @@ global_mobility_report <- read_delim("data/google_mobility/Global_Mobility_Repor
     
     
 ### Descriptives ----
-
+    regions = unique(merged_data_countries$Region)[is.na(unique(merged_data_countries$Region))==F] # exclude countries without region
+    
     # summary 
     summary(is.na(merged_data_countries))
     summary(merged_data_countries)
@@ -152,9 +153,18 @@ global_mobility_report <- read_delim("data/google_mobility/Global_Mobility_Repor
     print("Grocery/Pharmacy and Parks lower correlation than others")
     print("Residential strong positive correlation (obviously)")
     cor(merged_data_countries[,c("StringencyIndex", mobility_variables)] ,use = "pairwise.complete.obs")
-      
-    # Plot 
-      # Worldwide simple averages
+    
+    # In Continents/Regions
+    print("Correlation of Stringency and Mobility Variables - Regions")
+    print("Similar for all regions. Europe and Baltics have lower sensitivity of park measure.")
+    for (i in 1:length(regions)) {
+      data = merged_data_countries[merged_data_countries$Region == regions[i],c("StringencyIndex", mobility_variables)]
+      print(cor(data ,use = "pairwise.complete.obs"))
+    }
+    
+  # Plot 
+    # Worldwide simple averages
+      # get data
       stringency_mobility_ww_av = group_by(merged_data_countries, Date) %>%
         summarize(StringencyIndex = mean(StringencyIndex,na.rm=T), 
                   retail_and_recreation=  mean(retail_and_recreation, na.rm=T), 
@@ -176,10 +186,73 @@ global_mobility_report <- read_delim("data/google_mobility/Global_Mobility_Repor
         assign(name, -data$var)
       }
       
-      line_plot_multiple("Stringency and Mobility - Worldwide", outpath, stringency_mobility_ww_av$Date,"Date", "Stringency and Mobility (Mobility Change *-1)", names_y=c("Stringency Index", "log(ConfirmedCases)*5(to see better)", mobility_variables),
+      line_plot_multiple("Stringency and Mobility simple averages - Worldwide", outpath, stringency_mobility_ww_av$Date,"Date", "Stringency and Mobility (Mobility Change *-1)", names_y=c("Stringency Index", "log(ConfirmedCases)*5(to see better)", mobility_variables),
                          y_percent=F, legend=T, y1, y2,y3,y4,y5,y6,y7,y8)
       
-### Models ----
+    # Worldwide population weighed averages
+      # get data
+      stringency_mobility_ww_pop_average = group_by(merged_data_countries, Date) %>%
+        summarize(StringencyIndex = weighted.mean(StringencyIndex,dplyr::coalesce(Population,0),na.rm=T), 
+                  retail_and_recreation= weighted.mean(retail_and_recreation,dplyr::coalesce(Population,0),na.rm=T), 
+                  grocery_and_pharmacy=  weighted.mean(grocery_and_pharmacy,dplyr::coalesce(Population,0),na.rm=T), 
+                  parks=  weighted.mean(parks,dplyr::coalesce(Population,0),na.rm=T), 
+                  transit_stations=  weighted.mean(transit_stations,dplyr::coalesce(Population,0),na.rm=T), 
+                  workplaces=  weighted.mean(workplaces,dplyr::coalesce(Population,0),na.rm=T), 
+                  residential=  weighted.mean(residential,dplyr::coalesce(Population,0),na.rm=T), 
+                  ConfirmedCases=sum(ConfirmedCases,na.rm=T))
+      
+      # get plot variables
+      y1 = stringency_mobility_ww_pop_average$StringencyIndex
+      y2 = log(stringency_mobility_ww_pop_average$ConfirmedCases)*5 # log case number time random scalar for better depiction
+      
+      for (i in 1:(length(mobility_variables))) { # mobility vars + 1(stringency) +1(infected)
+        name = paste0("y",i+2)
+        data = select(stringency_mobility_ww_pop_average, mobility_variables[i])
+        colnames(data) = "var"
+        assign(name, -data$var)
+      }
+      
+      line_plot_multiple("Stringency and Mobility population-weighed Averages - Worldwide", outpath, stringency_mobility_ww_pop_average$Date,"Date", "Stringency and Mobility (Mobility Change *-1)", names_y=c("Stringency Index", "log(ConfirmedCases)*5(to see better)", mobility_variables),
+                         y_percent=F, legend=T, y1, y2,y3,y4,y5,y6,y7,y8)
+      
+    # Region population weighed averages
+      
+      for (i in 1:length(regions)) {
+        # get data
+        stringency_mobility_region_pop_average = filter(merged_data_countries, Region==regions[i]) %>%
+          group_by(Date) %>%
+          summarize(StringencyIndex = weighted.mean(StringencyIndex,dplyr::coalesce(Population,0),na.rm=T), 
+                    retail_and_recreation= weighted.mean(retail_and_recreation,dplyr::coalesce(Population,0),na.rm=T), 
+                    grocery_and_pharmacy=  weighted.mean(grocery_and_pharmacy,dplyr::coalesce(Population,0),na.rm=T), 
+                    parks=  weighted.mean(parks,dplyr::coalesce(Population,0),na.rm=T), 
+                    transit_stations=  weighted.mean(transit_stations,dplyr::coalesce(Population,0),na.rm=T), 
+                    workplaces=  weighted.mean(workplaces,dplyr::coalesce(Population,0),na.rm=T), 
+                    residential=  weighted.mean(residential,dplyr::coalesce(Population,0),na.rm=T), 
+                    ConfirmedCases=sum(ConfirmedCases,na.rm=T))
+        
+        # get plot variables
+        y1 = stringency_mobility_region_pop_average$StringencyIndex
+        y2 = log(stringency_mobility_region_pop_average$ConfirmedCases)*5 # log case number time random scalar for better depiction
+        
+        for (j in 1:(length(mobility_variables))) { # mobility vars + 1(stringency) +1(infected)
+          name = paste0("y",j+2)
+          data = select(stringency_mobility_region_pop_average, mobility_variables[j])
+          colnames(data) = "var"
+          assign(name, -data$var)
+        }
+        
+        print(line_plot_multiple(paste("Stringency and Mobility population-weighed Averages -", regions[i]), outpath, stringency_mobility_region_pop_average$Date,"Date", "Stringency and Mobility (Mobility Change *-1)", names_y=c("Stringency Index", "log(ConfirmedCases)*5(to see better)", mobility_variables),
+                           y_percent=F, legend=T, y1, y2,y3,y4,y5,y6,y7,y8))
+      }
+   
+      
+    
+### Model Stringency Index ----   
+  # Model stringency index to get it per country subregion.
+  # desired output: predicted stringency index per country subregion, for countries without subregions use reported stringency index
+    # simple
+    # with region interaction effect (europe and baltics seem to have almost no park effect)
+      
     
   
   
