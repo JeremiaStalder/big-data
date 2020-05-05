@@ -85,55 +85,27 @@ line_plot_multiple = function(title, outpath,x,xlab, ylab, names_y, y_percent, l
 
 
 ### import data ----
-nationwide_data_clean <- read_csv("data/clean/nationwide_data_clean.csv") # load nationwide data
-global_mobility_report <- read_delim("data/google_mobility/Global_Mobility_Report.csv", 
-                                     ";",col_types = cols(date = col_date(format = "%d/%m/%Y")), escape_double = FALSE, trim_ws = TRUE) # load Google Mobility Data
-
-### cleaning global_mobility_report ----
-
-  # summary 
-  summary(is.na(global_mobility_report))
-  summary(global_mobility_report)
-
-  # rename cols to match nationwide data
-  colnames(global_mobility_report)[1] = "CountryCode" 
-  colnames(global_mobility_report)[2] = "CountryName" 
-  colnames(global_mobility_report)[5] = "Date" 
-
-  # change CountryCode from na to "na" for namibia. Remove countries without code
-  global_mobility_report = mutate(global_mobility_report, CountryCode = ifelse(is.na(CountryCode) & CountryName=="Namibia", "NA", CountryCode))
-  global_mobility_report = global_mobility_report[is.na(global_mobility_report$CountryCode)==F,] # only take countries with country code
-  
-  # drop observations with NA values for indices
-    # drop if X or more indices are NA
-    max_number_missing_indices = 6 # 0==all indices necessary, 6== no index necessary
-    global_mobility_report = filter(global_mobility_report, (is.na(retail_and_recreation_percent_change_from_baseline) +
-                                                              is.na(grocery_and_pharmacy_percent_change_from_baseline) +
-                                                              is.na(parks_percent_change_from_baseline) +
-                                                              is.na(transit_stations_percent_change_from_baseline) +
-                                                              is.na(workplaces_percent_change_from_baseline) +
-                                                              is.na(residential_percent_change_from_baseline))<=max_number_missing_indices)
-  # shorten variable names
-    mobility_variables_original = c("retail_and_recreation_percent_change_from_baseline",
-                           "grocery_and_pharmacy_percent_change_from_baseline",
-                           "parks_percent_change_from_baseline",
-                           "transit_stations_percent_change_from_baseline",
-                           "workplaces_percent_change_from_baseline",
-                           "residential_percent_change_from_baseline")
-    mobility_variables = sapply(strsplit(mobility_variables_original,split="_percent_change_from_baseline"), function(x) (x[1]))
-    colnames(global_mobility_report)[colnames(global_mobility_report) %in% mobility_variables_original] = mobility_variables
-  
-
-    
-# clean short for nationwide data
-  nationwide_data_clean = mutate(nationwide_data_clean, CountryCode = ifelse(is.na(CountryCode) & CountryName=="Namibia", "NA", CountryCode)) #redo because "NA" is imported as NA
-  
-  
-                                                                      
+  nationwide_data_clean <- read_csv("data/clean/nationwide_data_clean.csv") # load nationwide data
+  global_mobility_report_clean <- read_csv("data/clean/global_mobility_report_clean.csv", 
+                                           col_types = cols(Date = col_date(format = "%Y-%m-%d"))) # load mobility data
+  # replace NA with "NA" country code
+   global_mobility_report_clean = mutate(global_mobility_report_clean, CountryCode = ifelse(is.na(CountryCode) & CountryName=="Namibia", "NA", CountryCode)) # redo because "NA" is imported as NA    
+   nationwide_data_clean = mutate(nationwide_data_clean, CountryCode = ifelse(is.na(CountryCode) & CountryName=="Namibia", "NA", CountryCode)) #redo because "NA" is imported as NA
+      
+  # define key mobility variables 
+   mobility_variables_original = c("retail_and_recreation_percent_change_from_baseline",
+                                   "grocery_and_pharmacy_percent_change_from_baseline",
+                                   "parks_percent_change_from_baseline",
+                                   "transit_stations_percent_change_from_baseline",
+                                   "workplaces_percent_change_from_baseline",
+                                   "residential_percent_change_from_baseline")
+   mobility_variables = sapply(strsplit(mobility_variables_original,split="_percent_change_from_baseline"), function(x) (x[1]))
+   
+                                                                     
 ###  merge data (country level) ----
   
    # inner join by CountryCode and Date. Remove obs where one of the datapoints is not given. Remove CountryName of nationwide data
-   merged_data = inner_join(global_mobility_report, select(nationwide_data_clean,-CountryName), by = c("CountryCode", "Date")) 
+   merged_data = inner_join(global_mobility_report_clean, select(nationwide_data_clean,-CountryName), by = c("CountryCode", "Date")) 
   
   # get only country data
     merged_data_countries = filter(merged_data, is.na(sub_region_1))
@@ -248,7 +220,7 @@ global_mobility_report <- read_delim("data/google_mobility/Global_Mobility_Repor
       
     
 ### Model Stringency Index ----   
-  # Model stringency index to get it per country subregion.
+  # Model stringency index to get proxy for stringency per country subregion?
   # desired output: predicted stringency index per country subregion, for countries without subregions use reported stringency index
     # simple
     # with region interaction effect (europe and baltics seem to have almost no park effect)
