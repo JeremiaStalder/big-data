@@ -4,11 +4,13 @@
 #install.packages("jsonlite")
 #install.packages("RMariaDB")
 #install.packages("utf8")
+#install.packages("data.table")
 
 library(httr)
 library(jsonlite)
 library(RMariaDB)
 library(utf8)
+library(data.table)
 
 #define variables
 dbuser='bdauser'
@@ -18,6 +20,7 @@ dbhost='35.193.193.138'
 found <- 0
 notworking <- 0
 totalnumobservations <- 0
+path = "data/9fc1e440-a83e-4d45-82a6-093e2c785907.csv"
 
 #define functions
 #function to reduce the length of a string
@@ -88,6 +91,12 @@ saveToDB <- function(data, db, tableName, columns, maxItems){
     dbExecute(db, query)
   }
 }
+
+#load data from csv
+data <- fread(path, verbose = TRUE)
+
+#get data with them latitude/longitude and get geolocation
+data[, geocode:=do.call(paste0,.SD), .SDcols=-1]
 
 #retrieve all available countries from the openaq api
 call_country = "https://api.openaq.org/v1/countries?limit=10000"
