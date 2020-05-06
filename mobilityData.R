@@ -1,9 +1,16 @@
 ### cleaning global_mobility_report ----
 
+# librarys
+library(tidyverse)
+library(readr)
+library(zoo)
+
 ### import data ----
 
 global_mobility_report <- read_delim("data/google_mobility/Global_Mobility_Report.csv", 
                                      ";",col_types = cols(date = col_date(format = "%d/%m/%Y")), escape_double = FALSE, trim_ws = TRUE) # load Google Mobility Data
+
+
 ### Prepocessing ----
   # summary 
     summary(is.na(global_mobility_report))
