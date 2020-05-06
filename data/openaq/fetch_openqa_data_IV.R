@@ -1,5 +1,7 @@
 ## Script to request data from openaq api
 
+setwd("D:/Programming/R/BigDataAnalytics/data/openaq")
+
 #install.packages("httr")
 #install.packages("jsonlite")
 #install.packages("RMariaDB")
@@ -20,17 +22,19 @@ dbhost='35.193.193.138'
 found <- 0
 notworking <- 0
 totalnumobservations <- 0
-path = "data/9fc1e440-a83e-4d45-82a6-093e2c785907.csv"
+data_path = "data/9fc1e440-a83e-4d45-82a6-093e2c785907.csv"
+isoDict_path = "data/wikipedia-iso-country-codes.csv"
+save_path = "data/"
 
 #define functions
 #function to reduce the length of a string
 reduceLength <- function(x, maxlength){
   output = vector()
-  for (element in x){
-    if (nchar(element)>maxlength){
-      output = append(output, substr(element, 1, maxlength))
+  for (i in 1:length(x)){
+    if (nchar(x[i])>maxlength){
+      output = append(output, substr(x[i], 1, maxlength))
     }else{
-      output = append(output, element)
+      output = append(output, x[i])
     }
   }
   return(output)
@@ -40,42 +44,25 @@ reduceLength <- function(x, maxlength){
 checkifstate <- function(x){
   return(identical(x, c("administrative_area_level_1", "political")))
 }
+checkifcountry <- function(x){
+  return(identical(x, c("country", "political")))
+}
 #function to add itation to a string
 addCitationMarks <- function (x){
   x = gsub("'", "", x)
   return(paste("'", x, "'", sep =""))
 }
-#function to reformat date as string
-formatDate <- function(x){
-  return(format(x, "%Y-%m-%d"))
-}
-#function to remove special characters (prevent SQL error)
-removeSpecialCharacters <-function(x){
-  return(iconv(x, to="UTF-8"))
-}
-myAggregate <- function(x){
-  if (typeof(x) == "double" || typeof(x) == "integer"){
-    return(mean(x))
-  }else{
-    if (length(unique(x)) == 1){
-      return(x[[1]])
-    } else {
-      return = ""
-      for (element in x){
-        if(!grepl(element, return, fixed=TRUE) && length(element) != 0){
-          return = paste(return, element, sep= "; ") 
-        }
-      }
-      return(return)
-    }
-  }
-}
 
-saveToDB <- function(data, db, tableName, columns, maxItems){
+saveToDB <- function(data, db, tableName, maxItems){
   #reformat columns
-  for (column in columns){
-    data[,column] = sapply(data[,column], addCitationMarks)
-  }
+  data[, country:=sapply(data[, country], addCitationMarks)]
+  data[, location:=sapply(data[, location], addCitationMarks)]
+  data[, date:=sapply(data[, date], addCitationMarks)]
+  data[, parameter:=sapply(data[, parameter], addCitationMarks)]
+  data[, unit:=sapply(data[, unit], addCitationMarks)]
+  data[, city:=sapply(data[, city], addCitationMarks)]
+  data[, state:=sapply(data[, state], addCitationMarks)]
+  
   #generate query
   for (i in 1:ceiling(nrow(data)/maxItems)) {
     query = paste0('INSERT INTO ', tableName, ' (',paste0(colnames(data),collapse = ','),') VALUES ')
@@ -92,117 +79,122 @@ saveToDB <- function(data, db, tableName, columns, maxItems){
   }
 }
 
+getStateCountry <- function(x){
+  apikey = "AIzaSyDiSHaEP0q-6kXrliQKAZ3Rjm1p-47SL1E"
+  geo_call = paste("https://maps.googleapis.com/maps/api/geocode/json?latlng=",as.double(x[["latitude"]]),",",as.double(x[["longitude"]]),"&language=en&key=", apikey, sep="")
+  geo_answer = fromJSON(content(GET(geo_call), "text"))
+  if (geo_answer$status == "OK"){
+    geo_data_state = geo_answer$results[sapply(geo_answer$results$types, checkifstate),]
+    if (length(geo_data_state) > 0){
+      geo_data_state = geo_data_state$address_components[[1]][sapply(geo_data_state$address_components[[1]]$types, checkifstate),]
+      if (length(geo_data_state) > 0){
+        state  = geo_data_state$long_name[1]
+      } else{
+        print("No state found")
+        state = x[["country.y"]]
+      }
+    }else{
+      print("No state found")
+      state  = x[["country.y"]]
+    }
+    geo_data_country = geo_answer$results[sapply(geo_answer$results$types, checkifstate),]
+    if (length(geo_data_country) > 0){
+      geo_data_country = geo_data_country$address_components[[1]][sapply(geo_data_country$address_components[[1]]$types, checkifcountry),]
+      if (length(geo_data_country) > 0){
+        country  = geo_data_country$short_name[1]
+      } else{
+        print("No country found")
+        country = x[["country"]]
+      }
+    }else{
+      print("No country found")
+      country = x[["country"]]
+    }
+  }else{
+    print("Google API Request failed")
+    state  = x[["country.y"]]
+    country = x[["country"]]
+  }
+  return(c(state, country))
+}
+
+getStateCountryTryCatch <- function(x){
+  output  <- tryCatch(
+        {output <- getStateCountry(x)},
+        error = function(cond){
+                  print("Encountered an error")
+                  output <- c(x[["country.y"]],x[["country"]])},
+        finally = {}
+      )
+  return(output)
+}
+
+
 #load data from csv
-data <- fread(path, verbose = TRUE)
+data <- fread(data_path, verbose = TRUE, encoding = "UTF-8")
+isoCountryDict <-fread(isoDict_path, verbose = TRUE)
+colnames(isoCountryDict) <- c("country", "iso2", "iso3", "numeric", "iso3166")
+isoCountryDict = subset(isoCountryDict, select = c(country, iso2))
+
+#clean data
+data = data[location != "" & !is.na(location)]
+data = data[!is.na(longitude) & !is.na(latitude)]
+data = data[longitude != 0 & latitude != 0]
+data[!is.na(country),country:= toupper(country)]
+
+#replace unmatched countries
+data[country == "BK",country:= "BA"]
+data[country == "CE",country:= "LK"]
+data[country == "CS",country:= "CR"]
+data[country == "IZ",country:= "IQ"]
+data[country == "KU",country:= "KW"]
+data[country == "KV",country:= "XK"]
+data[country == "TI",country:= "TJ"]
+data[country == "TX",country:= "TM"]
+data[country == "UC",country:= "CW"]
+data[country == "VM",country:= "VN"]
 
 #get data with them latitude/longitude and get geolocation
-data[, geocode:=do.call(paste0,.SD), .SDcols=-1]
+locations <- data[, .(latitude=mean(latitude), longitude=mean(longitude)), by=.(location, country)]
+locations = merge(locations, isoCountryDict, by.x ="country", by.y = "iso2", all.x = TRUE)
 
-#retrieve all available countries from the openaq api
-call_country = "https://api.openaq.org/v1/countries?limit=10000"
-countries = as.data.frame(fromJSON(content(GET(call_country), "text"), flatten = TRUE))
-
-#retrieve all available locations from the openaq api locations in china will be ignored
-for (country in countries$results.code[ countries$results.code != "CN"]){
-  print(country)
-  locations <- data.frame()
-  call_locations = paste("https://api.openaq.org/v1/locations?limit=10000&country[]=", country, sep = "")
-  locations = as.data.frame(fromJSON(content(GET(call_locations), "text"), flatten = TRUE))
-  if (nrow(locations) >= 10000){
-    print(paste0(country, " has more than 10000 locations"))
-  }
-  #retrive observations from the openaq api enrich this information with a state from the google geocode api
-  observations <- data.frame()
-  for (j in 1:nrow(locations)){
-    if (locations[j,]$results.coordinates.longitude != 0 && locations[j,]$results.coordinates.latitude != 0){
-      found = found+1
-      #find the correct state based on the geolocation
-      state = ""
-      geo_call = paste("https://maps.googleapis.com/maps/api/geocode/json?latlng=",locations[j,]$results.coordinates.latitude,",",locations[j,]$results.coordinates.longitude,"&language=en&key=AIzaSyDiSHaEP0q-6kXrliQKAZ3Rjm1p-47SL1E", sep="")
-      geo_answer = fromJSON(content(GET(geo_call), "text"))
-      if (geo_answer$status == "OK"){
-        geo_data = geo_answer$results[sapply(geo_answer$results$types, checkifstate),]
-        if (length(geo_data) > 0){
-          geo_data = geo_data$address_components[[1]][sapply(geo_data$address_components[[1]]$types, checkifstate),]
-          if (length(geo_data) > 0){
-            state = geo_data$long_name[1]
-          } else{
-            print("    No state found")
-            state = country
-          } 
-        }else{
-          print("    No state found")
-          state = country
-        }
-      }else{
-        print("    Google API Request failed")
-        state = country
-      }
-      
-      #retrieve openaq information while adhere to the max limit of 10000 samples
-      num_observations = 10000
-      i = 1
-      while (num_observations >= 10000){
-        call_observation = paste("https://api.openaq.org/v1/measurements?limit=10000&date_from=2000-01-01&location=", gsub(" ", "%20", locations[j,]$results.location), "&page=", i, sep = "")
-        temp_data = fromJSON(content(GET(call_observation), "text"), flatten = TRUE)
-        i = i+1
-        if (length(temp_data$results) == 0){
-          print(paste0("    ",locations[j,]$results.location))
-          print(paste0("    ",temp_data$meta$found))
-          notworking = notworking+1
-          num_observations = 0
-        }else{
-          temp_data$results$state = state
-          num_observations = nrow(temp_data$results)
-          observations = rbind(observations, temp_data$results)
-        }
-        #wait for 0.15 seconds so that not more than 2000 request per 5 minutes are send to the API
-        Sys.sleep(0.15)
-        totalnumobservations = totalnumobservations + num_observations
-      }
-    } else {
-      print("Location has no coordinates, it will be ignored")
-    }
-  }
-  
-  if (length(observations) != 0){
-    #save raw data local as backup
-    write.csv(observations, paste("D:/Programming/R/BigDataAnalytics/data/openaq/backup_data/",country, "_raw.csv"))
-    observations = read.csv(paste("D:/Programming/R/BigDataAnalytics/data/openaq/backup_data/",country, "_raw.csv"))
-    #aggregate data from the same date and the same state
-    names(observations)[names(observations) == 'coordinates.longitude'] <- 'longitude'
-    names(observations)[names(observations) == 'coordinates.latitude'] <- 'latitude'
-    
-    observations = observations[observations$value > 0, ]
-    observations$date = sapply(as.POSIXct(observations$date.utc,tz='UTC'), formatDate)
-    observations = subset(observations, select=-c(date.local, date.utc))
-    observations$location = sapply(reduceLength( observations$location, 120), removeSpecialCharacters)
-    observations$city = sapply(reduceLength( observations$city, 120), removeSpecialCharacters)
-    observations$state = sapply(reduceLength( observations$state, 120), removeSpecialCharacters)
-    observations_location = aggregate(observations[c("value", "state", "unit", "country", "latitude", "longitude")], by=list(location= observations$location, parameter = observations$parameter, city = observations$city, date = observations$date),FUN=myAggregate, drop = TRUE)
-    observations_state = aggregate(observations[c("value", "latitude", "longitude", "unit")], by=list(state = observations$state, parameter = observations$parameter, country = observations$country, date = observations$date),FUN=myAggregate, drop = TRUE)
-    
-    #save processed data local as backup
-    write.csv(observations_state, paste("D:/Programming/R/BigDataAnalytics/data/openaq/backup_data/",country, "_state.csv"))
-    write.csv(observations_location, paste("D:/Programming/R/BigDataAnalytics/data/openaq/backup_data/",country, "_location.csv"))
-    
-    #open connection to database
-    bigdatadb <- dbConnect(RMariaDB::MariaDB(), user=dbuser, password=dbpassword, dbname=dbname, host=dbhost)
-    
-    #save location level data in the sql database
-    print("write location sql")
-    saveToDB(data= observations_location, db= bigdatadb, tableName = "openaq_location", columns= c("location", "state", "parameter","unit","country","city","date"), maxItems= 10000)
-    
-    #save state level data in the sql database
-    print("write state sql")
-    saveToDB(data= observations_state, db= bigdatadb, tableName = "openaq_state", columns= c("state", "parameter","unit","country","date"), maxItems= 10000)
-    
-    #close connection to database
-    dbDisconnect(bigdatadb)
-    
-  } else {
-    print(paste0("    No observations found for ", country))
-  }
-  print(paste0(notworking, " / ", found))
-  print(totalnumobservations)
+#get state for locations
+state = c()
+country = c()
+for (i in 1:nrow(locations)){
+  stateCountry = getStateCountryTryCatch(locations[i,])
+  state = append(state, stateCountry[1])
+  country = append(country, stateCountry[2])
 }
+locations[ ,"state"] = state
+locations[ ,"country2"] = country
+locations = subset(locations, select = c(location, state, country, country2))
+
+#add to main data.table
+data = merge(data, locations, by.x =c("country","location"), by.y = c("country","location"))
+print(paste0("Observations without a state: ", nrow(data[is.na(state)])))
+fwrite(data, paste0(save_path, "df_by_location.csv"))
+
+#remove not required column
+data = subset(data, select = -c(country))
+colnames(data)[length(colnames(data))] = "country"
+
+#reduce value in primary key to adequate length
+data[, "location"] = reduceLength( data[, "location"], 120)
+data[, "city"] = reduceLength( data[, "city"], 120)
+data[, "state"] = reduceLength( data[, "state"], 120)
+
+#open connection to database
+bigdatadb <- dbConnect(RMariaDB::MariaDB(), user=dbuser, password=dbpassword, dbname=dbname, host=dbhost)
+
+#save location level data in the sql database
+print("write to sql database")
+saveToDB(data= data, db= bigdatadb, tableName = "openaq", maxItems= 10000)
+
+#close connection to database
+dbDisconnect(bigdatadb)
+
+print(paste0("Number of observations: ", nrow(data)))
+print(paste0("Number of locations: ", nrow(locations)))
+
+
