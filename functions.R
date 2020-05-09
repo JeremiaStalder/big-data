@@ -1,4 +1,4 @@
-# ploitting ----
+# Functions ----
 ## plotting function 
 line_plot_multiple = function(title, outpath,x,xlab, ylab, names_y, y_percent, legend, y1, y2,y3,y4,y5,y6,y7,y8,y9,y10, y11) {
   # plots up to 10 lines with same scale 
@@ -73,3 +73,47 @@ line_plot_multiple = function(title, outpath,x,xlab, ylab, names_y, y_percent, l
   plot
   return(plot)
 }
+
+remove_outliers <- function(vect) {
+  quantile1 <- quantile(vect, probs=c(.25, .75), na.rm = TRUE)
+  quantile2 <- quantile(vect, probs=c(.05, .95), na.rm = TRUE)
+  H <- 1.5 * IQR(vect, na.rm = TRUE)
+  vect[vect < (quantile1[1] - H)] <- quantile2[1]
+  vect[vect > (quantile1[2] + H)] <- quantile2[2]
+  return(vect)
+}
+
+
+ppm_to_microgram <- function(particle,tempF, pressure_millibars_to_tenth, concentration_pmm, constant_table){
+  # convert ppm to microgramm/m3 according to https://www.ccohs.ca/oshanswers/chemicals/convert.html
+  # inputs: temperature in Fahrenheit, pressure in millibars to tenth, concentration in ppm
+  # output: concentraction in microgram/m3
+  # Note: make sure inputs are cleaned. NAs are allowed
+  
+  # replace non-positive values with defaults for temperature, pressure, replace with NA for concentration_pmm
+  tempF = replace_na(tempF,filter(constant_table, key== "subtract_f")$value + filter(constant_table, key== "temperature")$value / filter(constant_table, key== "factor_f")$value)
+  tempC = (tempF-filter(constant_table, key== "subtract_f")$value)*filter(constant_table, key== "factor_f")$value
+  tempC = ifelse(tempC>-filter(constant_table, key== "kelvin_to_celsius")$value , tempC, NA)
+  
+  
+  pressure_mmHg = ifelse(pressure_millibars_to_tenth>0 , pressure_millibars_to_tenth * filter(constant_table, key== "convert_pressure")$value, NA)
+  pressure_mmHg = replace_na(pressure_mmHg,filter(constant_table, key== "pressure")$value)
+  
+  concentration_pmm = ifelse(concentration_pmm>0 , concentration_pmm, NA)
+  
+  # calculate concentration
+  volume_1_gram = filter(constant_table, key== "G")$value * (tempC+ filter(constant_table, key== "kelvin_to_celsius")$value)  / pressure_mmHg # calc volume
+  mol_mass =  constant_table$value[match(particle, filter(constant_table, unit== "g/mol")$key)] # calc mol mass
+  concentration_microgram_per_m3 = 10^3 * mol_mass * concentration_pmm / volume_1_gram # calc concentration 
+  
+  return(concentration_microgram_per_m3)
+}
+
+
+
+
+
+
+
+
+

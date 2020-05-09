@@ -11,7 +11,7 @@
   library(lubridate)
   
   setwd("~/GitHub/big-data") # setwd
-  source("plotFunctions.R") # functions
+  source("functions.R") # functions
   outpath = outpath = "./output/detend_deseasonalize_airpollution_data/" # output
   
 
@@ -40,6 +40,12 @@
     # save as csv
     write.csv(openaq_state_original, "./data/clean/openaq_state_original.csv")
     }
+  
+  # unit conversion data for airpollution
+     unit_conversion_table <- read_delim("data/unit_conversion/unit_conversion.csv", 
+                                                            ";", escape_double = FALSE, col_types = cols(value = col_double()), 
+                                                            locale = locale(decimal_mark = ","), 
+                                                            trim_ws = TRUE)
 
   # mobility data
     # import mobililty data
@@ -55,28 +61,34 @@
 # Cleaning OpenAQ----
   openaq_state = openaq_state_original
   
+    
   # get same colnames as nationwide and mobility data for: date, countrycode, region
-  key_variable_names = c("CountryCode","sub_region_1","Date")
-  key_variable_names_openaq = c("country","state", "date")
-  colnames(openaq_state)[colnames(openaq_state) %in% key_variable_names_openaq] = key_variable_names 
-  
+    key_variable_names = c("CountryCode","sub_region_1","Date")
+    key_variable_names_openaq = c("country","state", "date")
+    colnames(openaq_state)[colnames(openaq_state) %in% key_variable_names_openaq] = key_variable_names 
+    
   # lowercase country code
-  openaq_state$CountryCode = tolower(openaq_state$CountryCode)
+    openaq_state$CountryCode = tolower(openaq_state$CountryCode)
   
   # rename value col
-  colnames(openaq_state)[colnames(openaq_state) == "AVG(value)"] = "value"
-  summary(openaq_state)
+    colnames(openaq_state)[colnames(openaq_state) == "AVG(value)"] = "value"
+    summary(openaq_state)
+    
+  # convert units from ppm to microgram/m3
+
+    # call function
+      list_particles_convert = unique(select(filter(openaq_state, unit == "ppm"), parameter))$parameter
+      
+############## INSERT TEMPERATURE DATA IF AVAILABLE
+      particle  = openaq_state$parameter[(openaq_state$parameter %in% list_particles_convert) & (openaq_state$unit =="ppm") ]
+      tempF = rep(NA, length(particle))
+      pressure_millibars_to_tenth = rep(NA, length(particle))
+      concentration_pmm = openaq_state$value[(openaq_state$parameter %in% list_particles_convert) & (openaq_state$unit =="ppm") ]
+  
+      openaq_state$value[(openaq_state$parameter %in% list_particles_convert) & (openaq_state$unit =="ppm") ] = ppm_to_microgram(particle,tempF, pressure_millibars_to_tenth, concentration_pmm, unit_conversion_table)
+
   
   # extreme outliers: replace wrt quantile
-  remove_outliers <- function(vect) {
-    quantile1 <- quantile(vect, probs=c(.25, .75), na.rm = TRUE)
-    quantile2 <- quantile(vect, probs=c(.05, .95), na.rm = TRUE)
-    H <- 1.5 * IQR(vect, na.rm = TRUE)
-    vect[vect < (quantile1[1] - H)] <- quantile2[1]
-    vect[vect > (quantile1[2] + H)] <- quantile2[2]
-    return(vect)
-  }
-  
   for (i in 1:length(unique(openaq_state$parameter))) {
     openaq_state[(openaq_state$parameter == unique(openaq_state$parameter)[i]),"value"] = remove_outliers(filter(openaq_state, parameter == unique(openaq_state$parameter)[i])$value)
   }
@@ -94,10 +106,52 @@
   
   openaq_state_clean = openaq_state # raw daily data
   
+  table =  filter(openaq_state, parameter=="o3" & Date >= '2019-05-01') %>%
+    group_by(Date) %>%
+    mutate(rolling  =  rollapply(value,60,mean, align = "center", fill=NA)) %>%
+    summarize(rollling = mean(rolling))
+  
+  rolling_table =  filter(openaq_state, parameter=="o3" & Date >= '2019-05-01') %>%
+    group_by(Date) %>%
+    mutate(rolling  =  rollapply(value,60,mean, align = "center", fill=NA))
+  
+  rolling_table_2 = summarize(rolling_table, mean = mean(rolling, na.rm=T))
+  
+  
   openaq_state_ma_monthly = group_by(openaq_state, CountryCode,sub_region_1, parameter, unit) %>%
     arrange(Date) %>%
-    mutate(value = rollapply(value,60,mean, align = "center", fill=NA)) %>%
+    mutate(value = rollapply(value,60,mean, align = "center",  na.rm = TRUE, fill=NA)) %>%
     ungroup()# get monthly moving average
+  
+  nrow(filter(openaq_state_ma_monthly, parameter=="o3"  & unit != "ppm"))
+  nrow(filter(openaq_state_ma_monthly, parameter=="o3"& unit == "ppm"))
+  
+  nrow(filter(openaq_state_ma_monthly, parameter=="co"  & unit != "ppm"))
+  nrow(filter(openaq_state_ma_monthly, parameter=="co"  & unit == "ppm"))
+  
+  nrow(filter(openaq_state_ma_monthly, parameter=="so2" & unit != "ppm"))
+  nrow(filter(openaq_state_ma_monthly, parameter=="so2" & unit == "ppm"))
+
+  nrow(filter(openaq_state_ma_monthly, parameter=="no2"& unit != "ppm"))
+  nrow(filter(openaq_state_ma_monthly, parameter=="no2" & unit == "ppm"))
+  
+  nrow(filter(openaq_state_ma_monthly, parameter=="bc"  & unit != "ppm"))
+  nrow(filter(openaq_state_ma_monthly, parameter=="bc"  & unit == "ppm"))
+
+  # only in mg/m3
+  unique(filter(openaq_state_ma_monthly, parameter=="pm25" & Date >= '2019-06-01')$unit )
+  unique(filter(openaq_state_ma_monthly, parameter=="pm10" & Date >= '2019-06-01')$unit )
+  
+  table2 =  filter(openaq_state_ma_monthly, parameter=="o3" & Date >= '2019-06-01') %>%
+    group_by(Date) %>%
+    summarize(mean = mean(value))
+  
+  openaq_state_ma_monthly = group_by(openaq_state, CountryCode,sub_region_1, parameter, unit) %>%
+    arrange(Date) %>%
+    mutate(value = ifelse(rollapply(value, 60, is.na,align ="center")<30,  rollapply(value,60,mean, align = "center", fill=NA), NA)) %>%
+    ungroup()# get monthly moving average
+  
+ 
   
 # Merge Covid & Airpollution ----
   
@@ -154,6 +208,9 @@
   print(line_plot_multiple(paste("Airpollution Data - World"), outpath,data_wide$Date,"Date", "Airpollution", names_y=unique(openaq_state_ma_monthly$parameter), 
                            y_percent=F, legend=T, data_wide$co / mean(data_wide$co, na.rm=T), data_wide$no2 / mean(data_wide$no2, na.rm=T), data_wide$o3 / mean(data_wide$o3, na.rm=T), 
                            data_wide$pm10 / mean(data_wide$pm10, na.rm=T), data_wide$pm25 / mean(data_wide$pm25, na.rm=T), data_wide$so2 / mean(data_wide$so2, na.rm=T), data_wide$bc / mean(data_wide$bc, na.rm=T)))
+  
+  print(line_plot_multiple(paste("Airpollution Data - World"), outpath,data_wide$Date,"Date", "Airpollution", names_y=unique(openaq_state_ma_monthly$parameter), 
+                           y_percent=F, legend=T, data_wide$o3 / mean(data_wide$o3, na.rm=T)))
 
   # regions
   data_plot = group_by(openaq_state_ma_monthly, parameter, Date, Region) %>%
@@ -207,8 +264,9 @@
   
   # subregions
   
-  list_countries = c("us", "de", "it", "cn","af","ae", "au")
+  list_countries = c("us", "de", "it", "cn","af","ae", "au","ca", "ch","fr", "es")
   list_subregions = c("mecklenburg-vorpommern","washington","colorado","shandong","beijing")
+  list_subregions = c("wuhan","bremen","hamburg","berlin","brandenburg")
   
   data_plot = filter(openaq_state_ma_monthly, (CountryCode %in% list_countries) & (sub_region_1 %in% list_subregions)) %>%
     group_by(parameter, Date, CountryCode, sub_region_1) %>%
@@ -241,13 +299,51 @@
     openaq_state_ma_monthly_difference = inner_join(openaq_state_ma_monthly, select(openaq_state_ma_monthly_previous_year, Date, CountryCode, sub_region_1, parameter,value_last_year), by = c("Date", "CountryCode", "sub_region_1", "parameter"))
     openaq_state_ma_monthly_difference$value_difference = openaq_state_ma_monthly_difference$value- openaq_state_ma_monthly_difference$value_last_year
 
-    summary(openaq_state_ma_monthly_difference)
+    t1 = group_by(openaq_state_ma_monthly, Date,parameter)  %>%
+      summarize(value = mean(value, na.rm =T))
+    
+    t2 = group_by(openaq_state_ma_monthly_previous_year, Date, parameter)  %>%
+    summarize(value_last_year = mean(value_last_year, na.rm =T))
+    
+    openaq_state_ma_monthly_difference = left_join(t1, select(t2, Date, parameter,value_last_year), by = c("Date", "parameter"))
+    openaq_state_ma_monthly_difference$value_difference = openaq_state_ma_monthly_difference$value- openaq_state_ma_monthly_difference$value_last_year
+    
+    
+    data_wide = group_by(openaq_state_ma_monthly_difference, parameter, Date) %>%
+      summarize(value_difference = mean(value_difference, na.rm=T), value = mean(value, na.rm=T)) %>%
+      pivot_wider(id_cols = c("Date", "parameter"), names_from=parameter, values_from = c("value", "value_difference")) %>%
+      ungroup()
+    # 
+    # table_3 = filter(data_wide, Date >='2020-04-01', CountryCode == "de")
+    # data_wide = group_by(openaq_state_ma_monthly_difference, parameter, Date, CountryCode) %>%
+    #   summarize(value_difference = mean(value_difference, na.rm=T), value = mean(value, na.rm=T)) %>%
+    #   ungroup()
+    # 
+    # table_1 = filter(openaq_state_ma_monthly_difference, Date >= '2019-02-01' & CountryCode == "us" & parameter == "co")
+    # table_2 = filter(openaq_state_ma_monthly_difference, Date >= '2020-02-01' & CountryCode == "us" & parameter == "co")
+    # 
+    # table_1 = filter(data_wide, Date >= '2019-02-01' & CountryCode == "us" & parameter == "co")
+    # table_2 = filter(data_wide, Date >= '2020-02-01' & CountryCode == "us" & parameter == "co")
+    # head(table_1)
+    # head(table_2)
+    
+    # openaq_state_ma_monthly_difference$value
+    # openaq_state_ma_monthly_difference$value
+    # 
+    # summary(openaq_state_ma_monthly_difference)
     
       # worldwide
       data_wide = group_by(openaq_state_ma_monthly_difference, parameter, Date) %>%
         summarize(value_difference = mean(value_difference, na.rm=T), value = mean(value, na.rm=T)) %>%
         pivot_wider(id_cols = c("Date", "parameter"), names_from=parameter, values_from = c("value", "value_difference")) %>%
         ungroup()
+      
+      data_wide = group_by(openaq_state_ma_monthly_difference, parameter, Date) %>%
+        summarize(value_difference = mean(value_difference, na.rm=T), value = mean(value, na.rm=T),  value_last_year = mean(value_last_year, na.rm=T)) 
+      table_1 = filter(data_wide, Date >= '2019-04-01' & parameter == "co")
+      table_2 = filter(data_wide, Date >= '2020-03-30' & parameter == "co")
+      head(table_1)
+      head(table_2)
       
       # add 0s for non-measures parms
       data_wide = mutate(data_wide, bc = ifelse(rep("bc", nrow(data_wide)) %in% colnames(data_wide), bc, rep(0, nrow(data_wide))), 

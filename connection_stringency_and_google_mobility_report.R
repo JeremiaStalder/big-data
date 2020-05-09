@@ -8,7 +8,7 @@ library(caret) # random forests
 library(grf)
 
 # functions
-source("plotFunctions.R")
+source("functions.R")
 
 # output
 outpath = "./output/stringency_and_mobility/"

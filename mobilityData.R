@@ -5,6 +5,9 @@ library(tidyverse)
 library(readr)
 library(zoo)
 
+# functions
+source("functions.R")
+
 ### import data ----
 
 global_mobility_report <- read_delim("data/google_mobility/Global_Mobility_Report.csv", 

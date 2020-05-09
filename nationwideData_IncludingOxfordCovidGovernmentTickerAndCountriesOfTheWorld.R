@@ -9,7 +9,7 @@ library(readr)
 library(zoo)
 
 # functions
-source("plotFunctions.R")
+source("functions.R")
 
 # output path
 outpath = "./output/descriptives_stringency/"

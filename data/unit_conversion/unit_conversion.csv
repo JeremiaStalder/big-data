@@ -1,0 +1,12 @@
+﻿variable;key;unit;value
+mass_o3;o3;g/mol;48
+mass_so2;so2;g/mol;64,06
+mass_no2;no2;g/mol;46,01
+mass_co;co;g/mol;28,01
+gasconstant;G;L_torr/mol;62,4
+0celsius_in_kelvin;kelvin_to_celsius;celsius;273,16
+default_pressure;pressure;mmHg;760
+default_temperature;temperature;celsius;25
+one_millibar_in_mmHg;convert_pressure;mmHg/millibar;0,7501
+factor_fahrenheit_to_celsius;factor_f;-;0,5556
+subtract_fahrenheit_to_celsius;subtract_f;-;32
