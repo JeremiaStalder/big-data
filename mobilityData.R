@@ -24,6 +24,9 @@ global_mobility_report <- read_delim("data/google_mobility/Global_Mobility_Repor
   # change CountryCode from na to "na" for namibia. Remove countries without code
     global_mobility_report = mutate(global_mobility_report, CountryCode = ifelse(is.na(CountryCode) & CountryName=="Namibia", "NA", CountryCode))
     global_mobility_report = global_mobility_report[is.na(global_mobility_report$CountryCode)==F,] # only take countries with country code
+    
+  # change subregions to lowercase letter
+    global_mobility_report$sub_region_1 = tolower(global_mobility_report$sub_region_1)
   
   # drop observations with NA values for indices
     # drop if X or more indices are NA

@@ -4,6 +4,8 @@
 library(tidyverse)
 library(readr)
 library(zoo)
+library(caret) # random forests
+library(grf)
 
 # functions
 source("plotFunctions.R")
@@ -153,10 +155,62 @@ outpath = "./output/stringency_and_mobility/"
     # simple
     # with region interaction effect (europe and baltics seem to have almost no park effect)
       
+  #OLS
+    linear_model = lm(StringencyIndex ~ . , data = merged_data_countries[,c("StringencyIndex", mobility_variables)])
+    summary(linear_model)
     
+    # get prediction
+    predicted_index = predict.lm(linear_model, global_mobility_report_clean[,mobility_variables])
+    # problem: bounded outcome variable
+    # problem: missing values
+    summary(predicted_index)
+    
+  # random forest
+    # only use data from april to fit model
+    merged_data_countries_later = filter(merged_data_countries, Date >=2020-03-01)
+    
+    # split in train and test
+      share_train = 0.8
+      train_index <- createDataPartition(merged_data_countries_later$Region, p = share_train, 
+                                                 list = FALSE, 
+                                                 times = 1) #balanced split wrt training
+    
+      train <- merged_data_countries_later[train_index,]
+      test <- merged_data_countries_later[-train_index,]
+    
+    forest1 <- regression_forest(train[,mobility_variables],train$StringencyIndex)
+    
+    # Prediction
+    fit <- predict(forest1, newdata = test[,mobility_variables])$predictions
+    summary(fit-test$StringencyIndex)
+    
+    # R-squared
+    r_sq = function(observed, predicted) {
+      r_sq <- 1-(sum((predicted-observed)^2)/sum((observed-mean(observed))^2))
+      return(r_sq)
+    }
+    
+    r_squared_forest <- r_sq(test$StringencyIndex, fit)
+    r_squared_forest
+    summary(fit)
+    forest1
   
+    test$fit = fit
   
-  
-  
-  
+    data = group_by(test, Region, Date) %>%
+      summarize(StringencyIndex = mean(StringencyIndex), fit = mean(fit))
+    
+    line_plot_multiple(paste("Test Forest"), outpath, data$Date,"Date", "Stringency and Prediced", names_y=c("Stringency Index Predicted", "Stringency Index True"),
+                             y_percent=F, legend=T, data$fit , data$StringencyIndex)
+    
+# Add stringency Index to google data ----
+    # quick workaround: use stringency index of country
+    summary(merged_data) # dataset merged by country and data
+    
+    summary(merged_data$StringencyIndex)
+    
+    global_mobility_report_clean_stringency_index  = merged_data
+    write.csv(global_mobility_report_clean_stringency_index,file="./data/clean/global_mobility_report_clean_stringency_index.csv")
+    
+    
   
