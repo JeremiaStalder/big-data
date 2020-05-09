@@ -29,13 +29,10 @@ save_path = "data/"
 #define functions
 #function to reduce the length of a string
 reduceLength <- function(x, maxlength){
-  output = vector()
-  for (i in 1:length(x)){
-    if (nchar(x[i])>maxlength){
-      output = append(output, substr(x[i], 1, maxlength))
-    }else{
-      output = append(output, x[i])
-    }
+  if (nchar(x)>maxlength){
+    output = substr(x, 1, maxlength)
+  }else{
+    output = x
   }
   return(output)
 }
@@ -52,16 +49,20 @@ addCitationMarks <- function (x){
   x = gsub("'", "", x)
   return(paste("'", x, "'", sep =""))
 }
+cutWhiteSpaces <-function (x) {
+  return(gsub("^\\s+|\\s+$", "", x))
+}
 
-saveToDB <- function(data, db, tableName, maxItems){
+
+saveToDB <- function(data, tableName, maxItems){
   #reformat columns
-  data[, country:=sapply(data[, country], addCitationMarks)]
-  data[, location:=sapply(data[, location], addCitationMarks)]
-  data[, date:=sapply(data[, date], addCitationMarks)]
-  data[, parameter:=sapply(data[, parameter], addCitationMarks)]
-  data[, unit:=sapply(data[, unit], addCitationMarks)]
-  data[, city:=sapply(data[, city], addCitationMarks)]
-  data[, state:=sapply(data[, state], addCitationMarks)]
+  data[!is.na(country),country:= addCitationMarks(country)]
+  data[!is.na(location),location:= addCitationMarks(location)]
+  data[!is.na(date),date:= addCitationMarks(date)]
+  data[!is.na(parameter),parameter:= addCitationMarks(parameter)]
+  data[!is.na(unit),unit:= addCitationMarks(unit)]
+  data[!is.na(city),city:= addCitationMarks(city)]
+  data[!is.na(state),state:= addCitationMarks(state)]
   
   #generate query
   for (i in 1:ceiling(nrow(data)/maxItems)) {
@@ -74,8 +75,18 @@ saveToDB <- function(data, db, tableName, maxItems){
       }
     }
     query = paste0(query, paste0(vals,collapse=','))
+    query = paste0(query, " ON DUPLICATE KEY UPDATE city = VALUES(city), unit = VALUES(unit), latitude = VALUES(latitude), longitude = VALUES(longitude), value = VALUES(value)")
+    #open connection to database
+    bigdatadb <- dbConnect(RMariaDB::MariaDB(), user=dbuser, password=dbpassword, dbname=dbname, host=dbhost)
+    
     #execute the query
-    dbExecute(db, query)
+    #print(query)
+    print(paste0("Processed: ",i * maxItems, "/", nrow(data)))
+    dbExecute(bigdatadb, query)
+    
+    #close connection to database
+    dbDisconnect(bigdatadb)
+    
   }
 }
 
@@ -137,8 +148,7 @@ colnames(isoCountryDict) <- c("country", "iso2", "iso3", "numeric", "iso3166")
 isoCountryDict = subset(isoCountryDict, select = c(country, iso2))
 
 #clean data
-data = data[location != "" & !is.na(location)]
-data = data[!is.na(longitude) & !is.na(latitude)]
+data = na.omit(data)
 data = data[longitude != 0 & latitude != 0]
 data[!is.na(country),country:= toupper(country)]
 
@@ -169,30 +179,73 @@ for (i in 1:nrow(locations)){
 locations[ ,"state"] = state
 locations[ ,"country2"] = country
 locations = subset(locations, select = c(location, state, country, country2))
+fwrite(locations, paste0(save_path, "locations.csv"))
+#locations = fread(paste0(save_path, "locations.csv"), encoding="UTF-8")
 
 #add to main data.table
-data = merge(data, locations, by.x =c("country","location"), by.y = c("country","location"))
+data = merge(data, locations, by.x =c("country","location"), by.y = c("country","location"), all.x = TRUE)
 print(paste0("Observations without a state: ", nrow(data[is.na(state)])))
 fwrite(data, paste0(save_path, "df_by_location.csv"))
+#data = fread(paste0(save_path, "df_by_location.csv"), encoding= "UTF-8")
 
 #remove not required column
 data = subset(data, select = -c(country))
 colnames(data)[length(colnames(data))] = "country"
 
 #reduce value in primary key to adequate length
-data[, "location"] = reduceLength( data[, "location"], 120)
-data[, "city"] = reduceLength( data[, "city"], 120)
-data[, "state"] = reduceLength( data[, "state"], 120)
+data[nchar(location) > 120, location:= substr(location, 1, 120)]
+data[nchar(state) > 120, state:= substr(state, 1, 120)]
 
-#open connection to database
-bigdatadb <- dbConnect(RMariaDB::MariaDB(), user=dbuser, password=dbpassword, dbname=dbname, host=dbhost)
+#ensure no duplicated primary keys
+data[!is.na(state),state:= tolower(cutWhiteSpaces(state))]
+data[!is.na(location),location:= tolower(cutWhiteSpaces(location))]
+data[!is.na(city),city:= tolower(cutWhiteSpaces(city))]
+
+data = data[, .(value=mean(value), latitude=mean(latitude), longitude=mean(longitude), city=city[1], unit=unit[1]), by=c("country", "state", "location", "parameter", "date")]
 
 #save location level data in the sql database
 print("write to sql database")
-saveToDB(data= data, db= bigdatadb, tableName = "openaq", maxItems= 10000)
+saveToDB(data= data, tableName = "openaq", maxItems= 10000)
 
-#close connection to database
-dbDisconnect(bigdatadb)
+#print final information
+print(paste0("Number of observations: ", nrow(data)))
+print(paste0("Number of locations: ", nrow(locations)))
+
+
+
+#savetoDB
+db= bigdatadb
+tableName = "openaq"
+maxItems = 10000
+#reformat columns
+data[, country:=sapply(data[, country], addCitationMarks)]
+data[, location:=sapply(data[, location], addCitationMarks)]
+data[, date:=sapply(data[, date], addCitationMarks)]
+data[, parameter:=sapply(data[, parameter], addCitationMarks)]
+data[, unit:=sapply(data[, unit], addCitationMarks)]
+data[, city:=sapply(data[, city], addCitationMarks)]
+data[, state:=sapply(data[, state], addCitationMarks)]
+
+#generate query
+for (i in 1:ceiling(nrow(data)/maxItems)) {
+  query = paste0('INSERT INTO ', tableName, ' (',paste0(colnames(data),collapse = ','),') VALUES ')
+  vals = NULL
+  for (j in 1:maxItems) {
+    k = (i-1)*maxItems+j
+    if (k <= nrow(data)) {
+      vals[j] = paste0('(', paste0(data[k,],collapse = ','), ')')
+    }
+  }
+  query = paste0(query, paste0(vals,collapse=','))
+  
+  #open connection to database
+  bigdatadb <- dbConnect(RMariaDB::MariaDB(), user=dbuser, password=dbpassword, dbname=dbname, host=dbhost)
+  #execute the query
+  print(paste0("Processed: ",i * maxItems, "/", nrow(data)))
+  dbExecute(bigdatadb, query)
+  #close connection to database
+  dbDisconnect(bigdatadb)
+}
 
 print(paste0("Number of observations: ", nrow(data)))
 print(paste0("Number of locations: ", nrow(locations)))
