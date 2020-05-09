@@ -1,0 +1,4 @@
+INSERT INTO bigdatadb.openaq (location,date,parameter,value,unit,city,latitude,longitude,state,country) VALUES ('AD0942A','2017-11-12','so2',1.0555556,'µg/m³','Escaldes-Engordany',42.509693,1.539138,'Escaldes-Engordany','AD'),('AD0942A','2017-10-14','pm10',44.85,'µg/m³','Escaldes-Engordany',42.509693,1.539138,'Escaldes-Engordany','AD'),('AD0942A','2017-09-23','no2',19.318182,'µg/m³','Escaldes-Engordany',42.509693,1.539138,'Escaldes-Engordany','AD'),('AD0942A','2017-11-11','pm10',12.684211,'µg/m³','Escaldes-Engordany',42.509693,1.539138,'Escaldes-Engordany', 'AD');
+SELECT * FROM bigdatadb.openaq WHERE country= "AU" AND state = "Victoria";
+INSERT INTO bigdatadb.openaq (location,date,parameter,value,unit,city,latitude,longitude,state,country) VALUES ('xy', '2020-02-03', 'para','5.87654','unit', 'city', '23.45342', '34.5323', 'state', 'CON');
+SELECT * FROM bigdatadb.openaq;
