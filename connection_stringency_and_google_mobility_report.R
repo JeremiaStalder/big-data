@@ -7,8 +7,8 @@ library(zoo)
 library(caret) # random forests
 library(grf)
 
-# functions
-source("functions.R")
+setwd("~/GitHub/big-data") # setwd
+source("functions.R") # functions
 
 # output
 outpath = "./output/stringency_and_mobility/"

@@ -6,3 +6,5 @@ data/openaq/backup_data/
 data/weather/
 data/openaq/data/
 data/clean/openaq_state_original.csv
+data/merged.csv
+data/pollution_wheather_unified_units.csv

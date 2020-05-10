@@ -5,8 +5,8 @@ library(tidyverse)
 library(readr)
 library(zoo)
 
-# functions
-source("functions.R")
+setwd("~/GitHub/big-data") # setwd
+source("functions.R") # functions
 
 ### import data ----
 

@@ -8,11 +8,9 @@ library(tidyverse)
 library(readr)
 library(zoo)
 
-# functions
-source("functions.R")
-
-# output path
-outpath = "./output/descriptives_stringency/"
+setwd("~/GitHub/big-data") # setwd
+source("functions.R") # functions
+outpath = "./output/descriptives_stringency/" #output path
 
 
 ### import data ----
@@ -55,7 +53,10 @@ wikipedia_iso_country_codes <- read_csv("data/countries-iso-codes/wikipedia-iso-
     countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Swaziland","Eswatini")
     countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Trinidad & Tobago","Trinidad and Tobago")
     
-  # combine datasets 
+  # remove baltics region and include to eastern europe  
+    countries_of_the_world_original$Region = replace(countries_of_the_world_original$Region,countries_of_the_world_original$Region=="BALTICS","EASTERN EUROPE") 
+ 
+     # combine datasets 
     # get country data for countries that match
       countries_of_the_world = filter(countries_of_the_world_original, countries_of_the_world_original$Country %in% unique(government_response_data_original$CountryName)) 
       colnames(countries_of_the_world)[1] = "CountryName"
@@ -150,7 +151,7 @@ wikipedia_iso_country_codes <- read_csv("data/countries-iso-codes/wikipedia-iso-
         }
         
         line_plot_multiple("Covid19 Cases per Region over Time", outpath,stringency_time$Date,"Date", "Cases", names_y=unique(stringency_region$Region), 
-                           y_percent=F, legend=T,y1, y2,y3,y4,y5,y6,y7,y8, y9, y10, y11)
+                           y_percent=F, legend=T,y1, y2,y3,y4,y5,y6,y7,y8, y9, y10)
         
         
     
