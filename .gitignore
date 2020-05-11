@@ -8,3 +8,5 @@ data/openaq/data/
 data/clean/openaq_state_original.csv
 data/merged.csv
 data/pollution_wheather_unified_units.csv
+data/clean/merged.csv
+data/clean/openaq_state_converted_units.csv

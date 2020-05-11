@@ -21,10 +21,11 @@
     # load data from locally or from database (save file from database).
     # Note: local file implemented to prevent waiting times from database
     load_locally = 1
+    unit_conversion_openaq = T # do not convert units if inputs data already did
 
     if(load_locally ==1) {
       openaq_state_original = read_csv("./data/clean/openaq_state_original.csv", 
-                                       col_types = cols(date = col_date(format = "%Y-%m-%d")))
+                                       col_types = cols(date = col_date(format = "%Y-%m-%d"))) 
       colnames(openaq_state_original)[colnames(openaq_state_original) == "AVG.value."] = "value"
     } else {
     # connect to database 
@@ -50,14 +51,21 @@
 
   # mobility data
     # import mobililty data
-    global_mobility_report_clean_stringency_index <- read_csv("data/clean/global_mobility_report_clean_stringency_index.csv", 
-                                                              col_types = cols(Date = col_date(format = "%Y-%m-%d")))
+    global_mobility_report_clean_stringency_index <- read_csv("data/clean/global_mobility_report_clean_with_predictions_stringency_index.csv", 
+                                                              col_types = cols(CountryName = col_character(), 
+                                                                                     Date = col_date(format = "%Y-%m-%d"), 
+                                                                                     grocery_and_pharmacy = col_double(), 
+                                                                                     parks = col_double(), residential = col_double(), 
+                                                                                     retail_and_recreation = col_double(), 
+                                                                                     sub_region_1 = col_character(), transit_stations = col_double(), 
+                                                                                     workplaces = col_double()))
     
     global_mobility_report_clean_stringency_index = mutate(global_mobility_report_clean_stringency_index, CountryCode = ifelse(is.na(CountryCode) & CountryName=="Namibia", "NA", CountryCode)) # redo because "NA" is imported as NA
     global_mobility_report_clean_stringency_index = mutate(global_mobility_report_clean_stringency_index, sub_region_1 = ifelse(is.na(sub_region_1),CountryCode, sub_region_1)) # insert CountryCode as region to merge. Reason: if subregion in open aq missing, then country code is inserted. Is only inaccuarate in only a of the regions are reported
     global_mobility_report_clean_stringency_index$sub_region_1 = tolower(global_mobility_report_clean_stringency_index$sub_region_1)
     global_mobility_report_clean_stringency_index$CountryCode = tolower(global_mobility_report_clean_stringency_index$CountryCode)
     global_mobility_report_clean_stringency_index$CountryName = tolower(global_mobility_report_clean_stringency_index$CountryName)
+    
     
 # Cleaning OpenAQ----
   openaq_state = openaq_state_original
@@ -75,19 +83,20 @@
     colnames(openaq_state)[colnames(openaq_state) == "AVG(value)"] = "value"
     summary(openaq_state)
     
-  # convert units from ppm to microgram/m3
-    # inputs for function
+  # convert units from ppm to microgram/m3 if not already done input data
+    if (unit_conversion_openaq==T) {
+      # inputs for function
       list_particles_convert = unique(select(filter(openaq_state, unit == "ppm"), parameter))$parameter
       
-############## INSERT Weather DATA WHEN AVAILABLE ----
       particle  = openaq_state$parameter[(openaq_state$parameter %in% list_particles_convert) & (openaq_state$unit =="ppm") ]
       tempF = rep(NA, length(particle))
       pressure_millibars_to_tenth = rep(NA, length(particle))
       concentration_pmm = openaq_state$value[(openaq_state$parameter %in% list_particles_convert) & (openaq_state$unit =="ppm") ]
-    # call function
+      # call function
       openaq_state$value[(openaq_state$parameter %in% list_particles_convert) & (openaq_state$unit =="ppm") ] = ppm_to_microgram(particle,tempF, pressure_millibars_to_tenth, concentration_pmm, unit_conversion_table)
       openaq_state$unit[(openaq_state$parameter %in% list_particles_convert) & (openaq_state$unit =="ppm") ] = "microgram_per_m3_transformed"
-      
+    }
+
     # extreme outliers: replace wrt quantile
     for (i in 1:length(unique(openaq_state$parameter))) {
       openaq_state[(openaq_state$parameter == unique(openaq_state$parameter)[i]),"value"] = remove_outliers(filter(openaq_state, parameter == unique(openaq_state$parameter)[i])$value)
@@ -108,24 +117,28 @@
   
   open_state_clean = openaq_state # use raw data, take rolling averages later
   
-  # Merge Covid & Airpollution ----
+  # Merge Covid & Airpollution: ----
+    # Aim: only analyze airpollution regions that are in covid data.
+    # change airpollution dataset for descriptives
+    # merge again before effect calculation (only limited timeframe)
   
-  # replace region with country in openaq if no match in mobility data
-  indicator_change_region_name = sort(match(unique(global_mobility_report_clean_stringency_index$sub_region_1), unique(open_state_clean$sub_region_1))) # identify matched regions
-  not_matched_regions = unique(open_state_clean$sub_region_1)[-indicator_change_region_name] # identify non-matched regions
-  open_state_clean[(open_state_clean$sub_region_1 %in% not_matched_regions),]$sub_region_1 = open_state_clean[(open_state_clean$sub_region_1 %in% not_matched_regions),]$CountryCode
   
-  # test match
-  indicator_change_region_name_1 = sort(match(unique(global_mobility_report_clean_stringency_index$sub_region_1), unique(open_state_clean$sub_region_1))) 
-  not_matched_regions_1 = unique(open_state_clean$sub_region_1)[-indicator_change_region_name_1]
-  print(paste("Merging:",length(not_matched_regions_1), "Subregions are not matched"))
-  
-  # merge by CountryCode, sub_region_1 and Date (CountryCode should not be necessary if no mistakes before)
-  merged_data = inner_join(global_mobility_report_clean_stringency_index, open_state_clean, by = c("CountryCode", "sub_region_1", "Date")) 
-  summary(merged_data)
-  
-  regions = unique(merged_data$sub_region_1)  
-  
+    # replace region with country in openaq if no match in mobility data
+    indicator_change_region_name = sort(match(unique(global_mobility_report_clean_stringency_index$sub_region_1), unique(open_state_clean$sub_region_1))) # identify matched regions
+    not_matched_regions = unique(open_state_clean$sub_region_1)[-indicator_change_region_name] # identify non-matched regions
+    open_state_clean[(open_state_clean$sub_region_1 %in% not_matched_regions),]$sub_region_1 = open_state_clean[(open_state_clean$sub_region_1 %in% not_matched_regions),]$CountryCode
+    
+    # test match
+    indicator_change_region_name_1 = sort(match(unique(global_mobility_report_clean_stringency_index$sub_region_1), unique(open_state_clean$sub_region_1))) 
+    not_matched_regions_1 = unique(open_state_clean$sub_region_1)[-indicator_change_region_name_1]
+    print(paste("Merging:",length(not_matched_regions_1), "Subregions are not matched"))
+    
+    # merge by CountryCode, sub_region_1 and Date (CountryCode should not be necessary if no mistakes before)
+    merged_data = inner_join(global_mobility_report_clean_stringency_index, open_state_clean, by = c("CountryCode", "sub_region_1", "Date")) 
+    summary(merged_data)
+    
+    regions = unique(merged_data$sub_region_1)  
+    
   
   # Airpollution Data Clean Step 2 ---- 
     # add regions to entire open_state_clean dataset
@@ -149,7 +162,7 @@
   # Create Rolling Average Dataset
       
       # rolling average for value to figure out seasonal patterns. 
-      parms_ma = list(30, 60, 90, 15, 30, 45)
+      parms_ma = list(15, 30, 60, 8, 15, 30)
       names(parms_ma) = c("short","medium","long","max_na_short","max_na_medium","max_na_long")
       
       openaq_state_ma = group_by(open_state_clean, CountryCode,sub_region_1, parameter, unit) %>%
@@ -159,6 +172,38 @@
         ungroup()# get monthly moving average if more than share of the values are provided
       
       openaq_state_clean_ma = openaq_state_ma # rolling average data
+      
+  # country difference
+  country_difference_data = group_by(open_state_clean, parameter, Date, Region,CountryCode) %>%
+    summarize(value = mean(value, na.rm=T), value_last_year = mean(value_last_year, na.rm=T)) %>%
+    mutate(value_indicator = ifelse(is.na(value),1,0)) %>%
+    mutate(value_last_year_indicator = ifelse(is.na(value_last_year),1,0)) %>%
+    ungroup(Date) %>%
+    arrange(Date) %>%
+    mutate(value = ifelse((rollapply(value_indicator,parms_ma$medium,sum,  na.rm = TRUE, align = "center", fill = NA))<parms_ma$max_na_medium,  rollapply(value,parms_ma$medium,mean, align = "center",  na.rm = TRUE, fill = NA), NA)) %>%
+    mutate(value_last_year = ifelse((rollapply(value_last_year_indicator,parms_ma$medium,sum,  na.rm = TRUE, align = "center", fill = NA))<parms_ma$max_na_medium,  rollapply(value_last_year,parms_ma$medium,mean, align = "center",  na.rm = TRUE, fill = NA), NA)) %>%
+    mutate(value_difference = value - value_last_year)
+  
+  # standardize (value-mean)/sd
+  country_difference_data_standardized = group_by(country_difference_data, parameter, Region,CountryCode) %>%
+    mutate(value = (value-mean(value,na.rm=T))/sd(value, na.rm=T), value_last_year = (value_last_year-mean(value_last_year,na.rm=T))/sd(value_last_year, na.rm=T)) %>%
+    mutate( value_difference = value - value_last_year)
+  
+  # subregion difference
+  subregion_difference_data = group_by(open_state_clean, parameter, Date, Region,CountryCode, sub_region_1) %>%
+    summarize(value = mean(value, na.rm=T), value_last_year = mean(value_last_year, na.rm=T)) %>%
+    mutate(value_indicator = ifelse(is.na(value),1,0)) %>%
+    mutate(value_last_year_indicator = ifelse(is.na(value_last_year),1,0)) %>%
+    ungroup(Date) %>%
+    arrange(Date) %>%
+    mutate(value = ifelse((rollapply(value_indicator,parms_ma$medium,sum,  na.rm = TRUE, align = "center", fill = NA))<parms_ma$max_na_medium,  rollapply(value,parms_ma$medium,mean, align = "center",  na.rm = TRUE, fill = NA), NA)) %>%
+    mutate(value_last_year = ifelse((rollapply(value_last_year_indicator,parms_ma$medium,sum,  na.rm = TRUE, align = "center", fill = NA))<parms_ma$max_na_medium,  rollapply(value_last_year,parms_ma$medium,mean, align = "center",  na.rm = TRUE, fill = NA), NA)) %>%
+    mutate(value_difference = value - value_last_year)
+  
+  # standardize (value-mean)/sd. Edit: should only take mean up to covid time 
+  subregion_difference_data_standardized = group_by(subregion_difference_data, parameter, Region,CountryCode, sub_region_1) %>%
+    mutate(value = (value-mean(value,na.rm=T))/sd(value, na.rm=T), value_last_year = (value_last_year-mean(value_last_year,na.rm=T))/sd(value_last_year, na.rm=T)) %>%
+    mutate( value_difference = value - value_last_year)
       
 # Descriptive Airpollution Raw Data ----   
  
@@ -393,46 +438,57 @@
   print(line_plot_multiple(paste("Difference Previous Year -",select_subregion, unique(open_state_clean$parameter)[7]), outpath,data_wide$Date,"Date", "Airpollution", names_y=c(unique(open_state_clean$parameter)[7],"last_year","diff"), 
                            y_percent=F, legend=T, data_wide$value_bc, data_wide$value_last_year_bc, data_wide$value_difference_bc ))
   
+
   
-  # country difference to region 
-  country_difference_data = group_by(open_state_clean, parameter, Date, Region,CountryCode) %>%
-    summarize(value = mean(value, na.rm=T), value_last_year = mean(value_last_year, na.rm=T)) %>%
-    mutate(value_indicator = ifelse(is.na(value),1,0)) %>%
-    mutate(value_last_year_indicator = ifelse(is.na(value_last_year),1,0)) %>%
-    ungroup(Date) %>%
-    arrange(Date) %>%
-    mutate(value = ifelse((rollapply(value_indicator,parms_ma$medium,sum,  na.rm = TRUE, align = "center", fill = NA))<parms_ma$max_na_medium,  rollapply(value,parms_ma$medium,mean, align = "center",  na.rm = TRUE, fill = NA), NA)) %>%
-    mutate(value_last_year = ifelse((rollapply(value_last_year_indicator,parms_ma$medium,sum,  na.rm = TRUE, align = "center", fill = NA))<parms_ma$max_na_medium,  rollapply(value_last_year,parms_ma$medium,mean, align = "center",  na.rm = TRUE, fill = NA), NA)) %>%
-    mutate(value_difference = value - value_last_year)
-  
-  # standardize (value-mean)/sd
-  country_difference_data_standardized = group_by(country_difference_data, parameter, Date, Region,CountryCode) %>%
-    mutate(value = (value-mean(value,na.rm=T))/sd(value, na.rm=T), value_last_year = (value_last_year-mean(value_last_year,na.rm=T))/sd(value_last_year, na.rm=T), value_difference = (value_difference-mean(value_difference,na.rm=T))/sd(value_difference, na.rm=T))
-    
   # standardized data
-  for (i in 1:length(unique(country_difference_data$Region))) {
-    data_plot = filter(country_difference_data_standardized, Region == unique(country_difference_data$Region)[i])
-    
-    title=paste("Airpollution Standardized",unique(country_difference_data$Region)[i])
-    print(ggplot(data_plot, aes(x = Date))+
-            geom_line(aes(y=value, color = CountryCode))+
-            facet_wrap(~parameter) +
-            ggtitle(paste(title,sep=" ")) +
-            theme(plot.title = element_text(size=10, face="bold"))+
-            theme(axis.text=element_text(size=10),
-                  axis.title=element_text(size=10,face="bold"))+
-            ggsave(file=paste0(outpath,title,".png"), width=6, height=4, dpi=600))
-    
-    title=paste("Airpollution Difference Previous Year Standardized-",unique(country_difference_data$Region)[i])
-    print(ggplot(data_plot, aes(x = Date))+
-            geom_line(aes(y=value_difference, color = CountryCode))+
-            facet_wrap(~parameter) +
-            ggtitle(paste(title,sep=" ")) +
-            theme(plot.title = element_text(size=10, face="bold"))+
-            theme(axis.text=element_text(size=10),
-                  axis.title=element_text(size=10,face="bold"))+
-            ggsave(file=paste0(outpath,title,".png"), width=6, height=4, dpi=600))
-  }
+    # plot regions
+    # plot each region
+    for (i in 1:length(unique(country_difference_data$parameter))) {
+      data_plot = filter(country_difference_data_standardized, parameter == unique(country_difference_data$parameter)[i])
+      
+      title=paste("Airpollution Standardized Regions",unique(country_difference_data$parameter)[i])
+      print(ggplot(data_plot, aes(x = Date))+
+              geom_line(aes(y=value, color = Region))+
+              ggtitle(paste(title,sep=" ")) +
+              theme(plot.title = element_text(size=10, face="bold"))+
+              theme(axis.text=element_text(size=10),
+                    axis.title=element_text(size=10,face="bold"))+
+              ggsave(file=paste0(outpath,title,".png"), width=6, height=4, dpi=600))
+      
+      title=paste("Airpollution Difference Previous Year Regions Standardized -",unique(country_difference_data$parameter)[i])
+      print(ggplot(data_plot, aes(x = Date))+
+              geom_line(aes(y=value_difference, color = Region))+
+              ggtitle(paste(title,sep=" ")) +
+              theme(plot.title = element_text(size=10, face="bold"))+
+              theme(axis.text=element_text(size=10),
+                    axis.title=element_text(size=10,face="bold"))+
+              ggsave(file=paste0(outpath,title,".png"), width=6, height=4, dpi=600))
+    }
+  
+    # plot each country
+    for (i in 1:length(unique(country_difference_data$Region))) {
+      data_plot = filter(country_difference_data_standardized, Region == unique(country_difference_data$Region)[i])
+      
+      title=paste("Airpollution Standardized",unique(country_difference_data$Region)[i])
+      print(ggplot(data_plot, aes(x = Date))+
+              geom_line(aes(y=value, color = CountryCode))+
+              facet_wrap(~parameter) +
+              ggtitle(paste(title,sep=" ")) +
+              theme(plot.title = element_text(size=10, face="bold"))+
+              theme(axis.text=element_text(size=10),
+                    axis.title=element_text(size=10,face="bold"))+
+              ggsave(file=paste0(outpath,title,".png"), width=6, height=4, dpi=600))
+      
+      title=paste("Airpollution Difference Previous Year Standardized-",unique(country_difference_data$Region)[i])
+      print(ggplot(data_plot, aes(x = Date))+
+              geom_line(aes(y=value_difference, color = CountryCode))+
+              facet_wrap(~parameter) +
+              ggtitle(paste(title,sep=" ")) +
+              theme(plot.title = element_text(size=10, face="bold"))+
+              theme(axis.text=element_text(size=10),
+                    axis.title=element_text(size=10,face="bold"))+
+              ggsave(file=paste0(outpath,title,".png"), width=6, height=4, dpi=600))
+    }
   
   
   # normal data
@@ -522,41 +578,89 @@
                   axis.title=element_text(size=10,face="bold"))+
             ggsave(file=paste0(outpath,title,".png"), width=6, height=4, dpi=600))
   }
-  
-  # correlation analysis
-      
-      
+
 
 # Effect Calculation ----
 
-# take means of pollution data and stringency measures before Covid and in Covid
-start_covid_timeframe = '2020-03-15'
-end_covid_timeframe = '2020-03-31'
-
-start_no_covid_timeframe = '2020-02-15'
-end_no_covid_timeframe = '2020-02-28'
-
-
-effect_data = filter(merged_data, (Date >=start_covid_timeframe & Date <= end_covid_timeframe)| (Date >=start_no_covid_timeframe & Date <= end_no_covid_timeframe)) %>%
-  mutate(covid_time = ifelse((Date >=start_covid_timeframe & Date <= end_covid_timeframe), 1,0)) %>%
-  group_by(sub_region_1, parameter, covid_time) %>%
-  summarize(value = mean(value), StringencyIndex = mean(StringencyIndex)) %>%
-  arrange(sub_region_1,parameter,covid_time)
-
-summary(effect_data[effect_data$covid_time==0,])
-summary(effect_data[effect_data$covid_time==1,])
-
-# difference in difference estimation for all pollution parameters
-parameters_pollution = unique(merged_data$parameter)
-diff_diff_model = list()
-for (i in 1:length(parameters_pollution)) {
+# take means of pollution data and stringency before and after ovid
+  start_covid_timeframe = as.Date('2020-03-20')
+  mid_covid_timeframe = start_covid_timeframe + days(round(parms_ma$medium/2,0))
+  end_covid_timeframe = start_covid_timeframe + days(parms_ma$medium)
   
-  model_data = filter(effect_data, parameter == parameters_pollution[i])
+  # short MA-timeframe for stringency before covid because data starts only on 2020-02-15
+  start_no_covid_timeframe = as.Date('2020-02-15')
+  mid_no_covid_timeframe = start_no_covid_timeframe + days(2)
+  end_no_covid_timeframe = start_no_covid_timeframe + days(4)
   
-  print(summary(lm(value ~ covid_time + StringencyIndex, data = model_data)))
-  # diff_diff_model[i] = lm(value ~ covid_time + StringencyIndex + covid_time*StringencyIndex, data = model_data)
-  # print(summary(diff_diff_model[[i]]))
-}
+  # paramters
+  region_effect_list = unique(global_mobility_report_clean_stringency_index$Region)
+  region_effect_list = "WESTERN EUROPE"
+
+# World --> Country
+  # airpollution data. 
+    # choices: country_difference_data, subregion_difference_data, country_difference_data_standardized
+    effect_data_raw = country_difference_data
+    # Merge with mobility data
+    merged_data_effect = inner_join(global_mobility_report_clean_stringency_index, effect_data_raw, by = c("CountryCode","Region", "Date")) 
+    summary(merged_data_effect)
+  
+  # cut timeframe
+  effect_data = filter(merged_data_effect, (Date >=start_covid_timeframe & Date <= end_covid_timeframe)| (Date >=start_no_covid_timeframe & Date <= end_no_covid_timeframe)) %>%
+    mutate(covid_time = ifelse((Date >=start_covid_timeframe & Date <= end_covid_timeframe), 1,0)) %>%
+    filter(Region %in% region_effect_list)
+  
+  # take means / values at covid
+  effect_data = effect_data %>%
+    group_by(CountryCode, Region, parameter, Date, covid_time) %>%
+    summarize(StringencyIndex = mean(StringencyIndex, na.rm=T), value = mean(value_difference  , na.rm=T)) %>% # summarize over country / day
+    group_by(CountryCode, Region ,parameter, covid_time) %>%
+    mutate(StringencyIndex = mean(StringencyIndex, na.rm=T)) %>% # take mean stringency index for before / after covid. value is already MA (from input)
+    filter(Date== mid_covid_timeframe | Date == mid_no_covid_timeframe) %>%
+    arrange(CountryCode,Region,parameter,covid_time)
+  
+  effect_data_difference  = effect_data %>%
+    group_by(CountryCode, Region ,parameter) %>%
+    arrange(CountryCode, parameter, covid_time) %>%
+    mutate(StringencyIndex_difference = StringencyIndex-lag(StringencyIndex),value_difference = value-lag(value)) %>%
+    filter(covid_time==1)
+  
+  summary(effect_data[effect_data$covid_time==0,])
+  summary(effect_data[effect_data$covid_time==1,])
+  
+  # scatter plot 
+  for (i in 1:length(unique(effect_data_difference$parameter))) {
+    effect_data_scatter  = effect_data_difference %>%
+      filter(parameter ==unique(effect_data$parameter)[i])
+    
+    print(ggplot(effect_data_scatter, aes(x = StringencyIndex_difference, y = value_difference)) +
+            geom_point(aes(col = Region)) + 
+            geom_smooth(method='lm') + 
+            ggtitle(unique(effect_data_difference$parameter)[i]))
+  }
+
+  
+  # difference in difference estimation for all pollution parameters
+  parameters_pollution = unique(effect_data$parameter)
+  diff_diff_model = list()
+  for (i in 1:length(parameters_pollution)) {
+    
+    model_data = filter(effect_data, parameter == parameters_pollution[i])
+    print(unique(effect_data$parameter)[i])
+    print(summary(lm(value ~ covid_time + covid_time*StringencyIndex, data = model_data)))
+    # diff_diff_model[i] = lm(value ~ covid_time + StringencyIndex + covid_time*StringencyIndex, data = model_data)
+    # print(summary(diff_diff_model[[i]]))
+  }
+  
+  parameters_pollution = unique(effect_data_difference$parameter)
+  diff_diff_model = list()
+  for (i in 1:length(parameters_pollution)) {
+    
+    model_data = filter(effect_data_difference, parameter == parameters_pollution[i])
+    print(unique(effect_data_difference$parameter)[i])
+    print(summary(lm(value_difference ~ StringencyIndex_difference, data = model_data)))
+    # diff_diff_model[i] = lm(value ~ covid_time + StringencyIndex + covid_time*StringencyIndex, data = model_data)
+    # print(summary(diff_diff_model[[i]]))
+  }
 
 
 

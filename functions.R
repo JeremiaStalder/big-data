@@ -109,7 +109,11 @@ ppm_to_microgram <- function(particle,tempF, pressure_millibars_to_tenth, concen
   return(concentration_microgram_per_m3)
 }
 
-
+# R-squared
+r_sq = function(observed, predicted) {
+  r_sq <- 1-(sum((predicted-observed)^2)/sum((observed-mean(observed))^2))
+  return(r_sq)
+}
 
 
 
