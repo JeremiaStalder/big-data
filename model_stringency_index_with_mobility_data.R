@@ -67,40 +67,39 @@ outpath = "./output/stringency_and_mobility/"
       print(cor(data ,use = "pairwise.complete.obs"))
     }
     
-    # Plot 
-    # One country
-    # get data
-    stringency_mobility_ww_av = group_by(merged_data_countries, sub_region_1) %>%
-      filter(CountryCode =="DE") %>%
-      arrange(Date) %>%
-      mutate(StringencyIndex= rollapply(StringencyIndex, width = 7, mean,na.rm=T, fill=lag(StringencyIndex),by=1), 
-             retail_and_recreation = rollapply(retail_and_recreation, width = 7, mean,na.rm=T, fill=retail_and_recreation), 
-             grocery_and_pharmacy =  rollapply(grocery_and_pharmacy, width = 7, mean,na.rm=T, fill=grocery_and_pharmacy), 
-             parks = rollapply(parks, width = 7, mean,na.rm=T, fill=parks), 
-             transit_stations = rollapply(transit_stations, width = 7, mean,na.rm=T, fill=transit_stations), 
-             workplaces  =rollapply(workplaces, width = 7, mean,na.rm=T, fill=workplaces), 
-             residential=  rollapply(residential, width = 7, mean,na.rm=T, fill=residential)) %>%
-      group_by(Date)%>%
-      summarize(StringencyIndex = mean(StringencyIndex,na.rm=T), 
-                retail_and_recreation=  mean(retail_and_recreation, na.rm=T), 
-                grocery_and_pharmacy=  mean(grocery_and_pharmacy, na.rm=T), 
-                parks=  mean(parks, na.rm=T), 
-                transit_stations=  mean(transit_stations, na.rm=T), 
-                workplaces=  mean(workplaces, na.rm=T), 
-                residential=  mean(residential, na.rm=T))
+    # Plot One country
+      # get data
+      stringency_mobility_country_av = group_by(merged_data_countries, sub_region_1) %>%
+        filter(CountryCode =="DE") %>%
+        arrange(Date) %>%
+        mutate(StringencyIndex= rollapply(StringencyIndex, width = 7, mean,na.rm=T, fill=lag(StringencyIndex),by=1), 
+               retail_and_recreation = rollapply(retail_and_recreation, width = 7, mean,na.rm=T, fill=retail_and_recreation), 
+               grocery_and_pharmacy =  rollapply(grocery_and_pharmacy, width = 7, mean,na.rm=T, fill=grocery_and_pharmacy), 
+               parks = rollapply(parks, width = 7, mean,na.rm=T, fill=parks), 
+               transit_stations = rollapply(transit_stations, width = 7, mean,na.rm=T, fill=transit_stations), 
+               workplaces  =rollapply(workplaces, width = 7, mean,na.rm=T, fill=workplaces), 
+               residential=  rollapply(residential, width = 7, mean,na.rm=T, fill=residential)) %>%
+        group_by(Date)%>%
+        summarize(StringencyIndex = mean(StringencyIndex,na.rm=T), 
+                  retail_and_recreation=  mean(retail_and_recreation, na.rm=T), 
+                  grocery_and_pharmacy=  mean(grocery_and_pharmacy, na.rm=T), 
+                  parks=  mean(parks, na.rm=T), 
+                  transit_stations=  mean(transit_stations, na.rm=T), 
+                  workplaces=  mean(workplaces, na.rm=T), 
+                  residential=  mean(residential, na.rm=T))
     
-    # get plot variables
-    y1 = stringency_mobility_ww_av$StringencyIndex
-    
-    for (i in 1:(length(mobility_variables))) { # mobility vars + 1(stringency) +1(infected)
-      name = paste0("y",i+2)
-      data = select(stringency_mobility_ww_av, mobility_variables[i])
-      colnames(data) = "var"
-      assign(name, -data$var)
-    }
-    
-    line_plot_multiple("Stringency and Mobility simple averages - DE", outpath, stringency_mobility_ww_av$Date,"Date", "Stringency and Mobility (Mobility Change *-1)", names_y=c("Stringency Index",  mobility_variables),
-                       y_percent=F, legend=T, y1,y3,y4,y5,y6,y7,y8)    
+      # get plot variables
+      y1 = stringency_mobility_country_av$StringencyIndex
+      
+      for (i in 1:(length(mobility_variables))) { # mobility vars + 1(stringency) +1(infected)
+        name = paste0("y",i+2)
+        data = select(stringency_mobility_country_av, mobility_variables[i])
+        colnames(data) = "var"
+        assign(name, -data$var)
+      }
+      
+      line_plot_multiple("Stringency and Mobility simple averages - DE", outpath, stringency_mobility_country_av$Date,"Date", "Stringency and Mobility (Mobility Change *-1)", names_y=c("Stringency Index",  mobility_variables),
+                         y_percent=F, legend=T, y1,y3,y4,y5,y6,y7,y8)    
     
   # Plot 
     # Worldwide simple averages
@@ -316,14 +315,12 @@ outpath = "./output/stringency_and_mobility/"
                                                                    c("Date", "CountryCode","sub_region_1", "StringencyIndex", "StringencyIndexPredicted", 
                                                                      "country_indicator","StringencyIndexFinalPrediction")]
         
-        # Plot 
-        # One country
-        # get data
+        # Test via plot
         stringency_model_plot = group_by(merged_data_with_prediction_with_countrymeans, CountryCode,sub_region_1, Date) %>%
-          filter(CountryCode=="IT") %>%
+          filter(CountryCode=="FR") %>%
           summarize(StringencyIndexPredicted = mean(StringencyIndexFinalPrediction,na.rm=T))
           
-        title=paste("Stringency Model - IT")
+        title=paste("Stringency Model - FR")
         print(ggplot(stringency_model_plot, aes(x = Date))+
                 geom_line(aes(y=StringencyIndexPredicted, color = sub_region_1))+
                 ggtitle(paste(title,sep=" ")) +
@@ -338,5 +335,5 @@ outpath = "./output/stringency_and_mobility/"
           select(-c("country_indicator","country_scaling_factor","StringencyIndexFinalPrediction","StringencyIndexPredicted","Date_numeric"))
         
       # save predictions
-        write.csv(merged_data_with_prediction_with_countrymeans,file="./data/clean/global_mobility_report_clean_with_predictions_stringency_index.csv")
+        write.csv(merged_data_with_prediction_with_countrymeans_final,file="./data/clean/global_mobility_report_clean_with_predictions_stringency_index.csv")
   

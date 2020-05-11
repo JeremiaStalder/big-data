@@ -9,13 +9,14 @@
   library(TSPred)
   library(forecast)
   library(lubridate)
+  library(data.table)
   
   setwd("~/GitHub/big-data") # setwd
   source("functions.R") # functions
   outpath = "./output/detend_deseasonalize_airpollution_data/" # output
   
 
-# import data----
+# Import data----
 
   # airpollution data
     # load data from locally or from database (save file from database).
@@ -65,8 +66,7 @@
     global_mobility_report_clean_stringency_index$sub_region_1 = tolower(global_mobility_report_clean_stringency_index$sub_region_1)
     global_mobility_report_clean_stringency_index$CountryCode = tolower(global_mobility_report_clean_stringency_index$CountryCode)
     global_mobility_report_clean_stringency_index$CountryName = tolower(global_mobility_report_clean_stringency_index$CountryName)
-    
-    
+
 # Cleaning OpenAQ----
   openaq_state = openaq_state_original
   
@@ -117,10 +117,10 @@
   
   open_state_clean = openaq_state # use raw data, take rolling averages later
   
-  # Merge Covid & Airpollution: ----
-    # Aim: only analyze airpollution regions that are in covid data.
-    # change airpollution dataset for descriptives
-    # merge again before effect calculation (only limited timeframe)
+# Merge Covid & Airpollution: ----
+  # Aim: only analyze airpollution regions that are in covid data.
+  # change airpollution dataset for descriptives
+  # merge again before effect calculation (only limited timeframe)
   
   
     # replace region with country in openaq if no match in mobility data
@@ -140,7 +140,7 @@
     regions = unique(merged_data$sub_region_1)  
     
   
-  # Airpollution Data Clean Step 2 ---- 
+# Airpollution Data Clean Step 2 ---- 
     # add regions to entire open_state_clean dataset
     list_country_code_region = select(global_mobility_report_clean_stringency_index, sub_region_1, Region) %>%
       distinct()
@@ -158,8 +158,8 @@
     open_state_clean = left_join(open_state_clean, select(open_state_clean_previous_year, Date, CountryCode, sub_region_1, parameter,value_last_year), by = c("Date", "CountryCode", "sub_region_1", "parameter"))
     open_state_clean$value_difference = open_state_clean$value- open_state_clean$value_last_year
     
-# Create two additional versions of dataset   
-  # Create Rolling Average Dataset
+  # Create two additional versions of dataset   
+    # Create Rolling Average Dataset
       
       # rolling average for value to figure out seasonal patterns. 
       parms_ma = list(15, 30, 60, 8, 15, 30)
@@ -204,7 +204,8 @@
   subregion_difference_data_standardized = group_by(subregion_difference_data, parameter, Region,CountryCode, sub_region_1) %>%
     mutate(value = (value-mean(value,na.rm=T))/sd(value, na.rm=T), value_last_year = (value_last_year-mean(value_last_year,na.rm=T))/sd(value_last_year, na.rm=T)) %>%
     mutate( value_difference = value - value_last_year)
-      
+    
+    
 # Descriptive Airpollution Raw Data ----   
  
   # Plot pollution data
@@ -312,19 +313,19 @@
       pivot_wider(id_cols = c("Date", "parameter"), names_from=parameter, values_from = value) %>%
       ungroup()
     
-    # add 0s for non-measures parms
-    data_wide = mutate(data_wide, bc = ifelse(rep("bc", nrow(data_wide)) %in% colnames(data_wide), data_wide$bc, rep(0, nrow(data_wide))), 
-                       co = ifelse(rep("co", nrow(data_wide)) %in% colnames(data_wide), co, rep(0, nrow(data_wide))), 
-                       no2 = ifelse(rep("no2", nrow(data_wide)) %in% colnames(data_wide), no2, rep(0, nrow(data_wide))),
-                       o3 = ifelse(rep("o3", nrow(data_wide)) %in% colnames(data_wide), o3, rep(0, nrow(data_wide))),
-                       pm10 = ifelse(rep("pm10", nrow(data_wide)) %in% colnames(data_wide), pm10, rep(0, nrow(data_wide))),
-                       pm25 = ifelse(rep("pm25", nrow(data_wide)) %in% colnames(data_wide), pm25, rep(0, nrow(data_wide))),
-                       so2 = ifelse(rep("so2", nrow(data_wide)) %in% colnames(data_wide), so2, rep(0, nrow(data_wide))))
-    
-    print(line_plot_multiple(paste("Airpollution Data -", unique(data_plot$sub_region_1)[i]), outpath,data_wide$Date,"Date", "Airpollution", names_y=unique(data_plot$parameter), 
-                             y_percent=F, legend=T, data_wide$co / mean(data_wide$co, na.rm=T), data_wide$no2 / mean(data_wide$no2, na.rm=T), data_wide$o3 / mean(data_wide$o3, na.rm=T), 
-                             data_wide$pm10 / mean(data_wide$pm10, na.rm=T), data_wide$pm25 / mean(data_wide$pm25, na.rm=T), data_wide$so2 / mean(data_wide$so2, na.rm=T), data_wide$bc / mean(data_wide$bc, na.rm=T)))
-  }
+  # add 0s for non-measures parms
+  data_wide = mutate(data_wide, bc = ifelse(rep("bc", nrow(data_wide)) %in% colnames(data_wide), data_wide$bc, rep(0, nrow(data_wide))), 
+                     co = ifelse(rep("co", nrow(data_wide)) %in% colnames(data_wide), co, rep(0, nrow(data_wide))), 
+                     no2 = ifelse(rep("no2", nrow(data_wide)) %in% colnames(data_wide), no2, rep(0, nrow(data_wide))),
+                     o3 = ifelse(rep("o3", nrow(data_wide)) %in% colnames(data_wide), o3, rep(0, nrow(data_wide))),
+                     pm10 = ifelse(rep("pm10", nrow(data_wide)) %in% colnames(data_wide), pm10, rep(0, nrow(data_wide))),
+                     pm25 = ifelse(rep("pm25", nrow(data_wide)) %in% colnames(data_wide), pm25, rep(0, nrow(data_wide))),
+                     so2 = ifelse(rep("so2", nrow(data_wide)) %in% colnames(data_wide), so2, rep(0, nrow(data_wide))))
+  
+  print(line_plot_multiple(paste("Airpollution Data -", unique(data_plot$sub_region_1)[i]), outpath,data_wide$Date,"Date", "Airpollution", names_y=unique(data_plot$parameter), 
+                           y_percent=F, legend=T, data_wide$co / mean(data_wide$co, na.rm=T), data_wide$no2 / mean(data_wide$no2, na.rm=T), data_wide$o3 / mean(data_wide$o3, na.rm=T), 
+                           data_wide$pm10 / mean(data_wide$pm10, na.rm=T), data_wide$pm25 / mean(data_wide$pm25, na.rm=T), data_wide$so2 / mean(data_wide$so2, na.rm=T), data_wide$bc / mean(data_wide$bc, na.rm=T)))
+}
   
   
 # Difference Airpollution to previous year ----
@@ -440,7 +441,7 @@
   
 
   
-  # standardized data
+  # Use Standardized Data (z-scores)
     # plot regions
     # plot each region
     for (i in 1:length(unique(country_difference_data$parameter))) {
@@ -580,87 +581,89 @@
   }
 
 
-# Effect Calculation ----
+# Effect Estimation ----
 
-# take means of pollution data and stringency before and after ovid
-  start_covid_timeframe = as.Date('2020-03-20')
-  mid_covid_timeframe = start_covid_timeframe + days(round(parms_ma$medium/2,0))
-  end_covid_timeframe = start_covid_timeframe + days(parms_ma$medium)
-  
-  # short MA-timeframe for stringency before covid because data starts only on 2020-02-15
-  start_no_covid_timeframe = as.Date('2020-02-15')
-  mid_no_covid_timeframe = start_no_covid_timeframe + days(2)
-  end_no_covid_timeframe = start_no_covid_timeframe + days(4)
-  
-  # paramters
-  region_effect_list = unique(global_mobility_report_clean_stringency_index$Region)
-  region_effect_list = "WESTERN EUROPE"
-
-# World --> Country
-  # airpollution data. 
-    # choices: country_difference_data, subregion_difference_data, country_difference_data_standardized
-    effect_data_raw = country_difference_data
-    # Merge with mobility data
-    merged_data_effect = inner_join(global_mobility_report_clean_stringency_index, effect_data_raw, by = c("CountryCode","Region", "Date")) 
-    summary(merged_data_effect)
-  
-  # cut timeframe
-  effect_data = filter(merged_data_effect, (Date >=start_covid_timeframe & Date <= end_covid_timeframe)| (Date >=start_no_covid_timeframe & Date <= end_no_covid_timeframe)) %>%
-    mutate(covid_time = ifelse((Date >=start_covid_timeframe & Date <= end_covid_timeframe), 1,0)) %>%
-    filter(Region %in% region_effect_list)
-  
-  # take means / values at covid
-  effect_data = effect_data %>%
-    group_by(CountryCode, Region, parameter, Date, covid_time) %>%
-    summarize(StringencyIndex = mean(StringencyIndex, na.rm=T), value = mean(value_difference  , na.rm=T)) %>% # summarize over country / day
-    group_by(CountryCode, Region ,parameter, covid_time) %>%
-    mutate(StringencyIndex = mean(StringencyIndex, na.rm=T)) %>% # take mean stringency index for before / after covid. value is already MA (from input)
-    filter(Date== mid_covid_timeframe | Date == mid_no_covid_timeframe) %>%
-    arrange(CountryCode,Region,parameter,covid_time)
-  
-  effect_data_difference  = effect_data %>%
-    group_by(CountryCode, Region ,parameter) %>%
-    arrange(CountryCode, parameter, covid_time) %>%
-    mutate(StringencyIndex_difference = StringencyIndex-lag(StringencyIndex),value_difference = value-lag(value)) %>%
-    filter(covid_time==1)
-  
-  summary(effect_data[effect_data$covid_time==0,])
-  summary(effect_data[effect_data$covid_time==1,])
-  
-  # scatter plot 
-  for (i in 1:length(unique(effect_data_difference$parameter))) {
-    effect_data_scatter  = effect_data_difference %>%
-      filter(parameter ==unique(effect_data$parameter)[i])
+  # take means of pollution data and stringency before and after ovid
+    start_covid_timeframe = as.Date('2020-03-20')
+    mid_covid_timeframe = start_covid_timeframe + days(round(parms_ma$medium/2,0))
+    end_covid_timeframe = start_covid_timeframe + days(parms_ma$medium)
     
-    print(ggplot(effect_data_scatter, aes(x = StringencyIndex_difference, y = value_difference)) +
-            geom_point(aes(col = Region)) + 
-            geom_smooth(method='lm') + 
-            ggtitle(unique(effect_data_difference$parameter)[i]))
-  }
-
-  
-  # difference in difference estimation for all pollution parameters
-  parameters_pollution = unique(effect_data$parameter)
-  diff_diff_model = list()
-  for (i in 1:length(parameters_pollution)) {
+    # short MA-timeframe for stringency before covid because data starts only on 2020-02-15
+    start_no_covid_timeframe = as.Date('2020-02-15')
+    mid_no_covid_timeframe = start_no_covid_timeframe + days(2)
+    end_no_covid_timeframe = start_no_covid_timeframe + days(4)
     
-    model_data = filter(effect_data, parameter == parameters_pollution[i])
-    print(unique(effect_data$parameter)[i])
-    print(summary(lm(value ~ covid_time + covid_time*StringencyIndex, data = model_data)))
-    # diff_diff_model[i] = lm(value ~ covid_time + StringencyIndex + covid_time*StringencyIndex, data = model_data)
-    # print(summary(diff_diff_model[[i]]))
-  }
+    # paramters
+    region_effect_list = unique(global_mobility_report_clean_stringency_index$Region)
+    region_effect_list = "WESTERN EUROPE"
   
-  parameters_pollution = unique(effect_data_difference$parameter)
-  diff_diff_model = list()
-  for (i in 1:length(parameters_pollution)) {
+    # World --> Country
+      # airpollution data. 
+        # choices: country_difference_data, subregion_difference_data, country_difference_data_standardized
+        effect_data_raw = subregion_difference_data
+        effect_data_raw = effect_data_raw
+
+        # Merge with mobility data
+        merged_data_effect = inner_join(global_mobility_report_clean_stringency_index, select(effect_data_raw, -c("CountryCode", "Region")), by = c("sub_region_1","Date")) 
+        summary(merged_data_effect)
+        summary(is.na(merged_data_effect))
+      
+      # cut timeframe
+      effect_data = filter(merged_data_effect, (Date >=start_covid_timeframe & Date <= end_covid_timeframe)| (Date >=start_no_covid_timeframe & Date <= end_no_covid_timeframe)) %>%
+        mutate(covid_time = ifelse((Date >=start_covid_timeframe & Date <= end_covid_timeframe), 1,0)) %>%
+        filter(Region %in% region_effect_list)
+      
+      # take means / values at covid
+      effect_data = effect_data %>%
+        group_by(CountryCode, Region, sub_region_1,parameter, Date, covid_time) %>%
+        summarize(StringencyIndex = mean(StringencyIndex, na.rm=T), value = mean(value_difference  , na.rm=T)) %>% # summarize over country / day
+        group_by(CountryCode, sub_region_1,Region ,parameter, covid_time) %>%
+        mutate(StringencyIndex = mean(StringencyIndex, na.rm=T)) %>% # take mean stringency index for before / after covid. value is already MA (from input)
+        filter(Date== mid_covid_timeframe | Date == mid_no_covid_timeframe) %>%
+        arrange(CountryCode,Region,sub_region_1,parameter,covid_time)
     
-    model_data = filter(effect_data_difference, parameter == parameters_pollution[i])
-    print(unique(effect_data_difference$parameter)[i])
-    print(summary(lm(value_difference ~ StringencyIndex_difference, data = model_data)))
-    # diff_diff_model[i] = lm(value ~ covid_time + StringencyIndex + covid_time*StringencyIndex, data = model_data)
-    # print(summary(diff_diff_model[[i]]))
-  }
-
-
-
+      # calculate difference in value and covid
+      # !CAREFUL: due to missing observations, this is not the same plot / regressions with cross section before and in covid
+    
+        effect_data_difference  = effect_data %>%
+          group_by(CountryCode, Region , sub_region_1,parameter) %>%
+          arrange(CountryCode, parameter, sub_region_1,covid_time) %>%
+          mutate(StringencyIndex_difference = StringencyIndex-lag(StringencyIndex),value_difference = value-lag(value)) %>%
+          filter(covid_time==1)
+        
+        summary(effect_data[effect_data$covid_time==0,])
+        summary(effect_data[effect_data$covid_time==1,])
+        
+        # scatter plot difference in pollution and difference in stringency to investigate effect
+        for (i in 1:length(unique(effect_data_difference$parameter))) {
+          effect_data_scatter  = effect_data_difference %>%
+            filter(parameter ==unique(effect_data$parameter)[i])
+          
+          print(ggplot(effect_data_scatter, aes(x = StringencyIndex_difference, y = value_difference)) +
+                  geom_point(aes(col = Region)) + 
+                  geom_smooth(method='lm') + 
+                  ggtitle(unique(effect_data_difference$parameter)[i]))
+        }
+  
+    
+    # difference in difference estimation for all pollution parameters
+    parameters_pollution = unique(effect_data$parameter)
+    diff_diff_model = list()
+    for (i in 1:length(parameters_pollution)) {
+      
+      model_data = filter(effect_data, parameter == parameters_pollution[i])
+      print(unique(effect_data$parameter)[i])
+      print(summary(lm(value ~ covid_time + StringencyIndex+covid_time*StringencyIndex, data = model_data)))
+    }
+    
+    parameters_pollution = unique(effect_data_difference$parameter)
+    diff_diff_model = list()
+    for (i in 1:length(parameters_pollution)) {
+      
+      model_data = filter(effect_data_difference, parameter == parameters_pollution[i])
+      print(unique(effect_data_difference$parameter)[i])
+      print(summary(lm(value_difference ~ StringencyIndex_difference, data = model_data)))
+    }
+  
+  
+  
