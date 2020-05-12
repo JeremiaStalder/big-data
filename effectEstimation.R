@@ -1,17 +1,80 @@
+# Effect Estimation: Stringency -> Covid 
 
+# librarys
+  library(readr)
+  library(zoo)
+  library(RMariaDB) 
+  library(stats)
+  library(TSPred)
+  library(forecast)
+  library(lubridate)
+  library(data.table)
+  library(tidyverse)
+  
+  filter <- dplyr::filter
+  select <- dplyr::select
 
+setwd("~/GitHub/big-data") # setwd
+source("functions.R") # functions
+outpath = "./output/openaqDescriptives/" # output
 
+# parameters
+  # rolling average for value to figure out seasonal patterns. 
+  parms_ma = list(15, 30, 60, 12, 20, 45)
+  names(parms_ma) = c("short","medium","long","max_na_short","max_na_medium","max_na_long")
 
+# Import Data ----
+  open_state_clean = read_csv("data/output_openaqData/open_state_clean.csv", 
+                              col_types = cols(Date = col_date(format = "%Y-%m-%d"))) 
+  country_difference_data = read_csv("data/output_openaqData/country_difference_data.csv", 
+                                     col_types = cols(Date = col_date(format = "%Y-%m-%d"),
+                                                      value = col_double(),
+                                                      value_last_year = col_double(),
+                                                      value_indicator = col_double(),
+                                                      value_last_year_indicator = col_double(),
+                                                      value_difference = col_double()))
+  
+  country_difference_data_standardized = read_csv("data/output_openaqData/country_difference_data_standardized.csv", 
+                                                  col_types = cols(Date = col_date(format = "%Y-%m-%d"),
+                                                                   value = col_double(),
+                                                                   value_last_year = col_double(),
+                                                                   value_indicator = col_double(),
+                                                                   value_last_year_indicator = col_double(),
+                                                                   value_difference = col_double()))
+  
+  subregion_difference_data = read_csv("data/output_openaqData/subregion_difference_data.csv", 
+                                       col_types = cols(Date = col_date(format = "%Y-%m-%d"),
+                                                        value = col_double(),
+                                                        value_last_year = col_double(),
+                                                        value_indicator = col_double(),
+                                                        value_last_year_indicator = col_double(),
+                                                        value_difference = col_double()))
+  
+  subregion_difference_data_standardized = read_csv("data/output_openaqData/subregion_difference_data_standardized.csv", 
+                                                    col_types = cols(Date = col_date(format = "%Y-%m-%d"),
+                                                                     value = col_double(),
+                                                                     value_last_year = col_double(),
+                                                                     value_indicator = col_double(),
+                                                                     value_last_year_indicator = col_double(),
+                                                                     value_difference = col_double()))
+  
+  global_mobility_report_clean_stringency_index = read_csv("data/output_openaqData/global_mobility_report_clean_to_merge_with_openaq.csv", 
+                                                           col_types = cols(Date = col_date(format = "%Y-%m-%d"),
+                                                                            CountryName = col_character(), 
+                                                                            grocery_and_pharmacy = col_double(), 
+                                                                            parks = col_double(), residential = col_double(), 
+                                                                            retail_and_recreation = col_double(), 
+                                                                            sub_region_1 = col_character(), transit_stations = col_double(), 
+                                                                            workplaces = col_double()))
 
 # Effect Estimation ----
 
-  # parameters for effect estimation:
+  # Settings for effect estimation:
     # CHOICE: take means of pollution data and stringency before and after ovid
     start_covid_timeframe = as.Date('2020-03-20')
     mid_covid_timeframe = start_covid_timeframe + days(round(parms_ma$medium/2,0))
     end_covid_timeframe = start_covid_timeframe + days(parms_ma$medium)
     
-    # CHOICE: short MA-timeframe for stringency before covid because data starts only on 2020-02-15
     start_no_covid_timeframe = as.Date('2020-02-15')
     mid_no_covid_timeframe = start_no_covid_timeframe + days(2)
     end_no_covid_timeframe = start_no_covid_timeframe + days(4)
@@ -20,7 +83,7 @@
     region_effect_list = unique(global_mobility_report_clean_stringency_index$Region)
     country_effect_list = unique(global_mobility_report_clean_stringency_index$CountryCode)
     
-    # CHOICE: country_difference_data, subregion_difference_data, country_difference_data_standardized, subregion_difference_data_standardized
+    # CHOICE: Data - country_difference_data, subregion_difference_data, country_difference_data_standardized, subregion_difference_data_standardized
     effect_data_raw = subregion_difference_data_standardized
     effect_data_raw = effect_data_raw
   

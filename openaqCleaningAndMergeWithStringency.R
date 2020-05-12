@@ -214,10 +214,8 @@
     ungroup(Region,CountryCode)
   
   # create list of countries and subregions that exist in both datasets
-    countryList_raw = inner_join(select(global_mobility_report_clean_stringency_index,c("CountryName", "CountryCode", "sub_region_1", "Region") ), select(open_state_clean, c("CountryCode","sub_region_1")), by = c("CountryCode","sub_region_1")) 
-    unique(countryList_raw$sub_region_1)
-    unique(countryList_raw$CountryCode)
-    
+    countryListOpenaqStringencyMerged= select(global_mobility_report_clean_stringency_index, sub_region_1, CountryCode, CountryName, Region) %>%
+      distinct()
   
   # save data
   write.csv(open_state_clean,file=paste0(outpath_files,"open_state_clean.csv"))
@@ -226,6 +224,6 @@
   write.csv(subregion_difference_data,file=paste0(outpath_files,"subregion_difference_data.csv"))
   write.csv(subregion_difference_data_standardized,file=paste0(outpath_files,"subregion_difference_data_standardized.csv"))
   write.csv(global_mobility_report_clean_stringency_index,file=paste0(outpath_files,"global_mobility_report_clean_to_merge_with_openaq.csv"))
-
+  write.csv(countryListOpenaqStringencyMerged,file=paste0(outpath_files,"countryListOpenaqStringencyMerged.csv"))
   
 

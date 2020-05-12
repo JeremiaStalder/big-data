@@ -57,15 +57,6 @@ outpath = "./output/openaqDescriptives/" # output
                                                                      value_indicator = col_double(),
                                                                      value_last_year_indicator = col_double(),
                                                                      value_difference = col_double()))
-  
-  global_mobility_report_clean_stringency_index = read_csv("data/output_openaqData/global_mobility_report_clean_to_merge_with_openaq.csv", 
-                                                           col_types = cols(Date = col_date(format = "%Y-%m-%d"),
-                                                           CountryName = col_character(), 
-                                                           grocery_and_pharmacy = col_double(), 
-                                                           parks = col_double(), residential = col_double(), 
-                                                           retail_and_recreation = col_double(), 
-                                                           sub_region_1 = col_character(), transit_stations = col_double(), 
-                                                           workplaces = col_double()))
 
   
 # Raw Data ----   
@@ -297,8 +288,6 @@ outpath = "./output/openaqDescriptives/" # output
                            y_percent=F, legend=T, data_wide$value_so2 , data_wide$value_last_year_so2, data_wide$value_difference_so2 ))
   print(line_plot_multiple(paste("Difference Previous Year -",select_subregion, unique(open_state_clean$parameter)[6]), outpath,data_wide$Date,"Date", "Airpollution", names_y=c(unique(open_state_clean$parameter)[6],"last_year","diff"), 
                            y_percent=F, legend=T, data_wide$value_pm25, data_wide$value_last_year_pm25, data_wide$value_difference_pm25 ))
-  print(line_plot_multiple(paste("Difference Previous Year -",select_subregion, unique(open_state_clean$parameter)[7]), outpath,data_wide$Date,"Date", "Airpollution", names_y=c(unique(open_state_clean$parameter)[7],"last_year","diff"), 
-                           y_percent=F, legend=T, data_wide$value_bc, data_wide$value_last_year_bc, data_wide$value_difference_bc ))
   
   
   
