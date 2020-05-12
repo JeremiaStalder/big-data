@@ -10,3 +10,5 @@ data/merged.csv
 data/pollution_wheather_unified_units.csv
 data/clean/merged.csv
 data/clean/openaq_state_converted_units.csv
+data/map_data/gadm36_levels_gpkg.zip
+data/map_data/gadm36_levels_gpkg/gadm36_levels.gpkg
