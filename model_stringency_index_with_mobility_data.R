@@ -7,6 +7,9 @@ library(zoo)
 library(caret) # random forests
 library(grf)
 
+filter <- dplyr::filter
+select <- dplyr::select
+
 setwd("~/GitHub/big-data") # setwd
 source("functions.R") # functions
 

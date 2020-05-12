@@ -12,3 +12,6 @@ data/clean/merged.csv
 data/clean/openaq_state_converted_units.csv
 data/map_data/gadm36_levels_gpkg.zip
 data/map_data/gadm36_levels_gpkg/gadm36_levels.gpkg
+data/output_openaqData/open_state_clean.csv
+data/output_openaqData/subregion_difference_data.csv
+data/output_openaqData/subregion_difference_data_standardized.csv

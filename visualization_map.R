@@ -27,13 +27,24 @@ map_switzerland = readRDS("data/map_data/switzerland_gadm36_CHE_gpkg/gadm36_CHE_
   summary(map_switzerland)
   
   map_us = fortify(map_us)
-  map_switzerland = fortify(map_switzerland)
+  map_data(map_switzerland, )
+  map_switzerland_fortify = fortify(map_switzerland, region = "NAME_1")
+  
 
   
-  locations <- ggplot(map_switzerland, aes(x=long, y=lat))
-  locations <- locations + geom_map(data = map_switzerland,
-                                    map = map_switzerland,
-                                    aes(map_id = id))
+
+  ggplot(map_switzerland_fortify, aes(long, lat)) +
+    geom_polygon(aes(group = group), colour = "white")
+  
+  locations <- ggplot(map_switzerland_fortify, aes(x=long, y=lat))
+  locations <- locations + geom_map(data = map_switzerland_fortify,
+                                    map = map_switzerland_fortify,
+                                    aes(map_id = id)) +
+    geom_polygon(aes(group = group))
+  
+
+  
+  
   locations
   by_subregion <- locations + geom_map(data=pop, map=map, color="white", size=0.15,
                                        aes(fill=log(X2013), group=Country.Code, map_id=Country.Code))
