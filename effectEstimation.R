@@ -16,7 +16,7 @@
 
 setwd("~/GitHub/big-data") # setwd
 source("functions.R") # functions
-outpath = "./output/openaqDescriptives/" # output
+outpath = "./output/openaqEffectEstimation/" # output
 
 # parameters
   # rolling average for value to figure out seasonal patterns. 
@@ -83,8 +83,10 @@ outpath = "./output/openaqDescriptives/" # output
     region_effect_list = unique(global_mobility_report_clean_stringency_index$Region)
     country_effect_list = unique(global_mobility_report_clean_stringency_index$CountryCode)
     
-    # CHOICE: Data - country_difference_data, subregion_difference_data, country_difference_data_standardized, subregion_difference_data_standardized
-    effect_data_raw = subregion_difference_data_standardized
+    # Choice: binary treatment - transforms 
+    
+    # CHOICE: Data on which level (country or subregion) - country_difference_data, subregion_difference_data, country_difference_data_standardized, subregion_difference_data_standardized
+    effect_data_raw = subregion_difference_data
     effect_data_raw = effect_data_raw
   
   # Get data for effect estimation
@@ -98,60 +100,83 @@ outpath = "./output/openaqDescriptives/" # output
       filter(Region %in% region_effect_list) %>%
       filter(CountryCode %in% country_effect_list)
     
+  #### CHOICE: choose effect variable in first summarize command ###
     # take means / values at covid
     effect_data = effect_data %>%
       group_by(CountryCode, Region, sub_region_1,parameter, Date, covid_time) %>%
-      summarize(StringencyIndex = mean(StringencyIndex, na.rm=T), value = mean(value_difference  , na.rm=T)) %>% # summarize over country / day
+      summarize(StringencyIndex = mean(StringencyIndex, na.rm=T), value = mean(value_difference, na.rm=T)) %>% # summarize over country / day
       group_by(CountryCode, sub_region_1,Region ,parameter, covid_time) %>%
       mutate(StringencyIndex = mean(StringencyIndex, na.rm=T)) %>% # take mean stringency index for before / after covid. value is already MA (from input)
       filter(Date== mid_covid_timeframe | Date == mid_no_covid_timeframe) %>%
       arrange(CountryCode,Region,sub_region_1,parameter,covid_time)
     
-    # calculate difference in value and covid
-    # !CAREFUL: due to missing observations, this is not the same plot / regressions with cross section before and in covid
+    # calculate difference in value and covid for plot.
+    # CAREFUL: this is not the same as the raw diff / diff approach
     
-    effect_data_difference  = effect_data %>%
+    effect_data  = effect_data %>%
       group_by(CountryCode, Region , sub_region_1,parameter) %>%
       arrange(CountryCode, parameter, sub_region_1,covid_time) %>%
-      mutate(StringencyIndex_difference = StringencyIndex-lag(StringencyIndex),value_difference = value-lag(value)) %>%
-      filter(covid_time==1)
+      mutate(StringencyIndex_difference = StringencyIndex-lag(StringencyIndex),value_difference = value-lag(value))
   
-  summary(effect_data[effect_data$covid_time==0,])
-  summary(effect_data[effect_data$covid_time==1,])
-  
-  
+    # difference between before covid and in covid time
+    summary(effect_data[effect_data$covid_time==0,])
+    summary(effect_data[effect_data$covid_time==1,])
+    
   # Effect estimation
   
     # Visual: scatter plot difference in pollution and difference in stringency to investigate effect
-    for (i in 1:length(unique(effect_data_difference$parameter))) {
-      effect_data_scatter  = effect_data_difference %>%
-        filter(parameter ==unique(effect_data$parameter)[i])
+    for (i in 1:length(unique(effect_data$parameter))) {
+      effect_data_scatter  = effect_data %>%
+        filter(parameter ==unique(effect_data$parameter)[i] & covid_time==1)
       
-      print(ggplot(effect_data_scatter, aes(x = StringencyIndex_difference, y = value_difference)) +
-              geom_point(aes(col = Region)) + 
-              geom_smooth(method='lm') + 
-              ggtitle(unique(effect_data_difference$parameter)[i]))
+      print(ggplot(effect_data_scatter, aes(x = StringencyIndex_difference, y = value_difference, col = Region)) +
+              geom_point() + 
+              geom_smooth(method='lm', aes(group=Region)) + 
+              ggtitle(unique(effect_data$parameter)[i]))
     }
   
   
     # Difference in Difference estimation for all pollution parameters
-    parameters_pollution = unique(effect_data$parameter)
-    diff_diff_model = list()
-    for (i in 1:length(parameters_pollution)) {
-      
-      model_data = filter(effect_data, parameter == parameters_pollution[i])
-      print(unique(effect_data$parameter)[i])
-      print(summary(lm(value ~ covid_time + StringencyIndex+covid_time*StringencyIndex, data = model_data)))
-    }
+      # choose parameters
+      parameters_pollution = unique(effect_data$parameter)[1]
     
-    parameters_pollution = unique(effect_data_difference$parameter)
-    diff_diff_model = list()
-    for (i in 1:length(parameters_pollution)) {
+      diff_diff_model = list()
+      for (i in 1:length(parameters_pollution)) {
+        
+        model_data = filter(effect_data, parameter == parameters_pollution[i])
+        print(parameters_pollution[i])
+        model = lm(value ~ covid_time + StringencyIndex+covid_time*StringencyIndex, data = model_data)
+        diff_diff_model[[i]] = model
+        print(summary(model))
+      }
       
-      model_data = filter(effect_data_difference, parameter == parameters_pollution[i])
-      print(unique(effect_data_difference$parameter)[i])
-      print(summary(lm(value_difference ~ StringencyIndex_difference, data = model_data)))
-    }
-  
+      diff_diff_model_v2 = list()
+      for (i in 1:length(parameters_pollution)) {
+        
+        model_data = filter(effect_data, parameter == parameters_pollution[i])
+        print(parameters_pollution[i])
+        
+        model_data$interact = model_data$covid_time*model_data$StringencyIndex_difference
+        model = lm(value ~ covid_time + interact, data = model_data)
+        diff_diff_model_v2[[i]] = model
+        print(summary(model))
+      }
+
+      
+      diff_diff_model_change = list()
+      for (i in 1:length(parameters_pollution)) {
+        model_data = filter(effect_data, parameter == parameters_pollution[i] & covid_time==1)
+        
+        print(parameters_pollution)
+        model = lm(value_difference ~ StringencyIndex_difference, data = model_data)
+        diff_diff_model_change[[i]] = model
+        print(summary(model))
+      }
+      
+    # pick final model for effect estimation
+    model_effect = 
+      
+# Effect prediction
+    
   
   

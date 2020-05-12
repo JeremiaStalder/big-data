@@ -25,7 +25,7 @@
     # load data from locally or from database (save file from database).
     # Note: local file implemented to prevent waiting times from database
     load_locally = 1
-    unit_conversion_openaq = T # do not convert units if inputs data already did
+    unit_conversion_openaq = F # do not convert units if inputs data already did
 
     if(load_locally ==1) {
       openaq_state_original = read_csv("./data/clean/openaq_state_original.csv", 
@@ -69,10 +69,34 @@
     global_mobility_report_clean_stringency_index$sub_region_1 = tolower(global_mobility_report_clean_stringency_index$sub_region_1)
     global_mobility_report_clean_stringency_index$CountryCode = tolower(global_mobility_report_clean_stringency_index$CountryCode)
     global_mobility_report_clean_stringency_index$CountryName = tolower(global_mobility_report_clean_stringency_index$CountryName)
+    
+  # import predictions for airpollution based on weather data
+    # no predictions for bc due to low number of observations and locations
+    co_prediction <- read_csv("data/predictionAirpollutionFromWeatherData/co_prediction.csv")
+    no2_prediction <- read_csv("data/predictionAirpollutionFromWeatherData/no2_prediction.csv")
+    o3_prediction <- read_csv("data/predictionAirpollutionFromWeatherData/o3_prediction.csv")
+    pm10_prediction <- read_csv("data/predictionAirpollutionFromWeatherData/pm10_prediction.csv")
+    pm25_prediction <- read_csv("data/predictionAirpollutionFromWeatherData/pm25_prediction.csv")
+    so2_prediction <- read_csv("data/predictionAirpollutionFromWeatherData/so2_prediction.csv")
+    
+    # add parameter as variable
+    co_prediction$parameter = "co"
+    no2_prediction$parameter = "no3"
+    o3_prediction$parameter = "o3"
+    pm10_prediction$parameter = "pm10"
+    pm25_prediction$parameter = "pm25"
+    so2_prediction$parameter = "so2"
+    
+    predicted_airpollution = rbind(co_prediction, no2_prediction, o3_prediction, pm10_prediction, pm25_prediction, so2_prediction)
+    colnames(predicted_airpollution)[colnames(predicted_airpollution) %in% c("state")] = "sub_region_1"
+    colnames(predicted_airpollution)[colnames(predicted_airpollution) %in% c("date")] = "Date"
+    
 
 # Cleaning OpenAQ----
   openaq_state = openaq_state_original
   
+  # drop non-predicted particle bc
+    openaq_state = filter(openaq_state, parameter != "bc")
     
   # get same colnames as nationwide and mobility data for: date, countrycode, region
     key_variable_names = c("CountryCode","sub_region_1","Date")
@@ -118,40 +142,52 @@
   
   analysis_variables = c(airquality_variables, stringency_variables, category_variables, cross_section_variables)
   
-  open_state_clean = openaq_state # use raw data, take rolling averages later
+  open_state_clean = openaq_state # use raw data, take rolling averages later. !! CAREFUL !! open_state_clean will be merged with predictions, edited and get same name later
   
-# Merge Covid & Airpollution: ----
-  # Aim: only analyze airpollution regions that are reported in covid data
+  
+# Merge Covid & Airpollution & Prediction: ----
+  #  merge predicted airpollution to airpollution data
+  # only analyze airpollution regions that are reported in other datasets.
   # change airpollution dataset for descriptives
   # merge again before effect calculation (only limited timeframe)
   
+  # Merge prediction and airpollution data
+    # test # of matching regions
+      indicator_change_region_name = sort(match(unique(predicted_airpollution$sub_region_1), unique(open_state_clean$sub_region_1))) # identify matched regions
+      not_matched_regions = unique(open_state_clean$sub_region_1)[-indicator_change_region_name] # identify non-matched regions
+      print(paste("Merging Predictions from Weather Data & Airpollution:",length(not_matched_regions), "Subregions are not matched. Prediction will be NA for not-matched regions"))
+    # merge
+      merged_openaq_prediciton = right_join(predicted_airpollution, open_state_clean, by = c("sub_region_1", "Date", "parameter")) 
+    # add deviation from prediction as variable
+      merged_openaq_prediciton = mutate(merged_openaq_prediciton, residual_prediction = value - prediction)
+      
   
+  # Covid & Airpollution
     # replace region with country in openaq if no match in mobility data
-    indicator_change_region_name = sort(match(unique(global_mobility_report_clean_stringency_index$sub_region_1), unique(open_state_clean$sub_region_1))) # identify matched regions
-    not_matched_regions = unique(open_state_clean$sub_region_1)[-indicator_change_region_name] # identify non-matched regions
-    open_state_clean[(open_state_clean$sub_region_1 %in% not_matched_regions),]$sub_region_1 = open_state_clean[(open_state_clean$sub_region_1 %in% not_matched_regions),]$CountryCode
+    indicator_change_region_name = sort(match(unique(global_mobility_report_clean_stringency_index$sub_region_1), unique(merged_openaq_prediciton$sub_region_1))) # identify matched regions
+    not_matched_regions = unique(merged_openaq_prediciton$sub_region_1)[-indicator_change_region_name] # identify non-matched regions
+    merged_openaq_prediciton[(merged_openaq_prediciton$sub_region_1 %in% not_matched_regions),]$sub_region_1 = merged_openaq_prediciton[(merged_openaq_prediciton$sub_region_1 %in% not_matched_regions),]$CountryCode
     
-    # test match
-    indicator_change_region_name_1 = sort(match(unique(global_mobility_report_clean_stringency_index$sub_region_1), unique(open_state_clean$sub_region_1))) 
-    not_matched_regions_1 = unique(open_state_clean$sub_region_1)[-indicator_change_region_name_1]
-    print(paste("Merging:",length(not_matched_regions_1), "Subregions are not matched"))
+    # test match after replacing
+    indicator_change_region_name_1 = sort(match(unique(global_mobility_report_clean_stringency_index$sub_region_1), unique(merged_openaq_prediciton$sub_region_1))) 
+    not_matched_regions_1 = unique(merged_openaq_prediciton$sub_region_1)[-indicator_change_region_name_1]
+    print(paste("Merging Stringency & Airpollution:",length(not_matched_regions_1), "Subregions are not matched"))
     
-    # merge by CountryCode, sub_region_1 and Date (CountryCode should not be necessary if no mistakes before)
-    merged_data = inner_join(global_mobility_report_clean_stringency_index, open_state_clean, by = c("CountryCode", "sub_region_1", "Date")) 
+   # test merge by CountryCode, sub_region_1 and Date (CountryCode should not be necessary if no mistakes before)
+    # dataset will not be saved, we merge data again when necessary so only relevant variables are in dataframe
+    merged_data = inner_join(global_mobility_report_clean_stringency_index, merged_openaq_prediciton, by = c("CountryCode", "sub_region_1", "Date")) 
     summary(merged_data)
-    
-    regions = unique(merged_data$sub_region_1)  
     
   
 # Airpollution Data Clean Step 2 ---- 
     # add regions to entire open_state_clean dataset
     list_country_code_region = select(global_mobility_report_clean_stringency_index, sub_region_1, Region) %>%
       distinct()
-    open_state_clean = left_join(open_state_clean, list_country_code_region, by=("sub_region_1"))
+    open_state_clean = left_join(merged_openaq_prediciton, list_country_code_region, by=("sub_region_1"))
     
-    # Average over new subregions after merging
+    # Average over new subregions after merging 
     open_state_clean = group_by(open_state_clean, Region, CountryCode, Date, sub_region_1, parameter, unit) %>%
-      summarize(value = mean(value, na.rm=T)) %>%
+      summarize(value = mean(value, na.rm=T), prediction = mean(prediction, na.rm=T)) %>%
       ungroup()
     
     # Create Last years value as variable

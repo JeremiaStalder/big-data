@@ -71,8 +71,7 @@ outpath = "./output/openaqDescriptives/" # output
     ungroup()
   
   # add 0s for non-measures parms
-  data_wide = mutate(data_wide, bc = ifelse(rep("bc", nrow(data_wide)) %in% colnames(data_wide), bc, rep(0, nrow(data_wide))), 
-                     co = ifelse(rep("co", nrow(data_wide)) %in% colnames(data_wide), co, rep(0, nrow(data_wide))), 
+  data_wide = mutate(data_wide, co = ifelse(rep("co", nrow(data_wide)) %in% colnames(data_wide), co, rep(0, nrow(data_wide))), 
                      no2 = ifelse(rep("no2", nrow(data_wide)) %in% colnames(data_wide), no2, rep(0, nrow(data_wide))),
                      o3 = ifelse(rep("o3", nrow(data_wide)) %in% colnames(data_wide), o3, rep(0, nrow(data_wide))),
                      pm10 = ifelse(rep("pm10", nrow(data_wide)) %in% colnames(data_wide), pm10, rep(0, nrow(data_wide))),
@@ -81,7 +80,7 @@ outpath = "./output/openaqDescriptives/" # output
   
   print(line_plot_multiple(paste("Airpollution Data - World"), outpath,data_wide$Date,"Date", "Airpollution", names_y=unique(open_state_clean$parameter), 
                            y_percent=F, legend=T, data_wide$co / mean(data_wide$co, na.rm=T), data_wide$no2 / mean(data_wide$no2, na.rm=T), data_wide$o3 / mean(data_wide$o3, na.rm=T), 
-                           data_wide$pm10 / mean(data_wide$pm10, na.rm=T), data_wide$pm25 / mean(data_wide$pm25, na.rm=T), data_wide$so2 / mean(data_wide$so2, na.rm=T), data_wide$bc / mean(data_wide$bc, na.rm=T)))
+                           data_wide$pm10 / mean(data_wide$pm10, na.rm=T), data_wide$pm25 / mean(data_wide$pm25, na.rm=T), data_wide$so2 / mean(data_wide$so2, na.rm=T)))
   
   
   # regions
@@ -99,8 +98,7 @@ outpath = "./output/openaqDescriptives/" # output
         ungroup()
       
       # add 0s for non-measures parms
-      data_wide = mutate(data_wide, bc = ifelse(rep("bc", nrow(data_wide)) %in% colnames(data_wide), bc, rep(0, nrow(data_wide))), 
-                         co = ifelse(rep("co", nrow(data_wide)) %in% colnames(data_wide), co, rep(0, nrow(data_wide))), 
+      data_wide = mutate(data_wide, co = ifelse(rep("co", nrow(data_wide)) %in% colnames(data_wide), co, rep(0, nrow(data_wide))), 
                          no2 = ifelse(rep("no2", nrow(data_wide)) %in% colnames(data_wide), no2, rep(0, nrow(data_wide))),
                          o3 = ifelse(rep("o3", nrow(data_wide)) %in% colnames(data_wide), o3, rep(0, nrow(data_wide))),
                          pm10 = ifelse(rep("pm10", nrow(data_wide)) %in% colnames(data_wide), pm10, rep(0, nrow(data_wide))),
@@ -109,7 +107,7 @@ outpath = "./output/openaqDescriptives/" # output
       
       print(line_plot_multiple(paste("Airpollution Data -", unique(data_plot$Region)[i]), outpath,data_wide$Date,"Date", "Airpollution", names_y=unique(data_plot$parameter), 
                                y_percent=F, legend=T, data_wide$co / mean(data_wide$co, na.rm=T), data_wide$no2 / mean(data_wide$no2, na.rm=T), data_wide$o3 / mean(data_wide$o3, na.rm=T), 
-                               data_wide$pm10 / mean(data_wide$pm10, na.rm=T), data_wide$pm25 / mean(data_wide$pm25, na.rm=T), data_wide$so2 / mean(data_wide$so2, na.rm=T), data_wide$bc / mean(data_wide$bc, na.rm=T)))
+                               data_wide$pm10 / mean(data_wide$pm10, na.rm=T), data_wide$pm25 / mean(data_wide$pm25, na.rm=T), data_wide$so2 / mean(data_wide$so2, na.rm=T)))
     }
   }
   
@@ -132,8 +130,7 @@ outpath = "./output/openaqDescriptives/" # output
       ungroup()
     
     # add 0s for non-measures parms
-    data_wide = mutate(data_wide, bc = ifelse(rep("bc", nrow(data_wide)) %in% colnames(data_wide), bc, rep(0, nrow(data_wide))), 
-                       co = ifelse(rep("co", nrow(data_wide)) %in% colnames(data_wide), co, rep(0, nrow(data_wide))), 
+    data_wide = mutate(data_wide, co = ifelse(rep("co", nrow(data_wide)) %in% colnames(data_wide), co, rep(0, nrow(data_wide))), 
                        no2 = ifelse(rep("no2", nrow(data_wide)) %in% colnames(data_wide), no2, rep(0, nrow(data_wide))),
                        o3 = ifelse(rep("o3", nrow(data_wide)) %in% colnames(data_wide), o3, rep(0, nrow(data_wide))),
                        pm10 = ifelse(rep("pm10", nrow(data_wide)) %in% colnames(data_wide), pm10, rep(0, nrow(data_wide))),
@@ -142,7 +139,7 @@ outpath = "./output/openaqDescriptives/" # output
     
     print(line_plot_multiple(paste("Airpollution Data -", unique(data_plot$CountryCode)[i]), outpath,data_wide$Date,"Date", "Airpollution", names_y=unique(data_plot$parameter), 
                              y_percent=F, legend=T, data_wide$co / mean(data_wide$co, na.rm=T), data_wide$no2 / mean(data_wide$no2, na.rm=T), data_wide$o3 / mean(data_wide$o3, na.rm=T), 
-                             data_wide$pm10 / mean(data_wide$pm10, na.rm=T), data_wide$pm25 / mean(data_wide$pm25, na.rm=T), data_wide$so2 / mean(data_wide$so2, na.rm=T), data_wide$bc / mean(data_wide$bc, na.rm=T)))
+                             data_wide$pm10 / mean(data_wide$pm10, na.rm=T), data_wide$pm25 / mean(data_wide$pm25, na.rm=T), data_wide$so2 / mean(data_wide$so2, na.rm=T)))
   }
   
   # subregions
@@ -166,8 +163,7 @@ outpath = "./output/openaqDescriptives/" # output
       ungroup()
     
     # add 0s for non-measures parms
-    data_wide = mutate(data_wide, bc = ifelse(rep("bc", nrow(data_wide)) %in% colnames(data_wide), data_wide$bc, rep(0, nrow(data_wide))), 
-                       co = ifelse(rep("co", nrow(data_wide)) %in% colnames(data_wide), co, rep(0, nrow(data_wide))), 
+    data_wide = mutate(data_wide, co = ifelse(rep("co", nrow(data_wide)) %in% colnames(data_wide), co, rep(0, nrow(data_wide))), 
                        no2 = ifelse(rep("no2", nrow(data_wide)) %in% colnames(data_wide), no2, rep(0, nrow(data_wide))),
                        o3 = ifelse(rep("o3", nrow(data_wide)) %in% colnames(data_wide), o3, rep(0, nrow(data_wide))),
                        pm10 = ifelse(rep("pm10", nrow(data_wide)) %in% colnames(data_wide), pm10, rep(0, nrow(data_wide))),
@@ -176,7 +172,7 @@ outpath = "./output/openaqDescriptives/" # output
     
     print(line_plot_multiple(paste("Airpollution Data -", unique(data_plot$sub_region_1)[i]), outpath,data_wide$Date,"Date", "Airpollution", names_y=unique(data_plot$parameter), 
                              y_percent=F, legend=T, data_wide$co / mean(data_wide$co, na.rm=T), data_wide$no2 / mean(data_wide$no2, na.rm=T), data_wide$o3 / mean(data_wide$o3, na.rm=T), 
-                             data_wide$pm10 / mean(data_wide$pm10, na.rm=T), data_wide$pm25 / mean(data_wide$pm25, na.rm=T), data_wide$so2 / mean(data_wide$so2, na.rm=T), data_wide$bc / mean(data_wide$bc, na.rm=T)))
+                             data_wide$pm10 / mean(data_wide$pm10, na.rm=T), data_wide$pm25 / mean(data_wide$pm25, na.rm=T), data_wide$so2 / mean(data_wide$so2, na.rm=T)))
   }
   
   
@@ -205,8 +201,6 @@ outpath = "./output/openaqDescriptives/" # output
                            y_percent=F, legend=T, data_wide$value_so2 , data_wide$value_last_year_so2, data_wide$value_difference_so2 ))
   print(line_plot_multiple(paste("Difference Previous Year - World", unique(open_state_clean$parameter)[6]), outpath,data_wide$Date,"Date", "Airpollution", names_y=c(unique(open_state_clean$parameter)[6],"last_year","diff"), 
                            y_percent=F, legend=T, data_wide$value_pm25, data_wide$value_last_year_pm25, data_wide$value_difference_pm25 ))
-  print(line_plot_multiple(paste("Difference Previous Year - World", unique(open_state_clean$parameter)[7]), outpath,data_wide$Date,"Date", "Airpollution", names_y=c(unique(open_state_clean$parameter)[7],"last_year","diff"), 
-                           y_percent=F, legend=T, data_wide$value_bc, data_wide$value_last_year_bc, data_wide$value_difference_bc ))
   
   # Plot one region 
   select_region = "WESTERN EUROPE"
@@ -234,9 +228,6 @@ outpath = "./output/openaqDescriptives/" # output
                            y_percent=F, legend=T, data_wide$value_so2 , data_wide$value_last_year_so2, data_wide$value_difference_so2 ))
   print(line_plot_multiple(paste("Difference Previous Year -",select_region, unique(open_state_clean$parameter)[6]), outpath,data_wide$Date,"Date", "Airpollution", names_y=c(unique(open_state_clean$parameter)[6],"last_year","diff"), 
                            y_percent=F, legend=T, data_wide$value_pm25, data_wide$value_last_year_pm25, data_wide$value_difference_pm25 ))
-  print(line_plot_multiple(paste("Difference Previous Year -",select_region, unique(open_state_clean$parameter)[7]), outpath,data_wide$Date,"Date", "Airpollution", names_y=c(unique(open_state_clean$parameter)[7],"last_year","diff"), 
-                           y_percent=F, legend=T, data_wide$value_bc, data_wide$value_last_year_bc, data_wide$value_difference_bc ))
-  
   # Plot one country 
   select_country = "it"
   data_wide = filter(open_state_clean, CountryCode ==select_country)
@@ -261,8 +252,6 @@ outpath = "./output/openaqDescriptives/" # output
                            y_percent=F, legend=T, data_wide$value_so2 , data_wide$value_last_year_so2, data_wide$value_difference_so2 ))
   print(line_plot_multiple(paste("Difference Previous Year -",select_country, unique(open_state_clean$parameter)[6]), outpath,data_wide$Date,"Date", "Airpollution", names_y=c(unique(open_state_clean$parameter)[6],"last_year","diff"), 
                            y_percent=F, legend=T, data_wide$value_pm25, data_wide$value_last_year_pm25, data_wide$value_difference_pm25 ))
-  print(line_plot_multiple(paste("Difference Previous Year -",select_country, unique(open_state_clean$parameter)[7]), outpath,data_wide$Date,"Date", "Airpollution", names_y=c(unique(open_state_clean$parameter)[7],"last_year","diff"), 
-                           y_percent=F, legend=T, data_wide$value_bc, data_wide$value_last_year_bc, data_wide$value_difference_bc ))
   
   # Plot one subregion 
   select_subregion = "bremen"
