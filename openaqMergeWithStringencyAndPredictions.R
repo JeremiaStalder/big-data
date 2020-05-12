@@ -25,7 +25,7 @@
     # load data from locally or from database (save file from database).
     # Note: local file implemented to prevent waiting times from database
     load_locally = 1
-    unit_conversion_openaq = F # do not convert units if inputs data already did
+    unit_conversion_openaq = T # do not convert units if inputs data already did
 
     if(load_locally ==1) {
       openaq_state_original = read_csv("./data/clean/openaq_state_original.csv", 
@@ -90,7 +90,10 @@
     predicted_airpollution = rbind(co_prediction, no2_prediction, o3_prediction, pm10_prediction, pm25_prediction, so2_prediction)
     colnames(predicted_airpollution)[colnames(predicted_airpollution) %in% c("state")] = "sub_region_1"
     colnames(predicted_airpollution)[colnames(predicted_airpollution) %in% c("date")] = "Date"
+    length(unique(predicted_airpollution$sub_region_1))
     
+    # remove negative predictions if any
+    predicted_airpollution$prediction[(predicted_airpollution$prediction<0)]= 0 
 
 # Cleaning OpenAQ----
   openaq_state = openaq_state_original
@@ -158,10 +161,7 @@
       print(paste("Merging Predictions from Weather Data & Airpollution:",length(not_matched_regions), "Subregions are not matched. Prediction will be NA for not-matched regions"))
     # merge
       merged_openaq_prediciton = right_join(predicted_airpollution, open_state_clean, by = c("sub_region_1", "Date", "parameter")) 
-    # add deviation from prediction as variable
-      merged_openaq_prediciton = mutate(merged_openaq_prediciton, residual_prediction = value - prediction)
-      
-  
+    
   # Covid & Airpollution
     # replace region with country in openaq if no match in mobility data
     indicator_change_region_name = sort(match(unique(global_mobility_report_clean_stringency_index$sub_region_1), unique(merged_openaq_prediciton$sub_region_1))) # identify matched regions
@@ -196,25 +196,30 @@
     
     open_state_clean = left_join(open_state_clean, select(open_state_clean_previous_year, Date, CountryCode, sub_region_1, parameter,value_last_year), by = c("Date", "CountryCode", "sub_region_1", "parameter"))
     open_state_clean$value_difference = open_state_clean$value- open_state_clean$value_last_year
+    open_state_clean$error_prediction = open_state_clean$prediction- open_state_clean$value
     
   # Create two additional versions of dataset   
     # Create Rolling Average Dataset
       
       # rolling average for value to figure out seasonal patterns. 
-      parms_ma = list(15, 30, 60, 12, 20, 45)
+      parms_ma = list(15, 30, 60, 8, 15, 30)
       names(parms_ma) = c("short","medium","long","max_na_short","max_na_medium","max_na_long")
       
       openaq_state_ma = group_by(open_state_clean, CountryCode,sub_region_1, parameter, unit) %>%
         arrange(Date) %>%
         mutate(value_indicator = ifelse(is.na(value), 1, 0)) %>% # to "sum" NAs is condition for when rolling is calculated
         mutate(value = ifelse((rollapply(value_indicator,parms_ma$medium,sum,  na.rm = TRUE, align = "center", fill = NA))<parms_ma$max_na_medium,  rollapply(value,parms_ma$short,mean, align = "center",  na.rm = TRUE, fill = NA), NA)) %>%
+        mutate(prediction_indicator = ifelse(is.na(value), 1, 0)) %>% # to "sum" NAs is condition for when rolling is calculated
+        mutate(prediction = ifelse((rollapply(prediction_indicator,parms_ma$medium,sum,  na.rm = TRUE, align = "center", fill = NA))<parms_ma$max_na_medium,  rollapply(prediction,parms_ma$short,mean, align = "center",  na.rm = TRUE, fill = NA), NA)) %>%
+        mutate(error_prediction = prediction - value) %>%
         ungroup()# get monthly moving average if more than share of the values are provided
       
       openaq_state_clean_ma = openaq_state_ma # rolling average data
+      summary(openaq_state_clean_ma)
       
   # country difference
   country_difference_data = group_by(open_state_clean, parameter, Date, Region,CountryCode) %>%
-    summarize(value = mean(value, na.rm=T), value_last_year = mean(value_last_year, na.rm=T)) %>%
+    summarize(value = mean(value, na.rm=T), value_last_year = mean(value_last_year, na.rm=T), prediction = mean(prediction, na.rm=T)) %>%
     mutate(value_indicator = ifelse(is.na(value),1,0)) %>%
     mutate(value_last_year_indicator = ifelse(is.na(value_last_year),1,0)) %>%
     ungroup(Date) %>%
@@ -222,17 +227,22 @@
     mutate(value = ifelse((rollapply(value_indicator,parms_ma$medium,sum,  na.rm = TRUE, align = "center", fill = NA))<parms_ma$max_na_medium,  rollapply(value,parms_ma$medium,mean, align = "center",  na.rm = TRUE, fill = NA), NA)) %>%
     mutate(value_last_year = ifelse((rollapply(value_last_year_indicator,parms_ma$medium,sum,  na.rm = TRUE, align = "center", fill = NA))<parms_ma$max_na_medium,  rollapply(value_last_year,parms_ma$medium,mean, align = "center",  na.rm = TRUE, fill = NA), NA)) %>%
     mutate(value_difference = value - value_last_year) %>%
+    mutate(prediction_indicator = ifelse(is.na(prediction), 1, 0)) %>% # to "sum" NAs is condition for when rolling is calculated
+    mutate(prediction = ifelse((rollapply(prediction_indicator,parms_ma$medium,sum,  na.rm = TRUE, align = "center", fill = NA))<parms_ma$max_na_medium,  rollapply(prediction,parms_ma$short,mean, align = "center",  na.rm = TRUE, fill = NA), NA)) %>%
+    mutate(error_prediction = prediction - value) %>%
     ungroup(Region,CountryCode)
   
   # standardize (value-mean)/sd
   country_difference_data_standardized = group_by(country_difference_data, parameter, Region,CountryCode) %>%
     mutate(value = (value-mean(value,na.rm=T))/sd(value, na.rm=T), value_last_year = (value_last_year-mean(value_last_year,na.rm=T))/sd(value_last_year, na.rm=T)) %>%
     mutate( value_difference = value - value_last_year)%>%
+    mutate(prediction = (prediction-mean(prediction,na.rm=T))/sd(prediction, na.rm=T)) %>%
+    mutate(error_prediction = prediction - value) %>%
     ungroup(Region,CountryCode)
   
   # subregion difference
   subregion_difference_data = group_by(open_state_clean, parameter, Date, Region,CountryCode, sub_region_1) %>%
-    summarize(value = mean(value, na.rm=T), value_last_year = mean(value_last_year, na.rm=T)) %>%
+    summarize(value = mean(value, na.rm=T), value_last_year = mean(value_last_year, na.rm=T), prediction = mean(prediction, na.rm=T)) %>%
     mutate(value_indicator = ifelse(is.na(value),1,0)) %>%
     mutate(value_last_year_indicator = ifelse(is.na(value_last_year),1,0)) %>%
     ungroup(Date) %>%
@@ -240,6 +250,9 @@
     mutate(value = ifelse((rollapply(value_indicator,parms_ma$medium,sum,  na.rm = TRUE, align = "center", fill = NA))<parms_ma$max_na_medium,  rollapply(value,parms_ma$medium,mean, align = "center",  na.rm = TRUE, fill = NA), NA)) %>%
     mutate(value_last_year = ifelse((rollapply(value_last_year_indicator,parms_ma$medium,sum,  na.rm = TRUE, align = "center", fill = NA))<parms_ma$max_na_medium,  rollapply(value_last_year,parms_ma$medium,mean, align = "center",  na.rm = TRUE, fill = NA), NA)) %>%
     mutate(value_difference = value - value_last_year) %>%
+    mutate(prediction_indicator = ifelse(is.na(prediction), 1, 0)) %>% # to "sum" NAs is condition for when rolling is calculated
+    mutate(prediction = ifelse((rollapply(prediction_indicator,parms_ma$medium,sum,  na.rm = TRUE, align = "center", fill = NA))<parms_ma$max_na_medium,  rollapply(prediction,parms_ma$short,mean, align = "center",  na.rm = TRUE, fill = NA), NA)) %>%
+    mutate(error_prediction = prediction - value) %>%
     ungroup(Region,CountryCode)
   
   
@@ -247,6 +260,8 @@
   subregion_difference_data_standardized = group_by(subregion_difference_data, parameter, Region,CountryCode, sub_region_1) %>%
     mutate(value = (value-mean(value,na.rm=T))/sd(value, na.rm=T), value_last_year = (value_last_year-mean(value_last_year,na.rm=T))/sd(value_last_year, na.rm=T)) %>%
     mutate( value_difference = value - value_last_year) %>%
+    mutate(prediction = (prediction-mean(prediction,na.rm=T))/sd(prediction, na.rm=T)) %>%
+    mutate(error_prediction = prediction - value) %>%
     ungroup(Region,CountryCode)
   
   # create list of countries and subregions that exist in both datasets
@@ -255,11 +270,10 @@
   
   # save data
   write.csv(open_state_clean,file=paste0(outpath_files,"open_state_clean.csv"))
+  write.csv(openaq_state_clean_ma,file=paste0(outpath_files,"openaq_state_clean_ma.csv"))
   write.csv(country_difference_data,file=paste0(outpath_files,"country_difference_data.csv"))
   write.csv(country_difference_data_standardized,file=paste0(outpath_files,"country_difference_data_standardized.csv"))
   write.csv(subregion_difference_data,file=paste0(outpath_files,"subregion_difference_data.csv"))
   write.csv(subregion_difference_data_standardized,file=paste0(outpath_files,"subregion_difference_data_standardized.csv"))
   write.csv(global_mobility_report_clean_stringency_index,file=paste0(outpath_files,"global_mobility_report_clean_to_merge_with_openaq.csv"))
   write.csv(countryListOpenaqStringencyMerged,file=paste0(outpath_files,"countryListOpenaqStringencyMerged.csv"))
-  
-
