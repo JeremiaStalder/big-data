@@ -15,3 +15,6 @@ data/map_data/gadm36_levels_gpkg/gadm36_levels.gpkg
 data/output_openaqData/open_state_clean.csv
 data/output_openaqData/subregion_difference_data.csv
 data/output_openaqData/subregion_difference_data_standardized.csv
+data/countries-map/data/gadm_fortified.csv
+data/countries-map/data/gadm36_levels_gpkg.zip
+data/countries-map/data/gadm36_levels_gpkg/
