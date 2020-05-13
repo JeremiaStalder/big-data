@@ -1,4 +1,0 @@
-Coding-Guidlines / Concepts Big-Data for Project
-•	Use data tables instead of data frames
-•	package ffdf for chunks
-add others that are important

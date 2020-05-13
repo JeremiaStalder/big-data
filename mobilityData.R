@@ -13,7 +13,6 @@ source("functions.R") # functions
 global_mobility_report <- read_delim("data/google_mobility/Global_Mobility_Report.csv", 
                                      ";",col_types = cols(date = col_date(format = "%d/%m/%Y")), escape_double = FALSE, trim_ws = TRUE) # load Google Mobility Data
 
-
 ### Prepocessing ----
   # summary 
     summary(is.na(global_mobility_report))
@@ -40,6 +39,11 @@ global_mobility_report <- read_delim("data/google_mobility/Global_Mobility_Repor
                                                                is.na(transit_stations_percent_change_from_baseline) +
                                                                is.na(workplaces_percent_change_from_baseline) +
                                                                is.na(residential_percent_change_from_baseline))<=max_number_missing_indices)
+    
+
+    
+
+    
   # shorten variable names
     mobility_variables_original = c("retail_and_recreation_percent_change_from_baseline",
                                     "grocery_and_pharmacy_percent_change_from_baseline",
@@ -52,5 +56,8 @@ global_mobility_report <- read_delim("data/google_mobility/Global_Mobility_Repor
   
   # save cleaned dataset
     global_mobility_report_clean  = global_mobility_report
-    write.csv(global_mobility_report_clean,file="./data/clean/global_mobility_report_clean.csv")
-
+    
+    con = file("./data/clean/global_mobility_report_clean.csv","w", encoding="utf-8")
+     write.csv(global_mobility_report_clean, con, row.names=FALSE)
+    close(con)
+  

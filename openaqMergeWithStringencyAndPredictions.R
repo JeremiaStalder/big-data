@@ -22,10 +22,10 @@
 # Import data----
 
   # airpollution data
-    # load data from locally or from database (save file from database).
-    # Note: local file implemented to prevent waiting times from database
+    # load data from locally or from database (save file from database). local file implemented to prevent waiting times from database
+    # Note: 
     load_locally = 1
-    unit_conversion_openaq = T # do not convert units if inputs data already did
+    unit_conversion_openaq = F # do not convert units if inputs data already did
 
     if(load_locally ==1) {
       openaq_state_original = read_csv("./data/clean/openaq_state_original.csv", 
@@ -46,7 +46,8 @@
     # save as csv
     write.csv(openaq_state_original, "./data/clean/openaq_state_original.csv")
     }
-  
+    
+    
   # unit conversion data for airpollution
      unit_conversion_table <- read_delim("./data/unit_conversion/unit_conversion.csv", 
                                                             ";", escape_double = FALSE, col_types = cols(value = col_double()), 
@@ -58,6 +59,9 @@
     global_mobility_report_clean_stringency_index <- read_csv("data/clean/global_mobility_report_clean_with_predictions_stringency_index.csv", 
                                                               col_types = cols(CountryName = col_character(), 
                                                                                      Date = col_date(format = "%Y-%m-%d"), 
+                                                                                     CountryCode = col_character(), 
+                                                                                     sub_region_1 = col_character(),
+                                                                                     sub_region_2 = col_character(), # load mobility data
                                                                                      grocery_and_pharmacy = col_double(), 
                                                                                      parks = col_double(), residential = col_double(), 
                                                                                      retail_and_recreation = col_double(), 
@@ -70,6 +74,7 @@
     global_mobility_report_clean_stringency_index$CountryCode = tolower(global_mobility_report_clean_stringency_index$CountryCode)
     global_mobility_report_clean_stringency_index$CountryName = tolower(global_mobility_report_clean_stringency_index$CountryName)
     
+
   # import predictions for airpollution based on weather data
     # no predictions for bc due to low number of observations and locations
     co_prediction <- read_csv("data/predictionAirpollutionFromWeatherData/co_prediction.csv")
@@ -177,7 +182,6 @@
     # dataset will not be saved, we merge data again when necessary so only relevant variables are in dataframe
     merged_data = inner_join(global_mobility_report_clean_stringency_index, merged_openaq_prediciton, by = c("CountryCode", "sub_region_1", "Date")) 
     summary(merged_data)
-    
   
 # Airpollution Data Clean Step 2 ---- 
     # add regions to entire open_state_clean dataset
@@ -196,7 +200,7 @@
     
     open_state_clean = left_join(open_state_clean, select(open_state_clean_previous_year, Date, CountryCode, sub_region_1, parameter,value_last_year), by = c("Date", "CountryCode", "sub_region_1", "parameter"))
     open_state_clean$value_difference = open_state_clean$value- open_state_clean$value_last_year
-    open_state_clean$error_prediction = open_state_clean$prediction- open_state_clean$value
+    open_state_clean$error_prediction = open_state_clean$value - open_state_clean$prediction
     
   # Create two additional versions of dataset   
     # Create Rolling Average Dataset
@@ -211,7 +215,7 @@
         mutate(value = ifelse((rollapply(value_indicator,parms_ma$medium,sum,  na.rm = TRUE, align = "center", fill = NA))<parms_ma$max_na_medium,  rollapply(value,parms_ma$short,mean, align = "center",  na.rm = TRUE, fill = NA), NA)) %>%
         mutate(prediction_indicator = ifelse(is.na(value), 1, 0)) %>% # to "sum" NAs is condition for when rolling is calculated
         mutate(prediction = ifelse((rollapply(prediction_indicator,parms_ma$medium,sum,  na.rm = TRUE, align = "center", fill = NA))<parms_ma$max_na_medium,  rollapply(prediction,parms_ma$short,mean, align = "center",  na.rm = TRUE, fill = NA), NA)) %>%
-        mutate(error_prediction = prediction - value) %>%
+        mutate(error_prediction = value- prediction ) %>%
         ungroup()# get monthly moving average if more than share of the values are provided
       
       openaq_state_clean_ma = openaq_state_ma # rolling average data
@@ -229,7 +233,7 @@
     mutate(value_difference = value - value_last_year) %>%
     mutate(prediction_indicator = ifelse(is.na(prediction), 1, 0)) %>% # to "sum" NAs is condition for when rolling is calculated
     mutate(prediction = ifelse((rollapply(prediction_indicator,parms_ma$medium,sum,  na.rm = TRUE, align = "center", fill = NA))<parms_ma$max_na_medium,  rollapply(prediction,parms_ma$short,mean, align = "center",  na.rm = TRUE, fill = NA), NA)) %>%
-    mutate(error_prediction = prediction - value) %>%
+    mutate(error_prediction =value - prediction) %>%
     ungroup(Region,CountryCode)
   
   # standardize (value-mean)/sd
@@ -237,7 +241,7 @@
     mutate(value = (value-mean(value,na.rm=T))/sd(value, na.rm=T), value_last_year = (value_last_year-mean(value_last_year,na.rm=T))/sd(value_last_year, na.rm=T)) %>%
     mutate( value_difference = value - value_last_year)%>%
     mutate(prediction = (prediction-mean(prediction,na.rm=T))/sd(prediction, na.rm=T)) %>%
-    mutate(error_prediction = prediction - value) %>%
+    mutate(error_prediction =value - prediction) %>%
     ungroup(Region,CountryCode)
   
   # subregion difference
@@ -252,7 +256,7 @@
     mutate(value_difference = value - value_last_year) %>%
     mutate(prediction_indicator = ifelse(is.na(prediction), 1, 0)) %>% # to "sum" NAs is condition for when rolling is calculated
     mutate(prediction = ifelse((rollapply(prediction_indicator,parms_ma$medium,sum,  na.rm = TRUE, align = "center", fill = NA))<parms_ma$max_na_medium,  rollapply(prediction,parms_ma$short,mean, align = "center",  na.rm = TRUE, fill = NA), NA)) %>%
-    mutate(error_prediction = prediction - value) %>%
+    mutate(error_prediction = value- prediction) %>%
     ungroup(Region,CountryCode)
   
   
@@ -261,13 +265,26 @@
     mutate(value = (value-mean(value,na.rm=T))/sd(value, na.rm=T), value_last_year = (value_last_year-mean(value_last_year,na.rm=T))/sd(value_last_year, na.rm=T)) %>%
     mutate( value_difference = value - value_last_year) %>%
     mutate(prediction = (prediction-mean(prediction,na.rm=T))/sd(prediction, na.rm=T)) %>%
-    mutate(error_prediction = prediction - value) %>%
+    mutate(error_prediction = value- prediction) %>%
     ungroup(Region,CountryCode)
   
   # create list of countries and subregions that exist in both datasets
     countryListOpenaqStringencyMerged= select(global_mobility_report_clean_stringency_index, sub_region_1, CountryCode, CountryName, Region) %>%
       distinct()
   
+  # dataset used for presentation: includes all data for relevant timeframe
+    # merge google and subregion airpollution data again
+    all_data_over_time = inner_join(global_mobility_report_clean_stringency_index, select(subregion_difference_data, -c("CountryCode", "Region")), by = c("sub_region_1","Date")) 
+    
+    # drop unnecessary vars
+    all_data_over_time = select(all_data_over_time, -c("value_last_year","prediction_indicator","value_last_year_indicator","X1","X1_1","sub_region_2", "LegacyStringencyIndex","LegacyStringencyIndexForDisplay")) %>%
+      filter(Date >='2020-02-15' & Date <='2020-04-20')
+      
+    length(unique(all_data_over_time$Date))
+    length(unique(all_data_over_time$sub_region_1))
+    length(unique(all_data_over_time$parameter))
+    nrow(all_data_over_time)
+    
   # save data
   write.csv(open_state_clean,file=paste0(outpath_files,"open_state_clean.csv"))
   write.csv(openaq_state_clean_ma,file=paste0(outpath_files,"openaq_state_clean_ma.csv"))
@@ -277,3 +294,5 @@
   write.csv(subregion_difference_data_standardized,file=paste0(outpath_files,"subregion_difference_data_standardized.csv"))
   write.csv(global_mobility_report_clean_stringency_index,file=paste0(outpath_files,"global_mobility_report_clean_to_merge_with_openaq.csv"))
   write.csv(countryListOpenaqStringencyMerged,file=paste0(outpath_files,"countryListOpenaqStringencyMerged.csv"))
+  write.csv(all_data_over_time,file=paste0(outpath_files,"all_data_over_time.csv"))
+  
