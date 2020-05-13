@@ -200,7 +200,7 @@ merged <- fread("./data/weather/pollution_wheather_unified_units.csv")
 # remove colums that certainly will not be used
 clean <- merged[,-c(2:4, 6, 8, 10, 11, 12, 17, 25)]
 rm(merged)
-
+length(unique(clean$state[clean$date > "2010-01-01"]))
 # impute the missing data
 features = c("wdsp", "mxspd", "max", "min")
 clean[, (features) := lapply(.SD, impute.mean), by = state, .SDcols = features]
@@ -331,50 +331,61 @@ pm25_prediction$prediction[pm25_prediction$prediction < 0] <- 0
 fwrite(pm25_prediction, "./data/predictionAirpollutionFromWeatherData/pm25_prediction.csv", sep = ",")
 
 
-#---------------------------------------------------- Some experimentation for visualisation -----------------------
+#---------------------------------------------------- Visualisation of Germany -----------------------
 
-o3_weekly <-
-  clean %>% group_by(year = year(date),
-                         week = week(date),
-                         state = state) %>% summarise_if(is.numeric, mean)
-o3_daily <-
-  o3_openaq %>% group_by(date = date, state = state) %>% summarise_if(is.numeric, mean)
-o3_weekly_test_world <-
-  o3_openaq %>% group_by(year = year(date), week = week(date)) %>% summarise_if(is.numeric, mean)
-test <- filter(o3_weekly, year == 2019, state == "hesse")
-plot(test$week, test$value, type = "l")
+merged <- fread("./data/weather/pollution_wheather_unified_units.csv")
 
-o3_test <-
-  o3_daily %>% group_by(state) %>% arrange(date) %>% mutate(
-    value = rollapply(value, 30, mean, align = "center", fill = NA),
-    temp = rollapply(TEMP, 30, mean, align = "center", fill = NA),
-    wdsp = rollapply(WDSP, 30, mean, align = "center", fill = NA),
-    prcp = rollapply(PRCP, 30, mean, align = "center", fill = NA)
-  ) %>% ungroup()
+# remove colums that certainly will not be used
+clean <- merged[,-c(2:3, 6, 8, 10, 11, 12, 17, 25)]
+rm(merged)
 
-test <- filter(o3_test)
-test <- na.omit(test)
-ggplot() +
-  geom_line(
-    data = o3_test,
-    aes(x = date, y = value),
-    color = "red",
-    group = 1
-  ) +
-  geom_line(data = test,
-            aes(x = date, y = temp),
-            color = "blue",
-            group = 2) +
-  geom_line(data = test,
-            aes(x = date, y = wdsp),
-            color = "green",
-            group = 3) +
-  geom_line(data = test,
-            aes(x = date, y = prcp),
-            color = "yellow",
-            group = 4) +
-  xlab('week') +
-  ylab('value')
+# o3 good for temp
+germany_pm25 <- filter(clean, country == "DE", date > "2018-01-01", parameter == "pm25") %>% group_by(date = date) %>% summarise_if(is.numeric, mean, na.rm = TRUE)
+
+germany_rolling_pm25 <- germany_pm25 %>% arrange(date) %>% mutate( value = rollapply(value, 30, mean, align = "center", fill = NA),
+    wdsp = rollapply(wdsp, 30, mean, align = "center", fill = NA)) %>% ungroup()
+
+
+germany_rolling_pm25 <- na.omit(germany_rolling_pm25)
+germany_rolling_pm25$date <- as.Date(germany_rolling_pm25$date)
+
+ggplot(germany_rolling_pm25, aes(date)) + 
+  geom_line(aes(y = value, colour = "pm25 in µg/m³")) + 
+  geom_line(aes(y = wdsp, colour = "wind speed"))+
+  theme_bw()+
+  ggtitle("30 day rolling average of temperature and pm25 particles") +
+  ylab(label= "wind speed and pm25 particles") +
+  theme(legend.title = element_blank()) +
+                theme(legend.position = "bottom") + 
+                theme(plot.title = element_text(size=10, face="bold"))+
+                theme(axis.text=element_text(size=10),
+                      axis.title=element_text(size=10,face="bold")) + 
+                ggsave(file="./presentation_charts/windspeed_pm25_germany.png", width=6, height=4, dpi=600)
+
+
+germany_o3 <- filter(clean, country == "DE", date > "2018-01-01", parameter == "o3") %>% group_by(date = date) %>% summarise_if(is.numeric, mean, na.rm = TRUE)
+
+germany_rolling_o3 <- germany_o3 %>% arrange(date) %>% mutate( value = rollapply(value, 30, mean, align = "center", fill = NA),
+    temp = rollapply(temp, 30, mean, align = "center", fill = NA),
+    min = rollapply(min, 30, mean, align = "center", fill = NA),
+    max = rollapply(max, 30, mean, align = "center", fill = NA)) %>% ungroup()
+
+
+germany_rolling_o3 <- na.omit(germany_rolling_o3)
+germany_rolling_o3$date <- as.Date(germany_rolling_o3$date)
+
+ggplot(germany_rolling_o3, aes(date)) + 
+  geom_line(aes(y = value, colour = "o3 in µg/m³")) + 
+  geom_line(aes(y = temp, colour = "average temperature in fahrenheit"))+
+  theme_bw()+
+  ggtitle("30 day rolling average of temperature and o3 particles") +
+  ylab(label= "temperature and o3 particles") +
+  theme(legend.title = element_blank()) +
+                theme(legend.position = "bottom") + 
+                theme(plot.title = element_text(size=10, face="bold"))+
+                theme(axis.text=element_text(size=10),
+                      axis.title=element_text(size=10,face="bold")) +
+               ggsave(file="./presentation_charts/temperature_o3_germany.png", width=6, height=4, dpi=600)
 
 #---------------------------------------------------- Alternative weather data ----------------------------------------------------------#
 # The following part of the code fetches the weather data from the NOOA networks, this is a network of weather stations at airports.
