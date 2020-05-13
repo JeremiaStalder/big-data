@@ -18,3 +18,4 @@ data/output_openaqData/subregion_difference_data_standardized.csv
 data/countries-map/data/gadm_fortified.csv
 data/countries-map/data/gadm36_levels_gpkg.zip
 data/countries-map/data/gadm36_levels_gpkg/
+data/output_openaqData/openaq_state_clean_ma.csv

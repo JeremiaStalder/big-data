@@ -6,6 +6,7 @@ library(readr)
 library(zoo)
 library(caret) # random forests
 library(grf)
+library(stringi)
 
 filter <- dplyr::filter
 select <- dplyr::select
@@ -18,7 +19,7 @@ outpath = "./output/stringency_and_mobility/"
 
 
 ### import data ----
-  nationwide_data_clean <- read_csv("data/clean/nationwide_data_clean.csv") # load nationwide data
+  nationwide_data_clean <- read_csv("data/clean/nationwide_data_clean.csv", encoding) # load nationwide data
   global_mobility_report_clean <- read_csv("data/clean/global_mobility_report_clean.csv", 
                                            col_types = cols(Date = col_date(format = "%Y-%m-%d"))) # load mobility data
   # replace NA with "NA" country code
@@ -75,7 +76,7 @@ outpath = "./output/stringency_and_mobility/"
       stringency_mobility_country_av = group_by(merged_data_countries, sub_region_1) %>%
         filter(CountryCode =="DE") %>%
         arrange(Date) %>%
-        mutate(StringencyIndex= rollapply(StringencyIndex, width = 7, mean,na.rm=T, fill=lag(StringencyIndex),by=1), 
+        mutate(StringencyIndex= rollapply(StringencyIndex, width = 10, mean,na.rm=T, fill=lag(StringencyIndex)), 
                retail_and_recreation = rollapply(retail_and_recreation, width = 7, mean,na.rm=T, fill=retail_and_recreation), 
                grocery_and_pharmacy =  rollapply(grocery_and_pharmacy, width = 7, mean,na.rm=T, fill=grocery_and_pharmacy), 
                parks = rollapply(parks, width = 7, mean,na.rm=T, fill=parks), 
@@ -130,6 +131,41 @@ outpath = "./output/stringency_and_mobility/"
       
       line_plot_multiple("Stringency and Mobility simple averages - Worldwide", outpath, stringency_mobility_ww_av$Date,"Date", "Stringency and Mobility (Mobility Change *-1)", names_y=c("Stringency Index", "log(ConfirmedCases)*5(to see better)", mobility_variables),
                          y_percent=F, legend=T, y1, y2,y3,y4,y5,y6,y7,y8)
+      
+    # Worldwide Rolling Averages
+      # get data
+      stringency_mobility_ww_av = group_by(merged_data_countries, Date) %>%
+        summarize(StringencyIndex = mean(StringencyIndex,na.rm=T), 
+                  ConfirmedCases = mean(ConfirmedCases,na.rm=T), 
+                  retail_and_recreation=  mean(retail_and_recreation, na.rm=T), 
+                  grocery_and_pharmacy=  mean(grocery_and_pharmacy, na.rm=T), 
+                  parks=  mean(parks, na.rm=T), 
+                  transit_stations=  mean(transit_stations, na.rm=T), 
+                  workplaces=  mean(workplaces, na.rm=T), 
+                  residential=  mean(residential, na.rm=T)) %>%
+        arrange(Date) %>%
+        mutate(StringencyIndex= rollapply(StringencyIndex, width = 7, mean,na.rm=T, fill=NA,by=1), 
+               ConfirmedCases= rollapply(ConfirmedCases, width = 7, mean,na.rm=T, fill=NA,by=1), 
+               retail_and_recreation = rollapply(retail_and_recreation, width = 7, mean,na.rm=T, fill=NA), 
+               grocery_and_pharmacy =  rollapply(grocery_and_pharmacy, width = 7, mean,na.rm=T, fill=NA), 
+               parks = rollapply(parks, width = 7, mean,na.rm=T, fill=NA), 
+               transit_stations = rollapply(transit_stations, width = 7, mean,na.rm=T, fill=NA), 
+               workplaces  =rollapply(workplaces, width = 7, mean,na.rm=T, fill=NA), 
+               residential=  rollapply(residential, width = 7, mean,na.rm=T, fill=NA))
+      
+      # get plot variables
+      y1 = stringency_mobility_ww_av$StringencyIndex
+      
+      for (i in 1:(length(mobility_variables))) { # mobility vars + 1(stringency) +1(infected)
+        name = paste0("y",i+2)
+        data = select(stringency_mobility_ww_av, mobility_variables[i])
+        colnames(data) = "var"
+        assign(name, -data$var)
+      }
+      
+      line_plot_multiple("Stringency and Mobility Rolling Averages - Worldwide", outpath, stringency_mobility_ww_av$Date,"Date", "Stringency (Index) / Mobility (% Change *-1)", names_y=c("Stringency Index",mobility_variables),
+                         y_percent=F, legend=T, y1, y3,y4,y5,y6,y7,y8)
+      
       
     # Worldwide population weighed averages
       # get data
@@ -320,13 +356,26 @@ outpath = "./output/stringency_and_mobility/"
         
         # Test via plot
         stringency_model_plot = group_by(merged_data_with_prediction_with_countrymeans, CountryCode,sub_region_1, Date) %>%
-          filter(CountryCode=="FR") %>%
-          summarize(StringencyIndexPredicted = mean(StringencyIndexFinalPrediction,na.rm=T))
+          filter(CountryCode=="DE" & (is.na(sub_region_1)==F)) %>%
+          summarize(StringencyIndexPredicted = mean(StringencyIndexFinalPrediction,na.rm=T),
+                    StringencyIndex = mean(StringencyIndex,na.rm=T),) %>%
+          ungroup(Date) %>%
+          arrange(Date) %>%
+          mutate(StringencyIndexPredicted= rollapply(StringencyIndexPredicted, width = 3, mean,na.rm=T, fill=NA)) 
+        
+          # change subregion names due to encoding
+        Encoding(stringency_model_plot$sub_region_1) = "latin1"
+        
           
-        title=paste("Stringency Model - FR")
+        title=paste("Predicted Stringency Model - States in Germany")
         print(ggplot(stringency_model_plot, aes(x = Date))+
+                geom_line(aes(y=StringencyIndex))+
                 geom_line(aes(y=StringencyIndexPredicted, color = sub_region_1))+
+                theme_bw()+
                 ggtitle(paste(title,sep=" ")) +
+                ylab(label= "Pred. Stringency 3 Day Average") +
+                theme(legend.title = element_blank()) +
+                theme(legend.position = "bottom") + 
                 theme(plot.title = element_text(size=10, face="bold"))+
                 theme(axis.text=element_text(size=10),
                       axis.title=element_text(size=10,face="bold"))+
