@@ -1,0 +1,638 @@
+state;CountryCode;sub_region_gadm
+encamp;ad;encamp
+escaldes-engordany;ad;escaldes-engordany
+abu dhabi;ae;abu dhabi
+dubai;ae;dubai
+kabul;af;kabul
+buenos aires;ar;buenos aires
+burgenland;at;burgenland
+carinthia;at;kärnten
+lower austria;at;niederösterreich
+salzburg;at;salzburg
+styria;at;steiermark
+tyrol;at;tirol
+upper austria;at;oberösterreich
+vienna;at;wien
+vorarlberg;at;vorarlberg
+australian capital territory;au;australian capital territory
+new south wales;au;new south wales
+queensland;au;queensland
+south australia;au;south australia
+tasmania;au;tasmania
+victoria;au;victoria
+federation of bosnia and herzegovina;ba;federacija bosna i hercegovina
+dhaka division;bd;dhaka
+brussels;be;bruxelles
+flanders;be;vlaanderen
+wallonia;be;wallonie
+blagoevgrad province;bg;blagoevgrad
+burgas;bg;burgas
+dobrich province;bg;dobrich
+haskovo province;bg;haskovo
+kardzhali province;bg;kardzhali
+lovec;bg;lovech
+plovdiv province;bg;plovdiv
+ruse;bg;ruse
+shumen province;bg;shumen
+sliven province;bg;sliven
+smoljan;bg;smolyan
+sofia city province;bg;sofia
+stara zagora;bg;stara zagora
+varna;bg;varna
+veliko tarnovo province;bg;veliko tarnovo
+vraca;bg;vratsa
+capital governorate;bh;capital
+state of são paulo;br;são paulo
+alberta;ca;alberta
+british columbia;ca;british columbia
+manitoba;ca;manitoba
+new brunswick;ca;new brunswick
+newfoundland and labrador;ca;newfoundland and labrador
+northwest territories;ca;northwest territories
+nova scotia;ca;nova scotia
+ontario;ca;ontario
+prince edward island;ca;prince edward island
+quebec;ca;québec
+saskatchewan;ca;saskatchewan
+aargau;ch;aargau
+basel city;ch;basel-stadt
+basel-landschaft;ch;basel-landschaft
+canton of bern;ch;bern
+geneva;ch;genève
+lucerne;ch;lucerne
+neuchâtel;ch;neuchâtel
+schwyz;ch;schwyz
+st. gallen;ch;sankt gallen
+thurgau;ch;thurgau
+ticino;ch;ticino
+valais;ch;valais
+vaud;ch;vaud
+zurich;ch;zürich
+abidjan autonomous district;ci;abidjan
+antofagasta;cl;antofagasta
+araucania;cl;araucanía
+arica y parinacota;cl;arica y parinacota
+atacama;cl;atacama
+aysén;cl;aisén del general carlos ibáñez del campo
+bio bio;cl;bío-bío
+chile;cl;
+coquimbo;cl;coquimbo
+los lagos;cl;los lagos
+los ríos;cl;los ríos
+magallanes and chilean antarctica;cl;magallanes y antártica chilena
+maule;cl;maule
+ohiggins;cl;libertador general bernardo o'higgins
+santiago metropolitan region;cl;región metropolitana de santiago
+tarapacá;cl;tarapacá
+valparaíso;cl;valparaíso
+ñuble;cl;ñuble
+anhui;cn;anhui
+beijing;cn;beijing
+china;cn;
+chongqing;cn;chongqing
+fujian;cn;fujian
+gansu;cn;gansu
+guangdong province;cn;guangdong
+guangxi;cn;guangxi
+guizhou;cn;guizhou
+hainan;cn;hainan
+hebei;cn;hebei
+heilongjiang;cn;heilongjiang
+henan;cn;henan
+hubei;cn;hubei
+hunan;cn;hunan
+inner mongolia;cn;nei mongol
+jiangsu;cn;jiangsu
+jiangxi;cn;jiangxi
+jilin;cn;jilin
+liaoning;cn;liaoning
+ningxia;cn;ningxia hui
+qinghai;cn;qinghai
+shaanxi;cn;shaanxi
+shandong;cn;shandong
+shanghai;cn;shanghai
+shanxi;cn;shanxi
+sichuan;cn;sichuan
+tianjin;cn;tianjin
+tibet;cn;yunnan
+xinjiang;cn;xinjiang uygur
+yunnan;cn;yunnan
+zhejiang;cn;zhejiang
+antioquia;co;antioquia
+bogota;co;cundinamarca
+san josé province;cr;san josé
+curaçao;cw;
+central bohemian region;cz;stredoceský
+hradec králové region;cz;královéhradecký
+karlovy vary region;cz;karlovarský
+liberec region;cz;liberecký
+moravian-silesian region;cz;moravskoslezský
+olomouc region;cz;olomoucký
+pardubice region;cz;pardubický
+plzen region;cz;plzenský
+prague;cz;prague
+south bohemian region;cz;jihoceský
+south moravian region;cz;jihomoravský
+vysocina region;cz;kraj vysocina
+zlin region;cz;zlínský
+ústí nad labem region;cz;ústecký
+baden-württemberg;de;baden-württemberg
+bavaria;de;bayern
+berlin;de;berlin
+brandenburg;de;brandenburg
+bremen;de;bremen
+hamburg;de;hamburg
+hesse;de;hessen
+lower saxony;de;niedersachsen
+mecklenburg-vorpommern;de;mecklenburg-vorpommern
+north rhine-westphalia;de;nordrhein-westfalen
+rhineland-palatinate;de;rheinland-pfalz
+saarland;de;saarland
+saxony;de;sachsen
+saxony-anhalt;de;sachsen-anhalt
+schleswig-holstein;de;schleswig-holstein
+thuringia;de;thüringen
+capital region of denmark;dk;hovedstaden
+central denmark region;dk;midtjylland
+north denmark region;dk;nordjylland
+region of southern denmark;dk;syddanmark
+region zealand;dk;sjælland
+algiers province;dz;alger
+harju county;ee;harju
+ida-viru county;ee;ida-viru
+jõgeva county;ee;jõgeva
+lääne-viru county;ee;lääne-viru
+saare county;ee;saare
+tartu county;ee;tartu
+andalusia;es;andalucía
+aragon;es;aragón
+asturias;es;principado de asturias
+balearic islands;es;islas baleares
+basque country;es;país vasco
+canary islands;es;islas canarias
+cantabria;es;cantabria
+castile and león;es;castilla y león
+castile-la mancha;es;castilla-la mancha
+catalonia;es;cataluña
+community of madrid;es;comunidad de madrid
+extremadura;es;extremadura
+galicia;es;galicia
+la rioja;es;la rioja
+navarre;es;comunidad foral de navarra
+region of murcia;es;región de murcia
+spain;es;
+valencian community;es;comunidad valenciana
+addis ababa;et;addis abeba
+central finland;fi;eastern finland
+central ostrobothnia;fi;western finland
+kainuu;fi;oulu
+kymenlaakso;fi;southern finland
+lapland;fi;lapland
+north karelia;fi;eastern finland
+northern ostrobothnia;fi;oulu
+northern savonia;fi;eastern finland
+ostrobothnia;fi;western finland
+pirkanmaa;fi;eastern finland
+päijänne tavastia;fi;southern finland
+satakunta;fi;western finland
+south karelia;fi;southern finland
+southern ostrobothnia;fi;western finland
+southwest finland;fi;western finland
+uusimaa;fi;southern finland
+auvergne-rhône-alpes;fr;auvergne-rhône-alpes
+bourgogne-franche-comté;fr;bourgogne-franche-comté
+brittany;fr;bretagne
+centre-val de loire;fr;centre-val de loire
+corsica;fr;corse
+grand est;fr;grand est
+hauts-de-france;fr;hauts-de-france
+normandy;fr;normandie
+nouvelle-aquitaine;fr;nouvelle-aquitaine
+occitanie;fr;occitanie
+pays de la loire;fr;pays de la loire
+provence-alpes-côte dazur;fr;provence-alpes-côte d'azur
+île-de-france;fr;île-de-france
+england;gb;england
+northern ireland;gb;northern ireland
+scotland;gb;scotland
+wales;gb;wales
+arrondissement of cayenne;gf;cayenne
+greater accra region;gh;greater accra
+gibraltar;gi;"boké; conakry; faranah; kankan; kindia; labé; mamou; nzérékoré"
+conakry;gn;conakry 
+basse-terre;gp;basse-terre
+grande-terre;gp;basse-terre
+decentralized administration of attica;gr;attica
+decentralized administration of macedonia and thrace;gr;macedonia and thrace
+decentralized administration of thessaly and central greece;gr;thessaly and central greece
+baja verapaz department;gt;baja verapaz
+guatemala department;gt;guatemala
+hong kong island;hk;eastern
+kowloon;hk;kowloon city
+new territories;hk;"islands; kwai tsing; north; sai kung; sha tin; tai po; tsuen wan; tuen mun; yuen long"
+brod-posavina county;hr;brodsko-posavska
+city of zagreb;hr;grad zagreb
+dubrovnik-neretva county;hr;dubrovacko-neretvanska
+istria county;hr;istarska
+krapina-zagorje county;hr;krapinsko-zagorska
+lika-senj county;hr;licko-senjska
+osijek-baranja county;hr;osjecko-baranjska
+primorje-gorski kotar county;hr;primorsko-goranska
+sisak-moslavina county;hr;sisacko-moslavacka
+split-dalmatia county;hr;splitsko-dalmatinska
+zagreb county;hr;zagrebacka
+baranya;hu;baranya
+borsod-abaúj-zemplén;hu;borsod-abaúj-zemplén
+budapest;hu;budapest
+bács-kiskun;hu;bács-kiskun
+csongrád;hu;csongrád
+fejér;hu;fejér
+gyor-moson-sopron;hu;gyor-moson-sopron
+hajdú-bihar;hu;hajdú-bihar
+komárom-esztergom;hu;komárom-esztergom
+pest county;hu;pest
+szabolcs-szatmár-bereg;hu;szabolcs-szatmár-bereg
+veszprém;hu;veszprém
+jakarta;id;jakarta raya
+county cork;ie;cork
+county dublin;ie;dublin
+county galway;ie;galway
+county kerry;ie;kerry
+county kilkenny;ie;kilkenny
+county laois;ie;laoighis
+county limerick;ie;limerick
+county longford;ie;longford
+county mayo;ie;mayo
+county monaghan;ie;monaghan
+county wexford;ie;wexford
+county wicklow;ie;wicklow
+ireland;ie;
+center district;il;hamerkaz
+israel;il;
+andhra pradesh;in;andhra pradesh
+assam;in;assam
+bihar;in;bihar
+chandigarh;in;chandigarh
+delhi;in;nct of delhi
+gujarat;in;gujarat
+haryana;in;haryana
+india;in;
+jharkhand;in;jharkhand
+karnataka;in;karnataka
+kerala;in;kerala
+madhya pradesh;in;madhya pradesh
+maharashtra;in;maharashtra
+meghalaya;in;meghalaya
+mizoram;in;mizoram
+odisha;in;odisha
+punjab;in;punjab
+rajasthan;in;rajasthan
+tamil nadu;in;tamil nadu
+telangana;in;telangana
+uttar pradesh;in;uttar pradesh
+west bengal;in;west bengal
+baghdad governorate;iq;baghdad
+capital region;is;höfuðborgarsvæði
+eastern region;is;austurland
+northeastern region;is;norðurland vestra
+southern peninsula region;is;höfuðborgarsvæði
+emilia-romagna;it;emilia-romagna
+lazio;it;lazio
+amman governorate;jo;amman
+kiambu county;ke;kiambu
+chuy province;kg;chüy
+north pyongan;kp;"chagang-do; p'yongan-bukto; p'yongan-namdo; p'yongyang"
+hawalli governorate;kw;hawalli
+kazakhstan;kz;"almaty; aqmola; aqtöbe; atyrau; east kazakhstan; mangghystau; north kazakhstan; pavlodar; qaraghandy; qostanay; qyzylorda; south kazakhstan; west kazakhstan; zhambyl"
+vientiane prefecture;la;vientiane
+western province;lk;"colombo; gampaha; kalutara"
+alytus county;lt;alytaus
+kaunas county;lt;kauno
+klaipeda county;lt;klaipedos
+panevežys county;lt;panevezio
+telšiai county;lt;telšiai
+utena county;lt;utenos
+vilnius county;lt;vilniaus
+šiauliai county;lt;šiauliai
+diekirch;lu;diekirch
+grevenmacher;lu;grevenmacher
+luxembourg district;lu;"diekirch; grevenmacher; luxembourg "
+city of liepaja;lv;kurzeme
+riga;lv;riga
+rezekne;lv;latgale
+ventspils;lv;kurzeme
+greater skopje;mk;"saraj; gjor?e petrov; cair; šuto orizari; gazi baba"
+kicevo municipality;mk;kicevo
+municipality of bitola;mk;bitola
+municipality of ilinden;mk;ilinden
+municipality of kavadarci;mk;kavadartsi
+municipality of kocani;mk;kocani
+municipality of kumanovo;mk;kumanovo
+municipality of mavrovo and rostuša;mk;mavrovo and rostuša
+municipality of tetovo;mk;tetovo
+municipality of veles;mk;veles
+bamako capital district;ml;bamako
+yangon region;mm;yangon
+arkhangai;mn;arhangay
+bayan-ölgii;mn;bayan-ölgiy
+bayankhongor;mn;bayanhongor
+bulgan;mn;bulgan
+darkhan-uul;mn;darhan-uul
+dornod;mn;dornod
+dornogovi;mn;dornogovi
+dundgovi;mn;dundgovi
+govi-altai;mn;govi-altay
+govisümber;mn;govisümber
+khentii;mn;hentiy
+khovd;mn;hovd
+khövsgöl;mn;hövsgöl
+orkhon;mn;orhon
+selenge;mn;selenge
+sükhbaatar;mn;sühbaatar
+töv;mn;töv
+ulaanbaatar;mn;ulaanbaatar
+uvs;mn;uvs
+zavkhan;mn;dzavhan
+ömnögovi;mn;ömnögovi
+övörkhangai;mn;övörhangay
+fort-de-france;mq;fort-de-france
+la trinité;mq;le trinité
+le marin;mq;le marin
+saint-pierre;mq;saint-pierre
+malta;mt;"centrali; ghawdex; nofsinhar; tramuntana; xlokk"
+baja california;mx;baja california
+chihuahua;mx;chihuahua
+guanajuato;mx;guanajuato
+mexico city;mx;méxico
+nuevo leon;mx;nuevo león
+sonora;mx;sonora
+state of mexico;mx;méxico
+drenthe;nl;drenthe
+flevoland;nl;flevoland
+friesland;nl;friesland
+gelderland;nl;gelderland
+groningen;nl;groningen
+limburg;nl;limburg
+north brabant;nl;noord-brabant
+north holland;nl;noord-holland
+overijssel;nl;overijssel
+south holland;nl;zuid-holland
+utrecht;nl;utrecht
+zeeland;nl;zeeland
+agder;no;aust-agder
+innlandet;no;"oppland; hedmark"
+møre og romsdal;no;møre og romsdal
+nordland;no;nordland
+norway;no;
+oslo;no;oslo
+rogaland;no;rogaland
+troms og finnmark;no;troms
+trøndelag;no;sør-trøndelag
+vestfold og telemark;no;telemark
+vestland;no;"hordaland; sogn og fjordane"
+viken;no;"akershus; buskerud "
+central development region;np;central
+metropolitan municipality of lima;pe;lima
+islamabad capital territory;pk;f.c.t.
+khyber pakhtunkhwa;pk;n.w.f.p.
+punjab;pk;punjab
+greater poland voivodeship;pl;wielkopolskie
+kuyavian-pomeranian voivodeship;pl;kujawsko-pomorskie
+lesser poland voivodeship;pl;malopolskie
+lower silesian voivodeship;pl;dolnoslaskie
+lublin voivodeship;pl;lubelskie
+lubusz voivodeship;pl;lubuskie
+masovian voivodeship;pl;mazowieckie
+opole voivodeship;pl;opolskie
+podkarpackie voivodeship;pl;podkarpackie
+podlaskie voivodeship;pl;podlaskie
+pomeranian voivodeship;pl;pomorskie
+silesian voivodeship;pl;slaskie
+swietokrzyskie;pl;swietokrzyskie
+warmian-masurian voivodeship;pl;warminsko-mazurskie
+west pomeranian voivodeship;pl;zachodniopomorskie
+lódz voivodeship;pl;lódzkie
+bayamón;pr;bayamón
+cataño;pr;cataño
+mayagüez;pr;mayagüez
+aveiro district;pt;aveiro
+azores;pt;azores
+braga;pt;braga
+castelo branco district;pt;castelo branco
+coimbra district;pt;coimbra
+faro district;pt;faro
+leiria district;pt;leiria
+lisbon;pt;lisboa
+madeira;pt;madeira
+porto district;pt;porto
+santarém district;pt;santarém
+setubal;pt;setúbal
+viana do castelo district;pt;viana do castelo
+vila real district;pt;vila real
+viseu district;pt;viseu
+évora district;pt;évora
+saint-denis;re;saint-denis
+saint-paul;re;saint-paul
+saint-pierre;re;saint-pierre
+alba county;ro;alba
+arad county;ro;arad
+arge<U+0219> county;ro;
+bacau county;ro;bacau
+bihor county;ro;bihor
+bistri<U+021B>a-nasaud county;ro;
+boto<U+0219>ani county;ro;
+bra<U+0219>ov county;ro;
+braila county;ro;braila
+bucharest;ro;bucharest
+buzau county;ro;buzau
+cara<U+0219>-severin county;ro;
+cluj county;ro;cluj
+constan<U+021B>a county;ro;
+covasna county;ro;covasna
+calara<U+0219>i county;ro;
+dolj county;ro;dolj
+gala<U+021B>i;ro;
+giurgiu county;ro;giurgiu
+gorj county;ro;gorj
+harghita county;ro;harghita
+hunedoara county;ro;hunedoara
+ialomi<U+021B>a county;ro;
+ia<U+0219>i county;ro;
+ilfov county;ro;ilfov
+maramure<U+0219> county;ro;
+mehedin<U+021B>i county;ro;
+mure<U+0219> county;ro;
+neam<U+021B> county;ro;
+olt county;ro;olt
+prahova;ro;prahova
+satu mare county;ro;satu mare
+sibiu;ro;sibiu
+suceava county;ro;suceava
+salaj;ro;salaj
+teleorman county;ro;teleorman
+timi<U+0219> county;ro;
+tulcea county;ro;tulcea
+vaslui county;ro;vaslui
+vrancea county;ro;vrancea
+vâlcea county;ro;vâlcea
+serbia;rs;"borski; branicevski; grad beograd; jablanicki; južno-backi; južno-banatski; kolubarski; macvanski; moravicki; nišavski; pcinjski; pirotski; podunavski; pomoravski; rasinski; raški; severno-backi; severno-banatski; srednje-banatski; sremski; šumadijski; toplicki; zajecarski; zapadno-backi; zlatiborski; kosovska mitrovica; pecki; prizren"
+vojvodina;rs;"borski; branicevski; grad beograd; jablanicki; južno-backi; južno-banatski; kolubarski; macvanski; moravicki; nišavski; pcinjski; pirotski; podunavski; pomoravski; rasinski; raški; severno-backi; severno-banatski; srednje-banatski; sremski; šumadijski; toplicki; zajecarski; zapadno-backi; zlatiborski; kosovska mitrovica; pecki; prizren"
+moscow;ru;moskva
+moscow oblast;ru;moscow city
+eastern province;sa;"ar riyad; makkah"
+gavleborg county;se;gävleborg
+stockholm county;se;stockholm
+uppsala county;se;uppsala
+administrative unit maribor;si;podravska
+celje;si;savinjska
+koper;si;obalno-kraška
+ljubljana;si;osrednjeslovenska
+murska sobota;si;pomurska
+nova gorica;si;goriška
+trbovlje;si;zasavska
+zagorje ob savi;si;zasavska
+svalbard;sj;svalbard
+banská bystrica region;sk;banskobystrický
+bratislava region;sk;bratislavský
+košice region;sk;košický
+nitra region;sk;nitriansky
+prešov region;sk;prešovský
+trencín region;sk;trenciansky
+trnava region;sk;trnavský
+žilina region;sk;žilinský
+bangkok;th;bangkok metropolis
+chachoengsao;th;chachoengsao
+chaiyaphum;th;chaiyaphum
+chiang mai;th;chiang mai
+chiang rai;th;chiang rai
+chon buri;th;chon buri
+lampang;th;lampang
+lamphun;th;lamphun
+mae hong son;th;mae hong son
+nakhon sawan;th;nakhon sawan
+nan;th;nan
+narathiwat;th;narathiwat
+nonthaburi;th;nonthaburi
+pathum thani;th;pathum thani
+phra nakhon si ayutthaya;th;phra nakhon si ayutthaya
+phrae;th;phrae
+phuket;th;phuket
+ratchaburi;th;ratchaburi
+rayong;th;rayong
+sa kaeo;th;sa kaeo
+samut prakan;th;samut prakan
+samut sakhon;th;samut sakhon
+saraburi;th;saraburi
+songkhla;th;songkhla
+surat thani;th;surat thani
+yala;th;yala
+districts of republican subordination;tj;"dushanbe; gorno-badakhshan; khatlon; leninabad; tadzhikistan territories"
+ashgabat;tm;asgabat
+adana;tr;adana
+amasya;tr;amasya
+ankara;tr;ankara
+artvin;tr;artvin
+agri;tr;agri
+balikesir;tr;balikesir
+bilecik;tr;bilecik
+bolu;tr;bolu
+bursa;tr;bursa
+denizli;tr;denizli
+edirne;tr;edirne
+erzurum;tr;erzurum
+giresun;tr;giresun
+hatay;tr;hatay
+igdir;tr;igdir
+kahramanmaras;tr;karaman
+kars;tr;kars
+kayseri;tr;kayseri
+kocaeli;tr;kocaeli
+konya;tr;konya
+kütahya;tr;kütahya
+kirklareli;tr;kirklareli
+manisa;tr;manisa
+mugla;tr;mugla
+ordu;tr;ordu
+rize;tr;rize
+sakarya;tr;sakarya
+samsun;tr;samsun
+sinop;tr;sinop
+sivas;tr;sivas
+tekirdag;tr;tekirdag
+tokat;tr;tokat
+trabzon;tr;trabzon
+turkey;tr;
+yalova;tr;yalova
+yozgat;tr;yozgat
+zonguldak;tr;zinguldak
+çanakkale;tr;çanakkale
+çorum;tr;çorum
+Istanbul;tr;istanbul
+Izmir;tr;izmir
+kaohsiung city;tw;kaohsiung
+new taipei city;tw;new taipei
+taichung city;tw;taichung
+tainan city;tw;tainan
+taipei city;tw;taipei
+taiwan;tw;taiwan
+taiwan province;tw;taiwan
+taoyuan city;tw;
+central region;ug;"adjumani; apac; arua; bugiri; bundibugyo; bushenyi; busia; gulu; hoima; iganga; jinja; kabale; kabarole; kaberamaido; kalangala; kampala; kamuli; kamwenge; kanungu; kapchorwa; kasese; katakwi; kayunga; kibale; kiboga; kisoro; kitgum; kotido; kumi; kyenjojo; lake; albert; lake victoria; lira; luwero; masaka; masindi; mayuge; mbale; mbarara; moroto; moyo; mpigi; mubende; mukono; nakapiripirit; nakasongola; nebbi; ntungamo; pader; pallisa; rakai; rukungiri; sembabule; sironko; soroti; tororo; wakiso; yumbe"
+alabama;us;alabama
+alaska;us;alaska
+arizona;us;arizona
+arkansas;us;arkansas
+california;us;california
+colorado;us;colorado
+connecticut;us;connecticut
+delaware;us;delaware
+district of columbia;us;district of columbia
+florida;us;florida
+georgia;us;georgia
+hawaii;us;hawaii
+idaho;us;idaho
+illinois;us;illinois
+indiana;us;indiana
+iowa;us;iowa
+kansas;us;kansas
+kentucky;us;kentucky
+louisiana;us;louisiana
+maine;us;maine
+maryland;us;maryland
+massachusetts;us;massachusetts
+michigan;us;michigan
+minnesota;us;minnesota
+mississippi;us;mississippi
+missouri;us;missouri
+montana;us;montana
+nebraska;us;nebraska
+nevada;us;nevada
+new hampshire;us;new hampshire
+new jersey;us;new jersey
+new mexico;us;new mexico
+new york;us;new york
+north carolina;us;north carolina
+north dakota;us;north dakota
+ohio;us;ohio
+oklahoma;us;oklahoma
+oregon;us;oregon
+pennsylvania;us;pennsylvania
+rhode island;us;rhode island
+south carolina;us;south carolina
+south dakota;us;south dakota
+tennessee;us;tennessee
+texas;us;texas
+united states of america;us;
+utah;us;utah
+vermont;us;vermont
+virginia;us;virginia
+washington;us;washington
+west virginia;us;west virginia
+wisconsin;us;wisconsin
+wyoming;us;wyoming
+uzbekistan;uz;"andijon; bukhoro; ferghana; jizzakh; karakalpakstan; kashkadarya; khorezm; namangan; navoi; samarkand; sirdaryo; surkhandarya; tashkent; tashkent city"
+hanoi;vn;
+ho chi minh city;vn;
+decentralized administration of peloponnese;gr;peloponnese
+kosovo;xk;"ðakovica; gnjilane; pristina; uroševac"
+kwazulu-natal;za;kwazulu-natal
