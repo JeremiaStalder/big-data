@@ -12,7 +12,7 @@ ui = shiny::htmlTemplate(
   # home page
   ## title
   page_title = textOutput(
-    "page_title_text",
+    "Test title",
     inline = T
   ),
   
