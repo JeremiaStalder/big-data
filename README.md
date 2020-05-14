@@ -27,7 +27,14 @@ unit-conversion pm to microg/m^3: https://www.ccohs.ca/oshanswers/chemicals/conv
 
 	## Airpullution Data SQL: @Fabian
 
-	## Weather Scripts @JERE
+	## "weatherData.R"
+	Input: raw weather data from WMO, openaq from database
+	Output: ./data/predictionAirpollutionFromWeatherData
+	Description:
+	  Import and clean weather data
+	  Match each weather station to closest airquality measure station
+	  Predict particles based on weather
+	  Short descriptive plots
 
 	## "nationwideDataIncludingOxfordCovidGovernmentTickerAndCountriesOfTheWorld.R" 
 	Input: covid_government_response_tracker.csv, countries of the world, wikipedia-iso-country-codes
