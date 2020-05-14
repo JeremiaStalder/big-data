@@ -1,11 +1,32 @@
-
 ###############################################################################
 # Entrypoint for the shiny app
 #
 # Author Fabian Karst, Erik Senn, Jeremia Stadler
 # Created 2020-05-20
 ###############################################################################
+library(readr)
+library(zoo)
+library(stats)
+library(forecast)
+library(lubridate)
+library(data.table)
+library(tidyverse)
 
+
+# laod data before app
+  #setwd("~/GitHub/big-data") # setwd
+  #inpath = "presentation/tables_map/"
+
+# Stringency, Pollution, Prediction data over time
+  all_data_over_time <- read_csv("../presentation/tables_map/all_data_over_time.csv",
+                                 col_types = cols(Date = col_date(format = "%Y-%m-%d")))
+  all_data_over_time = arrange(all_data_over_time, CountryName, Date)
+
+# # Weather Model Predictions
+  germany_pollution <- read_csv("../data/predictionAirpollutionFromWeatherData/germany_rolling.csv",
+                                col_types = cols(date = col_date(format = "%Y-%m-%d")))
+  
+ #  germany_pollution <- fread("../data/predictionAirpollutionFromWeatherData/germany_rolling.csv")
 ui = shiny::htmlTemplate(
   # Index Page
   "www/index2.html",
@@ -50,5 +71,10 @@ ui = shiny::htmlTemplate(
   page3_box3_content1 = helpText("Mobility"),
   page3_box3_stat1 = helpText("400"),
   page3_box3_content2 = helpText("tsd data points on activity information"),
-  page3_box3_content3 = helpText("The dataset shows how visits and length of stay at different places change compared to a baseline. These changes are calculated, using the same kind of aggregated and anonymized data used to show popular times for places in Google Maps.")
-)
+  page3_box3_content3 = helpText("The dataset shows how visits and length of stay at different places change compared to a baseline. These changes are calculated, using the same kind of aggregated and anonymized data used to show popular times for places in Google Maps."),
+
+  page4_selector = selectInput("stringencyCountryChoice","Select a Country",c("pick one", unique(all_data_over_time$CountryName)), "pick one"),
+  page4_plot = plotOutput("StringencyPlot"),
+  page4_plot2 = plotOutput("carPlot")
+  # Define UI for dataset viewer app ----
+  )
