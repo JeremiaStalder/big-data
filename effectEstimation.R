@@ -24,6 +24,17 @@ outpath = "output/effectEstimation/" # output
   names(parms_ma) = c("short","medium","long","max_na_short","max_na_medium","max_na_long")
 
 # Import Data ----
+  
+  openaq_state_clean_ma = read_csv("data/output_openaqData/openaq_state_clean_ma.csv", 
+                                   col_types = cols(Date = col_date(format = "%Y-%m-%d"),
+                                                    value = col_double(),
+                                                    value_last_year = col_double(),
+                                                    value_indicator = col_double(),
+                                                    value_difference = col_double(),
+                                                    prediction = col_double(),
+                                                    prediction_indicator = col_double(),
+                                                    error_prediction = col_double()))
+  
   country_difference_data = read_csv("data/output_openaqData/country_difference_data.csv", 
                                      col_types = cols(Date = col_date(format = "%Y-%m-%d"),
                                                       CountryCode = col_character(), 
@@ -96,7 +107,7 @@ outpath = "output/effectEstimation/" # output
   
     # CHOICE: analysis variable: airpollution value, weather model prediction - value, value - past years value
     analysis_variable_list = c("value","error_prediction", "value_difference")
-    analysis_variable = analysis_variable_list[2]
+    analysis_variable = analysis_variable_list[3]
     
     # CHOICE: save new regressions and update result table for presentation?
     update_result = T # make sure all tables for analysis_variable_list results exist in directory aber running estimimation. Change Analysis var to cover all
@@ -308,18 +319,23 @@ outpath = "output/effectEstimation/" # output
                                   parameter = col_character(),
                                   value_coefficient_10=col_double(),
                                   value_p_value = col_double()))
+        region_value= select(region_value, region, parameter,value_coefficient_10,value_p_value)
         
         region_error_prediction = read_csv(paste0(outpath, "effect_per_region_diff_error_prediction.csv"), 
                  col_types = cols(region =  col_character(),
                                   parameter = col_character(),
                                   error_prediction_coefficient_10=col_double(),
                                   error_prediction_p_value = col_double()))
+        region_error_prediction= select(region_error_prediction, region, parameter,error_prediction_coefficient_10,error_prediction_p_value)
         
         region_value_difference = read_csv(paste0(outpath, "effect_per_region_diff_value_difference.csv"), 
                  col_types = cols(region =  col_character(),
                                   parameter = col_character(),
                                   value_difference_coefficient_10=col_double(),
                                   value_difference_p_value = col_double()))
+        region_value_difference= select(region_value_difference, region, parameter,value_difference_coefficient_10,value_difference_p_value)
+        
+
         
         # load subregion estimated effects
         subregion_value = read_csv(paste0(outpath, "effect_per_subregion_diff_value.csv"), 
@@ -327,18 +343,21 @@ outpath = "output/effectEstimation/" # output
                                   subregion = col_character(),
                                   parameter=col_character(),
                                   value_effect = col_double()))
+        subregion_value= select(subregion_value, region, subregion,parameter,value_effect)
         
         subregion_error_prediction = read_csv(paste0(outpath, "effect_per_subregion_diff_error_prediction.csv"), 
                 col_types = cols(region =  col_character(),
                                  subregion = col_character(),
                                  parameter=col_character(),
                                  error_prediction_effect = col_double()))
+        subregion_error_prediction= select(subregion_error_prediction, region, subregion,parameter,error_prediction_effect)
 
         subregion_value_difference = read_csv(paste0(outpath, "effect_per_subregion_diff_value_difference.csv"), 
                 col_types = cols(region =  col_character(),
                                  subregion = col_character(),
                                  parameter=col_character(),
                                  value_difference_effect = col_double()))
+        subregion_value_difference= select(subregion_value_difference, region, subregion,parameter,value_difference_effect)
         
       # merge to one dataset
         # region effects
@@ -349,10 +368,26 @@ outpath = "output/effectEstimation/" # output
         subregion_effects = full_join(subregion_value, subregion_error_prediction, by = c("region", "parameter", "subregion"))
         subregion_effects = full_join(subregion_effects, subregion_value_difference, by = c("region", "parameter", "subregion"))
         
-      # save merged datasets
+
+        
+      # save merged datasets without countrycode (better overview=)
+        write.csv(region_effects,file=paste0(outpath,"region_effects_no_country_code.csv"), row.names=FALSE)
+        write.csv(subregion_effects,file=paste0(outpath,"subregion_effects_no_country_code.csv"), row.names=FALSE)
+        
+        # merge country code to datasets
+        region_effects =  left_join(region_effects, unique(select(effect_data_raw, CountryCode, sub_region_1, Region)), by = c("region" = "Region"))
+        subregion_effects = left_join(subregion_effects, unique(select(effect_data_raw, CountryCode, sub_region_1, Region)), by = c("region" = "Region","subregion" = "sub_region_1"))
+        
+        colnames(region_effects)[colnames(region_effects)=="sub_region_1"] =  "subregion"
+        colnames(subregion_effects)[colnames(subregion_effects)=="sub_region_1"] =  "subregion"
+        
+      # save merged datasets with countrycode (for merging to map data)
         write.csv(region_effects,file=paste0(outpath,"region_effects.csv"), row.names=FALSE)
         write.csv(subregion_effects,file=paste0(outpath,"subregion_effects.csv"), row.names=FALSE)
         
-        
       }
-
+      
+      # add regions to dictionary
+        # state_gadm_dict_cleaned <- read_csv("C:/Users/eriks/Desktop/state_gadm_dict_cleaned.csv")
+        # state_gadm_dict_cleaned_with_regions <- left_join(state_gadm_dict_cleaned, unique(select(openaq_state_clean_ma, CountryCode, Region)), by="CountryCode")
+        # write.csv(state_gadm_dict_cleaned_with_regions,file=paste0(outpath,"state_gadm_dict_cleaned_with_regions.csv"), row.names=FALSE)
