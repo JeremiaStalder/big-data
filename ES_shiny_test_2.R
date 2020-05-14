@@ -1,11 +1,63 @@
-###############################################################################
-# Defining Server Logic behind App
-#
-# Author Fabian Karst, Erik Senn, Jeremia Stalder
-# Created 2019-01-30 20:32:44
-###############################################################################
+library(readr)
+library(zoo)
+library(stats)
+library(forecast)
+library(lubridate)
+library(data.table)
+library(tidyverse)
 
 
+# laod data before app
+  setwd("~/GitHub/big-data") # setwd
+  inpath = "presentation/tables_map/"
+
+# Stringency, Pollution, Prediction data over time
+  all_data_over_time <- read_csv(paste0(inpath,"all_data_over_time.csv"),
+                                 col_types = cols(Date = col_date(format = "%Y-%m-%d")))
+  all_data_over_time = arrange(all_data_over_time, CountryName, Date)
+
+# # Weather Model Predictions
+  germany_pollution <- read_csv("data/predictionAirpollutionFromWeatherData/germany_rolling.csv",
+                                col_types = cols(date = col_date(format = "%Y-%m-%d")))
+  
+ #  germany_pollution <- fread("../data/predictionAirpollutionFromWeatherData/germany_rolling.csv")
+  
+# Define UI for dataset viewer app ----
+ui <- fluidPage(
+  
+  # App title ----
+  titlePanel("Reactivity"),
+  
+  # Sidebar layout with input and output definitions ----
+  sidebarLayout(
+    
+    # Sidebar panel for inputs ----
+    sidebarPanel(
+      
+      # Input: Selector for choosing dataset ----
+      uiOutput("StringencyChoiceCountry"),
+      uiOutput("ParticleTypeWeatherChoice")
+      
+    ),
+    
+    # Main panel for displaying outputs ----
+    mainPanel(
+      
+      # Output: Formatted text for caption ----
+      h3(textOutput("caption", container = span)),
+      
+      # Output: Verbatim text for data summary ----
+      verbatimTextOutput("summary"),
+      
+      # Output: HTML table with requested number of observations ----
+      tableOutput("view"),
+      
+      # Plot Output
+      plotOutput("stringencyPlot"),
+      plotOutput("weatherModelPlot")
+    )
+  )
+)
 
 
 # Define server logic to summarize and view selected dataset ----
@@ -18,7 +70,6 @@ server <- function(input, output) {
     # Particle Selection for weather model
     output$ParticleTypeWeatherChoice = renderUI(selectInput("particleTypeWeatherChoice","Select a Particle Type",c("pick one", unique(germany_pollution$parameter)), "pick one"))
     
-    output$carPlot <- renderPlot({plot(mtcars$wt, mtcars$mpg)})
   # render plots
     # country selection for stringency
     output$stringencyPlot <- renderPlot({
