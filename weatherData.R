@@ -335,7 +335,7 @@ fwrite(pm25_prediction, "./data/predictionAirpollutionFromWeatherData/pm25_predi
 
 merged <- fread("./data/weather/pollution_wheather_unified_units.csv")
 
-# remove colums that certainly will not be used
+  # remove colums that certainly will not be used
 clean <- merged[,-c(2:3, 6, 8, 10, 11, 12, 17, 25)]
 rm(merged)
 
@@ -353,7 +353,7 @@ ggplot(germany_rolling_pm25, aes(date)) +
   geom_line(aes(y = value, colour = "pm25 in µg/m³")) + 
   geom_line(aes(y = wdsp, colour = "wind speed"))+
   theme_bw()+
-  ggtitle("30 day rolling average of temperature and pm25 particles") +
+  ggtitle("30 day rolling average of temperature and pm25 particles - Germany") +
   ylab(label= "wind speed and pm25 particles") +
   theme(legend.title = element_blank()) +
                 theme(legend.position = "bottom") + 
@@ -362,10 +362,10 @@ ggplot(germany_rolling_pm25, aes(date)) +
                       axis.title=element_text(size=10,face="bold")) + 
                 ggsave(file="./presentation_charts/windspeed_pm25_germany.png", width=6, height=4, dpi=600)
 
+# o3 works fine and co
+germany_o3 <- filter(clean, country == "DE", date > "2018-01-01", parameter == "pm10" | parameter == "o3" | parameter == "co" | parameter == "no2") %>% group_by(date = date, parameter = parameter) %>% summarise_if(is.numeric, mean, na.rm = TRUE)
 
-germany_o3 <- filter(clean, country == "DE", date > "2018-01-01", parameter == "o3") %>% group_by(date = date) %>% summarise_if(is.numeric, mean, na.rm = TRUE)
-
-germany_rolling_o3 <- germany_o3 %>% arrange(date) %>% mutate( value = rollapply(value, 30, mean, align = "center", fill = NA),
+germany_rolling_o3 <- germany_o3 %>% group_by(parameter = parameter) %>% mutate( value = rollapply(value, 30, mean, align = "center", fill = NA),
     temp = rollapply(temp, 30, mean, align = "center", fill = NA),
     min = rollapply(min, 30, mean, align = "center", fill = NA),
     max = rollapply(max, 30, mean, align = "center", fill = NA)) %>% ungroup()
@@ -373,12 +373,15 @@ germany_rolling_o3 <- germany_o3 %>% arrange(date) %>% mutate( value = rollapply
 
 germany_rolling_o3 <- na.omit(germany_rolling_o3)
 germany_rolling_o3$date <- as.Date(germany_rolling_o3$date)
+germany_rolling_o3$value[germany_rolling_o3$parameter == "co"] <- germany_rolling_o3$value[germany_rolling_o3$parameter == "co"]/10
+
+fwrite(germany_rolling_o3, "./data/predictionAirpollutionFromWeatherData/germany_rolling.csv", sep = ",")
 
 ggplot(germany_rolling_o3, aes(date)) + 
-  geom_line(aes(y = value, colour = "o3 in µg/m³")) + 
+  geom_line(aes(y = value, colour = parameter)) + ## "o3 in µg/m³"
   geom_line(aes(y = temp, colour = "average temperature in fahrenheit"))+
   theme_bw()+
-  ggtitle("30 day rolling average of temperature and o3 particles") +
+  ggtitle("30 day rolling average of temperature and o3 particles - Germany") +
   ylab(label= "temperature and o3 particles") +
   theme(legend.title = element_blank()) +
                 theme(legend.position = "bottom") + 
