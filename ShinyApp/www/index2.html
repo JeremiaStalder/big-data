@@ -37,7 +37,8 @@
     
     <!-- shiny stuff
         ================================================== -->
-    
+    {{ headContent() }}
+
     <style>.selectize-dropdown {z-index: 10000}</style>
 </head>
 
@@ -59,8 +60,8 @@
                       <li><a class="smoothscroll"  href="#idea" title="idea">{{page1_title}}</a></li>
                     <li><a class="smoothscroll"  href="#approach" title="approach">{{page2_title}}</a></li>
 					<li><a class="smoothscroll"  href="#data" title="data">{{page3_title}}</a></li>
-					<li><a class="smoothscroll"  href="#results1" title="results1">Results I</a></li>
-					<li><a class="smoothscroll"  href="#results2" title="results2">Results II</a></li>
+					<li><a class="smoothscroll"  href="#results1" title="results1">{{page4_title}}</a></li>
+					<li><a class="smoothscroll"  href="#results2" title="results2">{{page5_title}}</a></li>
 						<li><a class="smoothscroll"  href="#results3" title="results3">Results III</a></li>
                 </ul>
 
@@ -197,7 +198,7 @@
     </section>
     <!-- end approach -->
 
-    <!-- approach
+    <!-- data
     ================================================== -->
     <section id='data' class="s-about about-white">
         <div class="s-padding">
@@ -240,8 +241,8 @@
                 </div>
                  <!--- END NUMBERS BY INTEGRATING SHINY OUTPUT -->
 
-                <div class="home-content__scroll">
-                    <a href="#result1" class="scroll-link smoothscroll">
+                <div class="home-content__scroll-dark">
+                    <a href="#results1" class="scroll-link smoothscroll">
                         <span>Next Slide</span>
                     </a>
                 </div>
@@ -249,25 +250,40 @@
             </div>
         </div>
     </section>
-    <!-- end approach -->
+    <!-- end data -->
 
- <section id='result1' class="s-about about-white">
+<!-- results1
+    ================================================== -->
+ <section id='results1' class="s-about about-green">
         <div class="s-padding">
             <div class="s-content">
                 <div class="row section-header has-bottom-sep" data-aos="fade-up">
                     <div class="col-full">
-                        <h1 class="display-1 display-1--dark">
-                          {{page3_title}}
+                        <h1 class="display-1 display-1--light">
+                          {{page4_title}}
                           </h1>
                     </div>
                 </div> <!-- end section-header -->
 
+                <div class="content-light">
+                    <center style="padding-bottom: 3rem">
+                        {{page4_content1}}
+                    </center>
+                </div>
 
-    <div class="row services-list block-1-2 block-tab-full"> <div class="col-block service-item aos-init aos-animate" data-aos="fade-up"> {{ page4_selector }} </div> </div> 
+                <div class="content-light">
+                    <div class="row block-1-1 block-tab-full input-light">
+                            {{ page4_selector }}
+                    </div>
+                     <div class="row block-1-3 block-m-1-2 block-mob-full" data-aos="fade-up">
+                        <div class="content-dark" style="margin-top: 5rem">
+                            {{page4_plot}}
+                        </div>
+                     </div>
+                </div>
                  <!--- END NUMBERS BY INTEGRATING SHINY OUTPUT -->
-    <div id="carPlot" class="shiny-plot-output" style="width: 100%; height: 300px"></div> 
                 <div class="home-content__scroll">
-                    <a href="#services" class="scroll-link smoothscroll">
+                    <a href="#results2" class="scroll-link smoothscroll">
                         <span>Next Slide</span>
                     </a>
                 </div>
@@ -275,7 +291,48 @@
             </div>
         </div>
     </section>
-    <!-- end approach -->
+    <!-- end results1 -->
+
+    <!-- results1
+    ================================================== -->
+ <section id='results2' class="s-about about-darkgrey">
+        <div class="s-padding">
+            <div class="s-content">
+                <div class="row section-header has-bottom-sep" data-aos="fade-up">
+                    <div class="col-full">
+                        <h1 class="display-1 display-1--light">
+                          {{page5_title}}
+                          </h1>
+                    </div>
+                </div> <!-- end section-header -->
+                <div class="content-light">
+                    <center style="padding-bottom: 3rem">
+                        {{page5_content1}}
+                    </center>
+                </div>
+                <div class="content-light">
+                    <div class="row block-1-1 block-tab-full input-light">
+                            {{ page5_selector }}
+                    </div>
+                     <div class="row block-1-3 block-m-1-2 block-mob-full" data-aos="fade-up">
+                        <div class="content-dark" style="margin-top: 5rem">
+                            {{page5_plot}}
+                        </div>
+                     </div>
+                </div>
+                 <!--- END NUMBERS BY INTEGRATING SHINY OUTPUT -->
+                <div class="home-content__scroll">
+                    <a href="#results2" class="scroll-link smoothscroll">
+                        <span>Next Slide</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- end results1 -->
+
+
     <!-- preloader
     ================================================== -->
     <div id="preloader">
