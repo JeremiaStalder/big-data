@@ -1718,6 +1718,11 @@ button::-moz-focus-inner, input::-moz-focus-inner {
     text-rendering: optimizeLegibility;
 }
 
+.content-dark img{
+    border-radius: 7px;
+
+}
+
 div.content-light ul ul {
     margin-left: 10rem;
 }
@@ -1739,6 +1744,23 @@ p{
     font-style: normal;
     font-weight: normal;
     font-size: 1vw;
+}
+
+.input-light label{
+    color: #FFFFFF!important;
+}
+
+.shiny-input-container{
+    margin: auto;
+}
+
+.selectize-input{
+    height: 6rem;
+    text-align: center;
+}
+
+.selectize-input>.item{
+    margin-top: 1.5rem;
 }
 
 /* ===================================================================
@@ -1869,6 +1891,46 @@ h1 {
 .home-content__scroll a::before {
     border-bottom: 2px solid #FFFFFF;
     border-right: 2px solid #FFFFFF;
+    content: '';
+    display: block;
+    height: 8px;
+    width: 8px;
+    margin-top: -6px;
+    pointer-events: none;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    -webkit-transform-origin: 66% 66%;
+    -ms-transform-origin: 66% 66%;
+    transform-origin: 66% 66%;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+}
+
+.home-content__scroll-dark {
+    position: absolute;
+    right: 10rem;
+    bottom: 2rem;
+}
+
+.home-content__scroll-dark a {
+    font-family: "montserrat-semibold", sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: .3rem;
+    color: #0C0C0C;
+    position: relative;
+    display: inline-block;
+    line-height: 3rem;
+    padding-left: 2.5rem;
+}
+
+.home-content__scroll-dark a::before {
+    border-bottom: 2px solid #0C0C0C;
+    border-right: 2px solid #0C0C0C;
     content: '';
     display: block;
     height: 8px;
@@ -2229,7 +2291,7 @@ html.no-csstransitions .home-content__main {
     color: #010507;
 }
 
-.about-darckgrey{
+.about-darkgrey{
     background-color: #616161;
     color: #ffffff;
 }
