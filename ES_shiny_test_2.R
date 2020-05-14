@@ -108,7 +108,7 @@ server <- function(input, output) {
       } else {
       germany_pollution_plot = filter(germany_pollution,parameter == input$particleTypeWeatherChoice)
 
-      title= paste("30 Day Rolling Average of Temperature and ", input$particleTypeWeatherChoice,"Particles - GERMANY")
+      title= paste("30 Day Rolling Average of Temperature and", input$particleTypeWeatherChoice,"Particles - GERMANY")
       unit = paste(input$particleTypeWeatherChoice, "in µg/m³")
       y_label  = paste("temperature and", input$particleTypeWeatherChoice, "particles")
       
