@@ -266,12 +266,6 @@ outpath = "output/effectEstimation/" # output
             colnames(subregion_data) = names_effect_per_subregion_diff
             
             effect_per_subregion_diff = bind_rows(effect_per_subregion_diff, subregion_data)
-            # print(nrow(subregion_data))
-            # print(subregion_data)
-            # print(length((nrow(effect_per_subregion_diff)+1):(nrow(effect_per_subregion_diff)+nrow(subregion_data))))
-            # 
-            # effect_per_subregion_diff[(nrow(effect_per_subregion_diff)+1):(nrow(effect_per_subregion_diff)+nrow(subregion_data)),] =  subregion_data
-            
           }
         }
       }

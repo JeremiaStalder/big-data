@@ -1,4 +1,4 @@
-# Big Data Project
+# Big Data Project: Do the lockdown measures related to the corona-virus pandemic impact groud level air pollution? 
 # Contributors: Jeremia Stalder, Fabian Karst, Erik Senn
 
 # Data Sources
@@ -16,16 +16,19 @@ iso country codes: https://www.kaggle.com/juanumusic/countries-iso-codes/data
 unit-conversion pm to microg/m^3: https://www.ccohs.ca/oshanswers/chemicals/convert.html
 
 
-# Project Structure
+# Short Description of Main Scripts IN ORDER OF EXECUTION
 
-## Research Question: Do the lockdown measures related to the corona-virus pandemic impact groud level air pollution? 
-
-
-# Order of Execution of Files
-
-# Short Description of Scripts in order of execution
-
-	## Airpullution Data SQL: @Fabian
+	  
+	## SQL AIRPolution 
+	Input: openaq API, ,cleaned weather data from WMO (only for unit conversion)
+	Output: cleaned daily open aq data on database
+	Description:
+	  Clean missing values
+	  Convert to values of one parameter same unit using weather data (conversion depends on temperature and air pressiure
+		(not required for weatherData.R, required for openaqMergeWithStringencyAndPredictions.R)
+	  Add subregion name via request to google maps using coordinates
+	  Chunk Files and load them in database
+	
 
 	## "weatherData.R"
 	Input: raw weather data from WMO, openaq from database
@@ -35,6 +38,7 @@ unit-conversion pm to microg/m^3: https://www.ccohs.ca/oshanswers/chemicals/conv
 	  Match each weather station to closest airquality measure station
 	  Predict particles based on weather
 	  Short descriptive plots
+
 
 	## "nationwideDataIncludingOxfordCovidGovernmentTickerAndCountriesOfTheWorld.R" 
 	Input: covid_government_response_tracker.csv, countries of the world, wikipedia-iso-country-codes
@@ -67,7 +71,6 @@ unit-conversion pm to microg/m^3: https://www.ccohs.ca/oshanswers/chemicals/conv
 		NAs: Only keep observations with Stringency Index and Airpollution value, prediction not required
 		Moving Averages for value, value_last_year, value_difference, prediciton, error_prediciton for descriptives and effect estimation
 		Save combined and seperate datasets (to analyse the correct set observations that will be matched in the effect estimation whichout unnecesessary columns)
-		Timeseries data "all_data_over_time" for result presentation
 		
 	## "openaqDescriptives.R"
 	Input: open_state_clean.csv and other aggregated variants (_ma, country_difference_data (_standardized), subregion_difference_data (_standardized),)
@@ -83,7 +86,7 @@ unit-conversion pm to microg/m^3: https://www.ccohs.ca/oshanswers/chemicals/conv
 		
 	## "effectEstimation.R"
 	Input: global_mobility_report_clean_stringency_index.csv, open_state_clean.csv and other aggregated variants (_ma, country_difference_data (_standardized), subregion_difference_data (_standardized),)
-	Output: region_effects.csv, subregion_effects.csv (and 3 subfiles only containing the effect of one of the 3 analysis variables): scatter plots with linear model
+	Output: region_effects.csv, subregion_effects.csv (and for each 3 subfiles only containing the effect of one of the 3 analysis variables, 2 files without subregion for easier): scatter plots with linear model
 	Description: 
 		Flexible Difference in Difference Estimation with Choices
 			Dataset
@@ -100,7 +103,15 @@ unit-conversion pm to microg/m^3: https://www.ccohs.ca/oshanswers/chemicals/conv
 					Western Europe: positive significant effect for: pm25, pm10
 					Eastern Europe: positive significant effect for: o3
 					Asia(excl near East):  negative significant effect for: so2
-			
+	
+	
+	## Shiny ui and server 
+	Input: all_data_over_time.csv, weather data and predictions
+	Output: Plots for presenation
+
+	## " PYTHON script for plotting map
+	Input:  all_data_over_time.csv, region_effects.csv, subregion_effects.csv
+	Output: map plots and gif map plots	for presentation
 
 
 
