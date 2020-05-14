@@ -5,19 +5,24 @@
 
 ## Main Sources
 airpollution data openaq: https://openaq.org/
+
 weather data from World Meterological Organisation: https://www.ncei.noaa.gov/data/global-summary-of-the-day/archive/ 
+
 government response ticker data - Oxford Covid-19 Government Response Ticker: https://covidtracker.bsg.ox.ac.uk/
+
 google mobility data - : https://www.google.com/covid19/mobility/
+
 map data: https://gadm.org/data.html
 
 ## Supplementary Sources
 countries of the world: https://www.kaggle.com/fernandol/countries-of-the-world
+
 iso country codes: https://www.kaggle.com/juanumusic/countries-iso-codes/data
+
 unit-conversion pm to microg/m^3: https://www.ccohs.ca/oshanswers/chemicals/convert.html
 
 ## Processed Dataset that are too big for git
 https://drive.google.com/drive/folders/1KXyUp4YcDnI567iCfHTCgYvtHMauQDNu?usp=sharing
-
 
 # Short Description of Main Scripts IN ORDER OF EXECUTION
 
