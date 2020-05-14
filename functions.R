@@ -86,7 +86,7 @@ remove_outliers <- function(vect) {
 
 ppm_to_microgram <- function(particle,tempF, pressure_millibars_to_tenth, concentration_pmm, constant_table){
   # convert ppm to microgramm/m3 according to https://www.ccohs.ca/oshanswers/chemicals/convert.html
-  # inputs: temperature in Fahrenheit, pressure in millibars to tenth, concentration in ppm
+  # inputs: temperature in Fahrenheit, pressure in millibars to tenth (millibars with 1 decimal), concentration in ppm
   # output: concentraction in microgram/m3
   # Note: make sure inputs are cleaned. NAs are allowed
   
@@ -94,7 +94,6 @@ ppm_to_microgram <- function(particle,tempF, pressure_millibars_to_tenth, concen
   tempF = replace_na(tempF,filter(constant_table, key== "subtract_f")$value + filter(constant_table, key== "temperature")$value / filter(constant_table, key== "factor_f")$value)
   tempC = (tempF-filter(constant_table, key== "subtract_f")$value)*filter(constant_table, key== "factor_f")$value
   tempC = ifelse(tempC>-filter(constant_table, key== "kelvin_to_celsius")$value , tempC, NA)
-  
   
   pressure_mmHg = ifelse(pressure_millibars_to_tenth>0 , pressure_millibars_to_tenth * filter(constant_table, key== "convert_pressure")$value, NA)
   pressure_mmHg = replace_na(pressure_mmHg,filter(constant_table, key== "pressure")$value)

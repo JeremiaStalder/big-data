@@ -2,6 +2,7 @@
 # Datasets used: 
   # Oxford Coronavirus Government Response Tracker
   # Countries of the world: countries, continent, basic population and economic data
+  # wikipedia_iso_country_codes: iso2 and iso3 country codes
 
 # librarys
 library(tidyverse)
@@ -42,16 +43,23 @@ wikipedia_iso_country_codes <- read_csv("data/countries-iso-codes/wikipedia-iso-
     indicator_change_country_name = sort(match(countries_of_the_world_original$Country, unique(government_response_data_original$CountryName)))
     unique(government_response_data_original$CountryName)[-indicator_change_country_name] # show which countries are not in countries of the world list
     
-    countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Bosnia & Herzegovina","Bosnia and Herzegovina")
-    countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Congo, Repub. of the","Democratic Republic of Congo")
-    countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Gambia, The","Gambia")
-    countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Kyrgystan","Kyrgyz Republic")
-    countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Korea, South","South Korea")
-    countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Macau","Macao")
-    countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Burma","Myanmar")
-    countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Slovakia","Slovak Republic")
-    countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Swaziland","Eswatini")
-    countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Trinidad & Tobago","Trinidad and Tobago")
+    country_to_replace_list = c("Bosnia & Herzegovina", "Congo, Repub. of the", "Gambia, The","Gambia","Kyrgystan", "Korea, South" ,"Macau","Burma", "Slovakia", "Swaziland","Trinidad & Tobago" )
+    country_replacement_list = c("Bosnia and Herzegovina","Democratic Republic of Congo","Gambia","Kyrgyz Republic", "South Korea", "Macao",  "Myanmar", "Slovak Republic","Eswatini", "Trinidad and Tobago" )
+    
+    for (i in 1:length(country_to_replace_list)){
+      countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country==country_to_replace_list[i],country_replacement_list[i])
+    }
+    
+    # countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Bosnia & Herzegovina","Bosnia and Herzegovina")
+    # countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Congo, Repub. of the","Democratic Republic of Congo")
+    # countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Gambia, The","Gambia")
+    # countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Kyrgystan","Kyrgyz Republic")
+    # countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Korea, South","South Korea")
+    # countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Macau","Macao")
+    # countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Burma","Myanmar")
+    # countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Slovakia","Slovak Republic")
+    # countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Swaziland","Eswatini")
+    # countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Trinidad & Tobago","Trinidad and Tobago")
     
   # remove baltics region and include to eastern europe  
     countries_of_the_world_original$Region = replace(countries_of_the_world_original$Region,countries_of_the_world_original$Region=="BALTICS","EASTERN EUROPE") 
@@ -130,7 +138,7 @@ wikipedia_iso_country_codes <- read_csv("data/countries-iso-codes/wikipedia-iso-
     }
     
     line_plot_multiple("Stringency per Region over Time", outpath,stringency_time$Date,"Date", "Stringency Index", names_y=unique(stringency_region$Region),
-                       y_percent=F, legend=T, y1, y2,y3,y4,y5,y6,y7,y8, y9, y10, y11)
+                       y_percent=F, legend=T, y1, y2,y3,y4,y5,y6,y7,y8, y9, y10)
     
   # assign y-variables for plot
     # replace NaNs / NA values with previous value. In loop because has to happen sequentially. 
