@@ -8,6 +8,12 @@
 server <- function(input, output) {
   
   # Basic Numbers Page --------------------------------------------------------------
+  output$ <- renderText({
+    d_clean %>% 
+      filter(trip_or_order_status == "COMPLETED") %>% 
+      nrow()
+  })
+  
   
   # Number of trips text in UI
   output$num_trips <- renderText({
