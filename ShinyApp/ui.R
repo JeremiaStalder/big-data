@@ -70,7 +70,7 @@ ui = shiny::htmlTemplate(
   ## title
   page5_title = helpText("Results II"),
   ## content
-  page5_content1 = helpText("Some Text about Weather Model"),
+  page5_content1 = helpText("Weather has an effect on some, but not all pollution particles. The main challenge was matching the weather stations to the closest airquality stations. "),
   page5_selector = selectInput("particleTypeWeatherChoice", "Select a Particle", c("pick one", unique(germany_pollution$parameter)), "pick one"),
   page5_plot = plotOutput("weatherModelPlot")
   
