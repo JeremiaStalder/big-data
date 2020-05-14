@@ -1,4 +1,4 @@
-# detrend and deseasonalize air pollution data
+# Merge Airpollution Data, Predicted Airpollution and Stringency Index Data
 
 # librarys
   library(readr)
@@ -22,8 +22,8 @@
 # Import data----
 
   # airpollution data
-    # load data from locally or from database (save file from database). local file implemented to prevent waiting times from database
-    # Note: 
+    # load data from database (and save file from database) or locally (access saved file from database)
+    # local file implemented to prevent waiting times from database
     load_locally = 1
     unit_conversion_openaq = F # do not convert units if inputs data already did
 
@@ -69,10 +69,18 @@
     
     global_mobility_report_clean_stringency_index = mutate(global_mobility_report_clean_stringency_index, CountryCode = ifelse(is.na(CountryCode) & CountryName=="Namibia", "NA", CountryCode)) # redo because "NA" is imported as NA
     global_mobility_report_clean_stringency_index = mutate(global_mobility_report_clean_stringency_index, sub_region_1 = ifelse(is.na(sub_region_1),CountryCode, sub_region_1)) # insert CountryCode as region to merge. Reason: if subregion in open aq missing, then country code is inserted. Is only inaccuarate in only a of the regions are reported
-    global_mobility_report_clean_stringency_index$sub_region_1 = tolower(global_mobility_report_clean_stringency_index$sub_region_1)
-    global_mobility_report_clean_stringency_index$CountryCode = tolower(global_mobility_report_clean_stringency_index$CountryCode)
-    global_mobility_report_clean_stringency_index$CountryName = tolower(global_mobility_report_clean_stringency_index$CountryName)
     
+    # change to lowercase. encoding latin1 inbetween to prevent errror
+      Encoding(global_mobility_report_clean_stringency_index$sub_region_1) = "latin1"
+      Encoding(global_mobility_report_clean_stringency_index$CountryCode) = "latin1"
+      Encoding(global_mobility_report_clean_stringency_index$CountryName) = "latin1"
+      global_mobility_report_clean_stringency_index$sub_region_1 = tolower(global_mobility_report_clean_stringency_index$sub_region_1)
+      global_mobility_report_clean_stringency_index$CountryCode = tolower(global_mobility_report_clean_stringency_index$CountryCode)
+      global_mobility_report_clean_stringency_index$CountryName = tolower(global_mobility_report_clean_stringency_index$CountryName)
+      Encoding(global_mobility_report_clean_stringency_index$sub_region_1) = "UTF-8"
+      Encoding(global_mobility_report_clean_stringency_index$CountryCode) = "UTF-8"
+      Encoding(global_mobility_report_clean_stringency_index$CountryName) = "UTF-8"
+
 
   # import predictions for airpollution based on weather data
     # no predictions for bc due to low number of observations and locations
@@ -94,7 +102,6 @@
     predicted_airpollution = rbind(co_prediction, no2_prediction, o3_prediction, pm10_prediction, pm25_prediction, so2_prediction)
     colnames(predicted_airpollution)[colnames(predicted_airpollution) %in% c("state")] = "sub_region_1"
     colnames(predicted_airpollution)[colnames(predicted_airpollution) %in% c("date")] = "Date"
-    length(unique(predicted_airpollution$sub_region_1))
     
     # remove negative predictions if any
     predicted_airpollution$prediction[(predicted_airpollution$prediction<0)]= 0 
@@ -289,3 +296,6 @@
   write.csv(global_mobility_report_clean_stringency_index,file=paste0(outpath_files,"global_mobility_report_clean_to_merge_with_openaq.csv"))
   write.csv(countryListOpenaqStringencyMerged,file=paste0(outpath_files,"countryListOpenaqStringencyMerged.csv"))
   write.csv(all_data_over_time,file=paste0(outpath_files,"all_data_over_time.csv"))
+  
+  
+  

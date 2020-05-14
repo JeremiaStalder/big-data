@@ -20,13 +20,10 @@ outpath = "./output/stringency_and_mobility/"
 
 ### import data ----
   nationwide_data_clean <- read_csv("data/clean/nationwide_data_clean.csv") # load nationwide data
-  global_mobility_report_clean <- read_csv("data/clean/global_mobility_report_clean.csv", 
-                                           col_types = cols(Date = col_date(format = "%Y-%m-%d"), 
-                                                            CountryCode = col_character(), 
+  global_mobility_report_clean <- read_csv("data/clean/global_mobility_report_clean.csv",
+                                           col_types = cols(Date = col_date(format = "%Y-%m-%d"),
+                                                            CountryCode = col_character(),
                                                             sub_region_1 = col_character()))
-  
-  global_mobility_report = fread("data/clean/global_mobility_report_clean.csv", header=TRUE, encoding = "UTF-8")
-  global_mobility_report = setDF(global_mobility_report)
   
   # replace NA with "NA" country code
    global_mobility_report_clean = mutate(global_mobility_report_clean, CountryCode = ifelse(is.na(CountryCode) & CountryName=="Namibia", "NA", CountryCode)) # redo because "NA" is imported as NA    
