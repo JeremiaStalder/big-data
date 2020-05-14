@@ -49,18 +49,7 @@ wikipedia_iso_country_codes <- read_csv("data/countries-iso-codes/wikipedia-iso-
     for (i in 1:length(country_to_replace_list)){
       countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country==country_to_replace_list[i],country_replacement_list[i])
     }
-    
-    # countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Bosnia & Herzegovina","Bosnia and Herzegovina")
-    # countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Congo, Repub. of the","Democratic Republic of Congo")
-    # countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Gambia, The","Gambia")
-    # countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Kyrgystan","Kyrgyz Republic")
-    # countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Korea, South","South Korea")
-    # countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Macau","Macao")
-    # countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Burma","Myanmar")
-    # countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Slovakia","Slovak Republic")
-    # countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Swaziland","Eswatini")
-    # countries_of_the_world_original$Country = replace(countries_of_the_world_original$Country,countries_of_the_world_original$Country=="Trinidad & Tobago","Trinidad and Tobago")
-    
+
   # remove baltics region and include to eastern europe  
     countries_of_the_world_original$Region = replace(countries_of_the_world_original$Region,countries_of_the_world_original$Region=="BALTICS","EASTERN EUROPE") 
  
