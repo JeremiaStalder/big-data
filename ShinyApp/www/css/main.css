@@ -119,7 +119,7 @@ h1, h2, h3, h4, h5, h6,
 }
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
-    margin-top: 6rem;
+    /*margin-top: 6rem;*/
     margin-bottom: 1.8rem;
 }
 
@@ -1695,11 +1695,54 @@ button::-moz-focus-inner, input::-moz-focus-inner {
         display: none;
     }
 }
+/* ===================================================================
+ * # general
+ *
+ * ------------------------------------------------------------------- */
 
+.content-light{
+    color: #ffffff;
+    font-size:  1.2vw;
+    text-align: left;
+}
+.content-dark{
+    color: #0C0C0C;
+    font-size:  1.2vw;
+    text-align: left;
+}
+.content-light, .content-dark{
+    margin: 0 5rem;
+    font-family: "montserrat-light";
+    font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
 
+div.content-light ul ul {
+    margin-left: 10rem;
+}
+
+div.content-dark ul ul {
+    margin-left: 10rem;
+}
+
+stats__count-dark{
+    color: #0C0C0C;
+}
+
+stats__count-light{
+    color: #FFFFFF;
+}
+
+p{
+    font-family: "montserrat-light";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1vw;
+}
 
 /* ===================================================================
- * # home 
+ * # home
  *
  * ------------------------------------------------------------------- */
 section {
@@ -2176,9 +2219,26 @@ html.no-csstransitions .home-content__main {
  * # about
  *
  * ------------------------------------------------------------------- */
-.s-about {
+.about-green{
     background-color: #007839;
     color: #010507;
+}
+
+.about-lightgrey{
+    background-color: #CCCCCC;
+    color: #010507;
+}
+
+.about-darckgrey{
+    background-color: #616161;
+    color: #ffffff;
+}
+.about-white{
+    background-color: #ffffff;
+    color: #010507;
+}
+
+.s-about {
     position: relative;
 }
 
@@ -2202,11 +2262,11 @@ html.no-csstransitions .home-content__main {
 }
 
 .stats__col {
-    margin: 5.4rem 0;
+    margin: 0 0 5.4rem 0;
     padding: 0 2rem;
     position: relative;
     overflow: hidden;
-    white-space: nowrap;
+    white-space: normal;
     border-right: 1px solid rgba(255, 255, 255, 0.25);
 }
 
@@ -2218,12 +2278,20 @@ html.no-csstransitions .home-content__main {
     font-family: "montserrat-bold", sans-serif;
     font-size: 8.4rem;
     line-height: 1;
-    color: #FFFFFF;
     position: relative;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+.stats__count-dark{
+    color: #0C0C0C;
+}
+
+.stats__count-light{
+    color: #FFFFFF;
+}
+
 
 .stats h5 {
     font-family: "montserrat-semibold", sans-serif;
@@ -2337,8 +2405,6 @@ html.no-csstransitions .home-content__main {
         font-size: 7.8rem;
     }
 }
-
-
 
 /* ===================================================================
  * # services
