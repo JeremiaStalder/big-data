@@ -56,9 +56,9 @@
                 
                 <ul class="header-nav__list">
                     <li class="current"><a class="smoothscroll"  href="#home" title="home">Home</a></li>
-                      <li><a class="smoothscroll"  href="#idea" title="idea">Idea</a></li>
-                    <li><a class="smoothscroll"  href="#data" title="data">Data</a></li>
-					<li><a class="smoothscroll"  href="#methods" title="methods">Methods</a></li>
+                      <li><a class="smoothscroll"  href="#idea" title="idea">{{page1_title}}</a></li>
+                    <li><a class="smoothscroll"  href="#approach" title="approach">{{page2_title}}</a></li>
+					<li><a class="smoothscroll"  href="#data" title="data">{{page3_title}}</a></li>
 					<li><a class="smoothscroll"  href="#results1" title="results1">Results I</a></li>
 					<li><a class="smoothscroll"  href="#results2" title="results2">Results II</a></li>
 						<li><a class="smoothscroll"  href="#results3" title="results3">Results III</a></li>
@@ -107,46 +107,136 @@
     </section> <!-- end s-home -->
 
 
-    <!-- about
+    <!-- idea
     ================================================== -->
-    <section id='idea' class="s-about">
+    <section id='idea' class="s-about about-green">
         <div class="s-padding">
             <div class="s-content">
                 <div class="row section-header has-bottom-sep" data-aos="fade-up">
                     <div class="col-full">
                         <h1 class="display-1 display-1--light">
-                          {{page_title}}
+                          {{page1_title}}
                           </h1>
                     </div>
                 </div> <!-- end section-header -->
 
-                <!-- end about-desc -->
+                <!---INTEGRATING SHINY OUTPUT -->
+                <div class="row block-1-3 block-m-1-2 block-mob-full" data-aos="fade-up">
+                    <div class="content-light" style="margin-top: 5rem">
+                        <ul>
+                            <li>{{page1_content_li1}}</li>
+                            <li>{{page1_content_li2}}</li>
+                            <li>{{page1_content_li3}}
+                                <ul>
+                                    <li>{{page1_content_li3li1}}</li>
+                                    <li>{{page1_content_li3li2}}</li>
+                                    <li>{{page1_content_li3li3}}</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                 <!--- END INTEGRATING SHINY OUTPUT -->
 
-                <!--- NUMBERS BY INTEGRATING SHINY OUTPUT -->
-                <div class="row about-stats stats block-1-3 block-m-1-2 block-mob-full" data-aos="fade-up">
+                <div class="home-content__scroll">
+                    <a href="#approach" class="scroll-link smoothscroll">
+                        <span>Next Slide</span>
+                    </a>
+                </div>
 
+            </div>
+        </div>
+    </section>
+    <!-- end idea -->
+
+    <!-- approach
+    ================================================== -->
+    <section id='approach' class="s-about about-lightgrey">
+        <div class="s-padding">
+            <div class="s-content">
+                <div class="row section-header has-bottom-sep" data-aos="fade-up">
+                    <div class="col-full">
+                        <h1 class="display-1 display-1--dark">
+                          {{page2_title}}
+                          </h1>
+                    </div>
+                </div>
+                <!-- end section-header -->
+
+
+                 <!---INTEGRATING SHINY OUTPUT -->
+                <div class="row block-1-3 block-m-1-2 block-mob-full" data-aos="fade-up">
+                    <div class="content-dark" style="margin-top: 5rem">
+                        {{page2_content1}}
+                        <br><br>
+                        {{page2_content2}}
+                        <ul>
+                            <li>{{page2_content_li1}}</li>
+                            <li>{{page2_content_li2}}</li>
+                            <li>{{page2_content_li3}}
+                                <ul>
+                                    <li>{{page2_content_li3li1}}</li>
+                                    <li>{{page2_content_li3li2}}</li>
+                                </ul>
+                            </li>
+                            <li>{{page2_content_li4}}</li>
+                            <li>{{page2_content_li5}}</li>
+                        </ul>
+                    </div>
+                </div>
+                 <!--- END INTEGRATING SHINY OUTPUT -->
+
+                <div class="home-content__scroll">
+                    <a href="#data" class="scroll-link smoothscroll">
+                        <span>Next Slide</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- end approach -->
+
+    <!-- approach
+    ================================================== -->
+    <section id='data' class="s-about about-white">
+        <div class="s-padding">
+            <div class="s-content">
+                <div class="row section-header has-bottom-sep" data-aos="fade-up">
+                    <div class="col-full">
+                        <h1 class="display-1 display-1--dark">
+                          {{page3_title}}
+                          </h1>
+                    </div>
+                </div> <!-- end section-header -->
+
+
+                 <!--- NUMBERS BY INTEGRATING SHINY OUTPUT -->
+                <div class="row about-stats stats block-1-3 block-mob-full" data-aos="fade-up">
                     <div class="col-block stats__col">
-                        <div class="stats__count">
-                         25
+                        <h2>{{page3_box1_content1}}</h2>
+                        <div class="stats__count stats__count-dark">
+                          {{page3_box1_stat1}}
                         </div>
-                        <h5>Hours Travelled</h5>
-                        <h6> </h6>
+                        <h5>{{page3_box1_content2}}</h5>
+                        <div class="content-dark">{{page3_box1_content3}}</div>
                     </div>
                     <div class="col-block stats__col">
-                        <div class="stats__count">
-                          25
+                        <h2>{{page3_box2_content1}}</h2>
+                        <div class="stats__count stats__count-dark">
+                          {{page3_box2_stat1}}
                         </div>
-                        <h5>Kilometres Travelled</h5>
-                        <h6></h6>
+                        <h5>{{page3_box2_content2}}</h5>
+                        <div class="content-dark">{{page3_box2_content3}}</div>
                     </div>
                     <div class="col-block stats__col">
-                        <div class="stats__count">
-                          <pre id="num_dollars_spent" class="shiny-text-output"></pre>
+                        <h2>{{page3_box3_content1}}</h2>
+                        <div class="stats__count stats__count-dark">
+                          {{page3_box3_stat1}}
                         </div>
-                        <h5>US Dollars Spent</h5>
-                        <h6> </h6>
+                        <h5>{{page3_box3_content2}}</h5>
+                        <div class="content-dark">{{page3_box3_content3}}</div>
                     </div>
-
                 </div>
                  <!--- END NUMBERS BY INTEGRATING SHINY OUTPUT -->
 
@@ -159,11 +249,7 @@
             </div>
         </div>
     </section>
-    <!-- end s-about -->
-
-  
-
-
+    <!-- end approach -->
 
 
     <!-- preloader
