@@ -1,0 +1,3611 @@
+;NAME_1;GID_0
+0;badakhshan;AFG
+1;badghis;AFG
+2;baghlan;AFG
+3;balkh;AFG
+4;bamyan;AFG
+5;daykundi;AFG
+6;farah;AFG
+7;faryab;AFG
+8;ghazni;AFG
+9;ghor;AFG
+10;hilmand;AFG
+11;hirat;AFG
+12;jawzjan;AFG
+13;kabul;AFG
+14;kandahar;AFG
+15;kapisa;AFG
+16;khost;AFG
+17;kunar;AFG
+18;kunduz;AFG
+19;laghman;AFG
+20;logar;AFG
+21;nangarhar;AFG
+22;nimroz;AFG
+23;nuristan;AFG
+24;paktika;AFG
+25;paktya;AFG
+26;panjshir;AFG
+27;parwan;AFG
+28;samangan;AFG
+29;sari pul;AFG
+30;takhar;AFG
+31;uruzgan;AFG
+32;wardak;AFG
+33;zabul;AFG
+34;bengo;AGO
+35;benguela;AGO
+36;bié;AGO
+37;cabinda;AGO
+38;cuando cubango;AGO
+39;cuanza norte;AGO
+40;cuanza sul;AGO
+41;cunene;AGO
+42;huambo;AGO
+43;huíla;AGO
+44;luanda;AGO
+45;lunda norte;AGO
+46;lunda sul;AGO
+47;malanje;AGO
+48;moxico;AGO
+49;namibe;AGO
+50;uíge;AGO
+51;zaire;AGO
+52;brändö;ALA
+53;eckerö;ALA
+54;finström;ALA
+55;föglö;ALA
+56;geta;ALA
+57;hammarland;ALA
+58;jomala;ALA
+59;kökar;ALA
+60;kumlinge;ALA
+61;lemland;ALA
+62;lumparland;ALA
+63;mariehamn;ALA
+64;saltvik;ALA
+65;sottunga;ALA
+66;sund;ALA
+67;vårdö;ALA
+68;berat;ALB
+69;dibër;ALB
+70;durrës;ALB
+71;elbasan;ALB
+72;fier;ALB
+73;gjirokastër;ALB
+74;korçë;ALB
+75;kukës;ALB
+76;lezhë;ALB
+77;shkodër;ALB
+78;tiranë;ALB
+79;vlorë;ALB
+80;andorra la vella;AND
+81;canillo;AND
+82;encamp;AND
+83;escaldes-engordany;AND
+84;la massana;AND
+85;ordino;AND
+86;sant julià de lòria;AND
+87;abu dhabi;ARE
+88;ajman;ARE
+89;dubai;ARE
+90;fujairah;ARE
+91;ras al-khaimah;ARE
+92;sharjah;ARE
+93;umm al-qaywayn;ARE
+94;buenos aires;ARG
+95;catamarca;ARG
+96;chaco;ARG
+97;chubut;ARG
+98;ciudad de buenos aires;ARG
+99;córdoba;ARG
+100;corrientes;ARG
+101;entre ríos;ARG
+102;formosa;ARG
+103;jujuy;ARG
+104;la pampa;ARG
+105;la rioja;ARG
+106;mendoza;ARG
+107;misiones;ARG
+108;neuquén;ARG
+109;río negro;ARG
+110;salta;ARG
+111;san juan;ARG
+112;san luis;ARG
+113;santa cruz;ARG
+114;santa fe;ARG
+115;santiago del estero;ARG
+116;tierra del fuego;ARG
+117;tucumán;ARG
+118;aragatsotn;ARM
+119;ararat;ARM
+120;armavir;ARM
+121;erevan;ARM
+122;gegharkunik;ARM
+123;kotayk;ARM
+124;lori;ARM
+125;shirak;ARM
+126;syunik;ARM
+127;tavush;ARM
+128;vayots dzor;ARM
+129;eastern;ASM
+130;manu'a;ASM
+131;unorganized;ASM
+132;western;ASM
+133;îles crozet;ATF
+134;îles éparses;ATF
+135;îles saint paul et amsterdam;ATF
+136;kerguelen;ATF
+137;barbuda;ATG
+138;redonda;ATG
+139;saint george;ATG
+140;saint john;ATG
+141;saint mary;ATG
+142;saint paul;ATG
+143;saint peter;ATG
+144;saint philip;ATG
+145;ashmore and cartier islands;AUS
+146;australian capital territory;AUS
+147;coral sea islands territory;AUS
+148;jervis bay territory;AUS
+149;new south wales;AUS
+150;northern territory;AUS
+151;queensland;AUS
+152;south australia;AUS
+153;tasmania;AUS
+154;victoria;AUS
+155;western australia;AUS
+156;burgenland;AUT
+157;kärnten;AUT
+158;niederösterreich;AUT
+159;oberösterreich;AUT
+160;salzburg;AUT
+161;steiermark;AUT
+162;tirol;AUT
+163;vorarlberg;AUT
+164;wien;AUT
+165;absheron;AZE
+166;aran;AZE
+167;daglig-shirvan;AZE
+168;ganja-qazakh;AZE
+169;kalbajar-lachin;AZE
+170;lankaran;AZE
+171;nakhchivan;AZE
+172;quba-khachmaz;AZE
+173;shaki-zaqatala;AZE
+174;yukhari-karabakh;AZE
+175;bubanza;BDI
+176;bujumbura mairie;BDI
+177;bujumbura rural;BDI
+178;bururi;BDI
+179;cankuzo;BDI
+180;cibitoke;BDI
+181;gitega;BDI
+182;karuzi;BDI
+183;kayanza;BDI
+184;kirundo;BDI
+185;makamba;BDI
+186;muramvya;BDI
+187;muyinga;BDI
+188;mwaro;BDI
+189;ngozi;BDI
+190;rutana;BDI
+191;ruyigi;BDI
+192;bruxelles;BEL
+193;vlaanderen;BEL
+194;wallonie;BEL
+195;alibori;BEN
+196;atakora;BEN
+197;atlantique;BEN
+198;borgou;BEN
+199;collines;BEN
+200;donga;BEN
+201;kouffo;BEN
+202;littoral;BEN
+203;mono;BEN
+204;ouémé;BEN
+205;plateau;BEN
+206;zou;BEN
+207;bonaire;BES
+208;saba;BES
+209;sint eustatius;BES
+210;boucle du mouhoun;BFA
+211;cascades;BFA
+212;centre;BFA
+213;centre-est;BFA
+214;centre-nord;BFA
+215;centre-ouest;BFA
+216;centre-sud;BFA
+217;est;BFA
+218;haut-bassins;BFA
+219;nord;BFA
+220;plateau-central;BFA
+221;sahel;BFA
+222;sud-ouest;BFA
+223;barisal;BGD
+224;chittagong;BGD
+225;dhaka;BGD
+226;khulna;BGD
+227;rajshahi;BGD
+228;rangpur;BGD
+229;sylhet;BGD
+230;blagoevgrad;BGR
+231;burgas;BGR
+232;dobrich;BGR
+233;gabrovo;BGR
+234;grad sofiya;BGR
+235;haskovo;BGR
+236;kardzhali;BGR
+237;kyustendil;BGR
+238;lovech;BGR
+239;montana;BGR
+240;pazardzhik;BGR
+241;pernik;BGR
+242;pleven;BGR
+243;plovdiv;BGR
+244;razgrad;BGR
+245;ruse;BGR
+246;shumen;BGR
+247;silistra;BGR
+248;sliven;BGR
+249;smolyan;BGR
+250;sofia;BGR
+251;stara zagora;BGR
+252;targovishte;BGR
+253;varna;BGR
+254;veliko tarnovo;BGR
+255;vidin;BGR
+256;vratsa;BGR
+257;yambol;BGR
+258;capital;BHR
+259;central;BHR
+260;muharraq;BHR
+261;northern;BHR
+262;southern;BHR
+263;acklins;BHS
+264;berry islands;BHS
+265;biminis;BHS
+266;black point;BHS
+267;cat island;BHS
+268;central abaco;BHS
+269;central andros;BHS
+270;central eleuthera;BHS
+271;city of freeport;BHS
+272;crooked island;BHS
+273;east grand bahama;BHS
+274;exuma;BHS
+275;grand cay;BHS
+276;harbour island;BHS
+277;hope town;BHS
+278;inagua;BHS
+279;long island;BHS
+280;mangrove cay;BHS
+281;mayaguana;BHS
+282;moore's island;BHS
+283;new providence;BHS
+284;north abaco;BHS
+285;north andros;BHS
+286;north eleuthera;BHS
+287;ragged island;BHS
+288;rum cay;BHS
+289;san salvador;BHS
+290;south abaco;BHS
+291;south andros;BHS
+292;south eleuthera;BHS
+293;spanish wells;BHS
+294;west grand bahama;BHS
+295;brčko;BIH
+296;federacija bosna i hercegovina;BIH
+297;repuplika srpska;BIH
+298;brest;BLR
+299;homyel';BLR
+300;hrodna;BLR
+301;mahilyow;BLR
+302;minsk;BLR
+303;vitsyebsk;BLR
+304;belize;BLZ
+305;cayo;BLZ
+306;corozal;BLZ
+307;orange walk;BLZ
+308;stann creek;BLZ
+309;toledo;BLZ
+310;devonshire;BMU
+311;hamilton;BMU
+312;hamilton municipality;BMU
+313;paget;BMU
+314;pembroke;BMU
+315;saint george's;BMU
+316;saint george municipality;BMU
+317;sandys;BMU
+318;smiths;BMU
+319;southampton;BMU
+320;warwick;BMU
+321;chuquisaca;BOL
+322;cochabamba;BOL
+323;el beni;BOL
+324;la paz;BOL
+325;oruro;BOL
+326;pando;BOL
+327;potosí;BOL
+328;santa cruz;BOL
+329;tarija;BOL
+330;acre;BRA
+331;alagoas;BRA
+332;amapá;BRA
+333;amazonas;BRA
+334;bahia;BRA
+335;ceará;BRA
+336;distrito federal;BRA
+337;espírito santo;BRA
+338;goiás;BRA
+339;maranhão;BRA
+340;mato grosso;BRA
+341;mato grosso do sul;BRA
+342;minas gerais;BRA
+343;pará;BRA
+344;paraíba;BRA
+345;paraná;BRA
+346;pernambuco;BRA
+347;piauí;BRA
+348;rio de janeiro;BRA
+349;rio grande do norte;BRA
+350;rio grande do sul;BRA
+351;rondônia;BRA
+352;roraima;BRA
+353;santa catarina;BRA
+354;são paulo;BRA
+355;sergipe;BRA
+356;tocantins;BRA
+357;christ church;BRB
+358;saint andrew;BRB
+359;saint george;BRB
+360;saint james;BRB
+361;saint john;BRB
+362;saint joseph;BRB
+363;saint lucy;BRB
+364;saint michael;BRB
+365;saint peter;BRB
+366;saint philip;BRB
+367;saint thomas;BRB
+368;belait;BRN
+369;brunei and muara;BRN
+370;temburong;BRN
+371;tutong;BRN
+372;bumthang;BTN
+373;chhukha;BTN
+374;dagana;BTN
+375;gasa;BTN
+376;haa;BTN
+377;lhuentse;BTN
+378;monggar;BTN
+379;paro;BTN
+380;pemagatshel;BTN
+381;punakha;BTN
+382;samdrupjongkhar;BTN
+383;samtse;BTN
+384;sarpang;BTN
+385;thimphu;BTN
+386;trashigang;BTN
+387;trongsa;BTN
+388;tsirang;BTN
+389;wangduephodrang;BTN
+390;yangtse;BTN
+391;zhemgang;BTN
+392;central;BWA
+393;chobe;BWA
+394;francistown;BWA
+395;gaborone;BWA
+396;ghanzi;BWA
+397;jwaneng;BWA
+398;kgalagadi;BWA
+399;kgatleng;BWA
+400;kweneng;BWA
+401;lobatse;BWA
+402;north-east;BWA
+403;north-west;BWA
+404;selibe phikwe;BWA
+405;south-east;BWA
+406;southern;BWA
+407;sowa;BWA
+408;bamingui-bangoran;CAF
+409;bangui;CAF
+410;basse-kotto;CAF
+411;haut-mbomou;CAF
+412;haute-kotto;CAF
+413;kémo;CAF
+414;lobaye;CAF
+415;mambéré-kadéï;CAF
+416;mbomou;CAF
+417;nana-grébizi;CAF
+418;nana-mambéré;CAF
+419;ombella-m'poko;CAF
+420;ouaka;CAF
+421;ouham;CAF
+422;ouham-pendé;CAF
+423;sangha-mbaéré;CAF
+424;vakaga;CAF
+425;alberta;CAN
+426;british columbia;CAN
+427;manitoba;CAN
+428;new brunswick;CAN
+429;newfoundland and labrador;CAN
+430;northwest territories;CAN
+431;nova scotia;CAN
+432;nunavut;CAN
+433;ontario;CAN
+434;prince edward island;CAN
+435;québec;CAN
+436;saskatchewan;CAN
+437;yukon;CAN
+438;aargau;CHE
+439;appenzell ausserrhoden;CHE
+440;appenzell innerrhoden;CHE
+441;basel-landschaft;CHE
+442;basel-stadt;CHE
+443;bern;CHE
+444;fribourg;CHE
+445;genève;CHE
+446;glarus;CHE
+447;graubünden;CHE
+448;jura;CHE
+449;lucerne;CHE
+450;neuchâtel;CHE
+451;nidwalden;CHE
+452;obwalden;CHE
+453;sankt gallen;CHE
+454;schaffhausen;CHE
+455;schwyz;CHE
+456;solothurn;CHE
+457;thurgau;CHE
+458;ticino;CHE
+459;uri;CHE
+460;valais;CHE
+461;vaud;CHE
+462;zug;CHE
+463;zürich;CHE
+464;aisén del general carlos ibáñez del campo;CHL
+465;antofagasta;CHL
+466;araucanía;CHL
+467;arica y parinacota;CHL
+468;atacama;CHL
+469;bío-bío;CHL
+470;coquimbo;CHL
+471;libertador general bernardo o'higgins;CHL
+472;los lagos;CHL
+473;los ríos;CHL
+474;magallanes y antártica chilena;CHL
+475;maule;CHL
+476;ñuble;CHL
+477;región metropolitana de santiago;CHL
+478;tarapacá;CHL
+479;valparaíso;CHL
+480;anhui;CHN
+481;beijing;CHN
+482;chongqing;CHN
+483;fujian;CHN
+484;gansu;CHN
+485;guangdong;CHN
+486;guangxi;CHN
+487;guizhou;CHN
+488;hainan;CHN
+489;hebei;CHN
+490;heilongjiang;CHN
+491;henan;CHN
+492;hubei;CHN
+493;hunan;CHN
+494;jiangsu;CHN
+495;jiangxi;CHN
+496;jilin;CHN
+497;liaoning;CHN
+498;nei mongol;CHN
+499;ningxia hui;CHN
+500;qinghai;CHN
+501;shaanxi;CHN
+502;shandong;CHN
+503;shanghai;CHN
+504;shanxi;CHN
+505;sichuan;CHN
+506;tianjin;CHN
+507;xinjiang uygur;CHN
+508;xizang;CHN
+509;yunnan;CHN
+510;zhejiang;CHN
+511;abidjan;CIV
+512;bas-sassandra;CIV
+513;comoé;CIV
+514;denguélé;CIV
+515;gôh-djiboua;CIV
+516;lacs;CIV
+517;lagunes;CIV
+518;montagnes;CIV
+519;sassandra-marahoué;CIV
+520;savanes;CIV
+521;vallée du bandama;CIV
+522;woroba;CIV
+523;yamoussoukro;CIV
+524;zanzan;CIV
+525;adamaoua;CMR
+526;centre;CMR
+527;est;CMR
+528;extrême-nord;CMR
+529;littoral;CMR
+530;nord;CMR
+531;nord-ouest;CMR
+532;ouest;CMR
+533;sud;CMR
+534;sud-ouest;CMR
+535;bas-uélé;COD
+536;équateur;COD
+537;haut-katanga;COD
+538;haut-lomami;COD
+539;haut-uélé;COD
+540;ituri;COD
+541;kasaï;COD
+542;kasaï-central;COD
+543;kasaï-oriental;COD
+544;kinshasa;COD
+545;kongo-central;COD
+546;kwango;COD
+547;kwilu;COD
+548;lomami;COD
+549;lualaba;COD
+550;maï-ndombe;COD
+551;maniema;COD
+552;mongala;COD
+553;nord-kivu;COD
+554;nord-ubangi;COD
+555;sankuru;COD
+556;sud-kivu;COD
+557;sud-ubangi;COD
+558;tanganyika;COD
+559;tshopo;COD
+560;tshuapa;COD
+561;bouenza;COG
+562;brazzaville;COG
+563;cuvette;COG
+564;cuvette-ouest;COG
+565;kouilou;COG
+566;lékoumou;COG
+567;likouala;COG
+568;niari;COG
+569;plateaux;COG
+570;pointe noire;COG
+571;pool;COG
+572;sangha;COG
+573;amazonas;COL
+574;antioquia;COL
+575;arauca;COL
+576;atlántico;COL
+577;bolívar;COL
+578;boyacá;COL
+579;caldas;COL
+580;caquetá;COL
+581;casanare;COL
+582;cauca;COL
+583;cesar;COL
+584;chocó;COL
+585;córdoba;COL
+586;cundinamarca;COL
+587;guainía;COL
+588;guaviare;COL
+589;huila;COL
+590;la guajira;COL
+591;magdalena;COL
+592;meta;COL
+593;nariño;COL
+594;norte de santander;COL
+595;putumayo;COL
+596;quindío;COL
+597;risaralda;COL
+598;san andrés y providencia;COL
+599;santander;COL
+600;sucre;COL
+601;tolima;COL
+602;valle del cauca;COL
+603;vaupés;COL
+604;vichada;COL
+605;mwali;COM
+606;njazídja;COM
+607;nzwani;COM
+608;boa vista;CPV
+609;brava;CPV
+610;maio;CPV
+611;mosteiros;CPV
+612;paúl;CPV
+613;porto novo;CPV
+614;praia;CPV
+615;ribeira brava;CPV
+616;ribeira grande;CPV
+617;ribeira grande de santiago;CPV
+618;sal;CPV
+619;santa catarina;CPV
+620;santa catarina do fogo ;CPV
+621;santa cruz;CPV
+622;são domingos;CPV
+623;são filipe;CPV
+624;são lourenço dos órgãos;CPV
+625;são miguel;CPV
+626;são salvador do mundo;CPV
+627;são vicente;CPV
+628;tarrafal;CPV
+629;tarrafal de são nicolau;CPV
+630;alajuela;CRI
+631;cartago;CRI
+632;guanacaste;CRI
+633;heredia;CRI
+634;limón;CRI
+635;puntarenas;CRI
+636;san josé;CRI
+637;camagüey;CUB
+638;ciego de ávila;CUB
+639;cienfuegos;CUB
+640;ciudad de la habana;CUB
+641;granma;CUB
+642;guantánamo;CUB
+643;holguín;CUB
+644;isla de la juventud;CUB
+645;la habana;CUB
+646;las tunas;CUB
+647;matanzas;CUB
+648;mayabeque;CUB
+649;pinar del río;CUB
+650;sancti spíritus;CUB
+651;santiago de cuba;CUB
+652;villa clara;CUB
+653;bodden town;CYM
+654;cayman brac;CYM
+655;east end;CYM
+656;george town;CYM
+657;little cayman;CYM
+658;north side;CYM
+659;west bay;CYM
+660;famagusta;CYP
+661;larnaca;CYP
+662;limassol;CYP
+663;nicosia;CYP
+664;paphos;CYP
+665;jihočeský;CZE
+666;jihomoravský;CZE
+667;karlovarský;CZE
+668;kraj vysočina;CZE
+669;královéhradecký;CZE
+670;liberecký;CZE
+671;moravskoslezský;CZE
+672;olomoucký;CZE
+673;pardubický;CZE
+674;plzeňský;CZE
+675;prague;CZE
+676;středočeský;CZE
+677;ústecký;CZE
+678;zlínský;CZE
+679;baden-württemberg;DEU
+680;bayern;DEU
+681;berlin;DEU
+682;brandenburg;DEU
+683;bremen;DEU
+684;hamburg;DEU
+685;hessen;DEU
+686;mecklenburg-vorpommern;DEU
+687;niedersachsen;DEU
+688;nordrhein-westfalen;DEU
+689;rheinland-pfalz;DEU
+690;saarland;DEU
+691;sachsen;DEU
+692;sachsen-anhalt;DEU
+693;schleswig-holstein;DEU
+694;thüringen;DEU
+695;ali sabieh;DJI
+696;dikhil;DJI
+697;djibouti;DJI
+698;obock;DJI
+699;tadjourah;DJI
+700;saint andrew;DMA
+701;saint david;DMA
+702;saint george;DMA
+703;saint john;DMA
+704;saint joseph;DMA
+705;saint luke;DMA
+706;saint mark;DMA
+707;saint patrick;DMA
+708;saint paul;DMA
+709;saint peter;DMA
+710;hovedstaden;DNK
+711;midtjylland;DNK
+712;nordjylland;DNK
+713;sjælland;DNK
+714;syddanmark;DNK
+715;azua;DOM
+716;bahoruco;DOM
+717;barahona;DOM
+718;dajabón;DOM
+719;distrito nacional;DOM
+720;duarte;DOM
+721;el seybo;DOM
+722;espaillat;DOM
+723;hato mayor;DOM
+724;independencia;DOM
+725;la altagracia;DOM
+726;la estrelleta;DOM
+727;la romana;DOM
+728;la vega;DOM
+729;maría trinidad sánchez;DOM
+730;monseñor nouel;DOM
+731;monte cristi;DOM
+732;monte plata;DOM
+733;pedernales;DOM
+734;peravia;DOM
+735;puerto plata;DOM
+736;salcedo;DOM
+737;samaná;DOM
+738;san cristóbal;DOM
+739;san josé de ocoa;DOM
+740;san juan;DOM
+741;san pedro de macorís;DOM
+742;sánchez ramírez;DOM
+743;santiago;DOM
+744;santiago rodríguez;DOM
+745;santo domingo;DOM
+746;valverde;DOM
+747;adrar;DZA
+748;aïn defla;DZA
+749;aïn témouchent;DZA
+750;alger;DZA
+751;annaba;DZA
+752;batna;DZA
+753;béchar;DZA
+754;béjaïa;DZA
+755;biskra;DZA
+756;blida;DZA
+757;bordj bou arréridj;DZA
+758;bouira;DZA
+759;boumerdès;DZA
+760;chlef;DZA
+761;constantine;DZA
+762;djelfa;DZA
+763;el bayadh;DZA
+764;el oued;DZA
+765;el tarf;DZA
+766;ghardaïa;DZA
+767;guelma;DZA
+768;illizi;DZA
+769;jijel;DZA
+770;khenchela;DZA
+771;laghouat;DZA
+772;m'sila;DZA
+773;mascara;DZA
+774;médéa;DZA
+775;mila;DZA
+776;mostaganem;DZA
+777;naâma;DZA
+778;oran;DZA
+779;ouargla;DZA
+780;oum el bouaghi;DZA
+781;relizane;DZA
+782;saïda;DZA
+783;sétif;DZA
+784;sidi bel abbès;DZA
+785;skikda;DZA
+786;souk ahras;DZA
+787;tamanghasset;DZA
+788;tébessa;DZA
+789;tiaret;DZA
+790;tindouf;DZA
+791;tipaza;DZA
+792;tissemsilt;DZA
+793;tizi ouzou;DZA
+794;tlemcen;DZA
+795;azuay;ECU
+796;bolivar;ECU
+797;cañar;ECU
+798;carchi;ECU
+799;chimborazo;ECU
+800;cotopaxi;ECU
+801;el oro;ECU
+802;esmeraldas;ECU
+803;galápagos;ECU
+804;guayas;ECU
+805;imbabura;ECU
+806;loja;ECU
+807;los rios;ECU
+808;manabi;ECU
+809;morona santiago;ECU
+810;napo;ECU
+811;orellana;ECU
+812;pastaza;ECU
+813;pichincha;ECU
+814;santa elena;ECU
+815;santo domingo de los tsachilas;ECU
+816;sucumbios;ECU
+817;tungurahua;ECU
+818;zamora chinchipe;ECU
+819;ad daqahliyah;EGY
+820;al bahr al ahmar;EGY
+821;al buhayrah;EGY
+822;al fayyum;EGY
+823;al gharbiyah;EGY
+824;al iskandariyah;EGY
+825;al isma`iliyah;EGY
+826;al jizah;EGY
+827;al minufiyah;EGY
+828;al minya;EGY
+829;al qahirah;EGY
+830;al qalyubiyah;EGY
+831;al uqsur;EGY
+832;al wadi al jadid;EGY
+833;as suways;EGY
+834;ash sharqiyah;EGY
+835;aswan;EGY
+836;asyut;EGY
+837;bani suwayf;EGY
+838;bur sa`id;EGY
+839;dumyat;EGY
+840;janub sina';EGY
+841;kafr ash shaykh;EGY
+842;matrouh;EGY
+843;qina;EGY
+844;shamal sina';EGY
+845;suhaj;EGY
+846;anseba;ERI
+847;debub;ERI
+848;debubawi keyih bahri;ERI
+849;gash barka;ERI
+850;maekel;ERI
+851;semenawi keyih bahri;ERI
+852;boujdour;ESH
+853;es semara;ESH
+854;laayoune;ESH
+855;oued el dahab;ESH
+856;andalucía;ESP
+857;aragón;ESP
+858;cantabria;ESP
+859;castilla-la mancha;ESP
+860;castilla y león;ESP
+861;cataluña;ESP
+862;ceuta y melilla;ESP
+863;comunidad de madrid;ESP
+864;comunidad foral de navarra;ESP
+865;comunidad valenciana;ESP
+866;extremadura;ESP
+867;galicia;ESP
+868;islas baleares;ESP
+869;islas canarias;ESP
+870;la rioja;ESP
+871;país vasco;ESP
+872;principado de asturias;ESP
+873;región de murcia;ESP
+874;harju;EST
+875;hiiu;EST
+876;ida-viru;EST
+877;järva;EST
+878;jõgeva;EST
+879;lääne;EST
+880;lääne-viru;EST
+881;pärnu;EST
+882;peipsi;EST
+883;põlva;EST
+884;rapla;EST
+885;saare;EST
+886;tartu;EST
+887;valga;EST
+888;viljandi;EST
+889;võru;EST
+890;addis abeba;ETH
+891;afar;ETH
+892;amhara;ETH
+893;benshangul-gumaz;ETH
+894;dire dawa;ETH
+895;gambela peoples;ETH
+896;harari people;ETH
+897;oromia;ETH
+898;somali;ETH
+899;southern nations, nationalities and peoples;ETH
+900;tigray;ETH
+901;eastern finland;FIN
+902;lapland;FIN
+903;oulu;FIN
+904;southern finland;FIN
+905;western finland;FIN
+906;central;FJI
+907;eastern;FJI
+908;northern;FJI
+909;rotuma;FJI
+910;western;FJI
+911;auvergne-rhône-alpes;FRA
+912;bourgogne-franche-comté;FRA
+913;bretagne;FRA
+914;centre-val de loire;FRA
+915;corse;FRA
+916;grand est;FRA
+917;hauts-de-france;FRA
+918;île-de-france;FRA
+919;normandie;FRA
+920;nouvelle-aquitaine;FRA
+921;occitanie;FRA
+922;pays de la loire;FRA
+923;provence-alpes-côte d'azur;FRA
+924;eysturoyar;FRO
+925;norderøerne;FRO
+926;sandoyar;FRO
+927;streymoyar;FRO
+928;suðuroyar;FRO
+929;vågø;FRO
+930;chuuk;FSM
+931;kosrae;FSM
+932;pohnpei;FSM
+933;yap;FSM
+934;estuaire;GAB
+935;haut-ogooué;GAB
+936;moyen-ogooué;GAB
+937;ngounié;GAB
+938;nyanga;GAB
+939;ogooué-ivindo;GAB
+940;ogooué-lolo;GAB
+941;ogooué-maritime;GAB
+942;wouleu-ntem;GAB
+943;england;GBR
+944;northern ireland;GBR
+945;scotland;GBR
+946;wales;GBR
+947;abkhazia;GEO
+948;ajaria;GEO
+949;guria;GEO
+950;imereti;GEO
+951;kakheti;GEO
+952;kvemo kartli;GEO
+953;mtskheta-mtianeti;GEO
+954;racha-lechkhumi-kvemo svaneti;GEO
+955;samegrelo-zemo svaneti;GEO
+956;samtskhe-javakheti;GEO
+957;shida kartli;GEO
+958;tbilisi;GEO
+959;alderney;GGY
+960;brecqhou;GGY
+961;castel;GGY
+962;forest;GGY
+963;herm;GGY
+964;jethou;GGY
+965;saint andrew;GGY
+966;saint martin;GGY
+967;saint peter port;GGY
+968;saint pierre du bois;GGY
+969;saint sampson;GGY
+970;saint saviour;GGY
+971;sark;GGY
+972;torteval;GGY
+973;vale;GGY
+974;ashanti;GHA
+975;brong ahafo;GHA
+976;central;GHA
+977;eastern;GHA
+978;greater accra;GHA
+979;northern;GHA
+980;upper east;GHA
+981;upper west;GHA
+982;volta;GHA
+983;western;GHA
+984;boké;GIN
+985;conakry;GIN
+986;faranah;GIN
+987;kankan;GIN
+988;kindia;GIN
+989;labé;GIN
+990;mamou;GIN
+991;nzérékoré;GIN
+992;basse-terre;GLP
+993;pointe-à-pitre;GLP
+994;banjul;GMB
+995;lower river;GMB
+996;maccarthy island;GMB
+997;north bank;GMB
+998;upper river;GMB
+999;western;GMB
+1000;bafatá;GNB
+1001;biombo;GNB
+1002;bissau;GNB
+1003;bolama;GNB
+1004;cacheu;GNB
+1005;gabú;GNB
+1006;oio;GNB
+1007;quinara;GNB
+1008;tombali;GNB
+1009;annobón;GNQ
+1010;bioko norte;GNQ
+1011;bioko sur;GNQ
+1012;centro sur;GNQ
+1013;kié-ntem;GNQ
+1014;litoral;GNQ
+1015;wele-nzas;GNQ
+1016;aegean;GRC
+1017;athos;GRC
+1018;attica;GRC
+1019;crete;GRC
+1020;epirus and western macedonia;GRC
+1021;macedonia and thrace;GRC
+1022;peloponnese, western greece and the ionian islands;GRC
+1023;thessaly and central greece;GRC
+1024;carriacou;GRD
+1025;saint andrew;GRD
+1026;saint david;GRD
+1027;saint george;GRD
+1028;saint john;GRD
+1029;saint mark;GRD
+1030;saint patrick;GRD
+1031;kujalleq;GRL
+1032;northeast greenland national park;GRL
+1033;qaasuitsup;GRL
+1034;qeqqata;GRL
+1035;sermersooq;GRL
+1036;alta verapaz;GTM
+1037;baja verapaz;GTM
+1038;chimaltenango;GTM
+1039;chiquimula;GTM
+1040;el progreso;GTM
+1041;escuintla;GTM
+1042;guatemala;GTM
+1043;huehuetenango;GTM
+1044;izabal;GTM
+1045;jalapa;GTM
+1046;jutiapa;GTM
+1047;petén;GTM
+1048;quezaltenango;GTM
+1049;quiché;GTM
+1050;retalhuleu;GTM
+1051;sacatepéquez;GTM
+1052;san marcos;GTM
+1053;santa rosa;GTM
+1054;sololá;GTM
+1055;suchitepéquez;GTM
+1056;totonicapán;GTM
+1057;zacapa;GTM
+1058;cayenne;GUF
+1059;saint-laurent-du-maroni;GUF
+1060;agana heights;GUM
+1061;agat;GUM
+1062;asan;GUM
+1063;barrigada;GUM
+1064;chalan-pago-ordot;GUM
+1065;dededo;GUM
+1066;hagåtña;GUM
+1067;inarajan;GUM
+1068;mangilao;GUM
+1069;merizo;GUM
+1070;mongmong-toto-maite;GUM
+1071;piti;GUM
+1072;santa rita;GUM
+1073;sinajana;GUM
+1074;talofofo;GUM
+1075;tamuning;GUM
+1076;umatac;GUM
+1077;yigo;GUM
+1078;yona;GUM
+1079;barima-waini;GUY
+1080;cuyuni-mazaruni;GUY
+1081;demerara-mahaica;GUY
+1082;east berbice-corentyne;GUY
+1083;essequibo islands-west demerara;GUY
+1084;mahaica-berbice;GUY
+1085;pomeroon-supenaam;GUY
+1086;potaro-siparuni;GUY
+1087;upper demerara-berbice;GUY
+1088;upper takutu-upper essequibo;GUY
+1089;central and western;HKG
+1090;eastern;HKG
+1091;islands;HKG
+1092;kowloon city;HKG
+1093;kwai tsing;HKG
+1094;kwun tong;HKG
+1095;north;HKG
+1096;sai kung;HKG
+1097;sha tin;HKG
+1098;sham shui po;HKG
+1099;southern;HKG
+1100;tai po;HKG
+1101;tsuen wan;HKG
+1102;tuen mun;HKG
+1103;wan chai;HKG
+1104;wong tai sin;HKG
+1105;yau tsim mong;HKG
+1106;yuen long;HKG
+1107;atlántida;HND
+1108;choluteca;HND
+1109;colón;HND
+1110;comayagua;HND
+1111;copán;HND
+1112;cortés;HND
+1113;el paraíso;HND
+1114;francisco morazán;HND
+1115;gracias a dios;HND
+1116;intibucá;HND
+1117;islas de la bahía;HND
+1118;la paz;HND
+1119;lempira;HND
+1120;ocotepeque;HND
+1121;olancho;HND
+1122;santa bárbara;HND
+1123;valle;HND
+1124;yoro;HND
+1125;bjelovarska-bilogorska;HRV
+1126;brodsko-posavska;HRV
+1127;dubrovacko-neretvanska;HRV
+1128;grad zagreb;HRV
+1129;istarska;HRV
+1130;karlovacka;HRV
+1131;koprivničko-križevačka;HRV
+1132;krapinsko-zagorska;HRV
+1133;licko-senjska;HRV
+1134;medimurska;HRV
+1135;osjecko-baranjska;HRV
+1136;požeško-slavonska;HRV
+1137;primorsko-goranska;HRV
+1138;šibensko-kninska;HRV
+1139;sisacko-moslavacka;HRV
+1140;splitsko-dalmatinska;HRV
+1141;varaždinska;HRV
+1142;viroviticko-podravska;HRV
+1143;vukovarsko-srijemska;HRV
+1144;zadarska;HRV
+1145;zagrebačka;HRV
+1146;centre;HTI
+1147;grand'anse;HTI
+1148;l'artibonite;HTI
+1149;nippes;HTI
+1150;nord;HTI
+1151;nord-est;HTI
+1152;nord-ouest;HTI
+1153;ouest;HTI
+1154;sud;HTI
+1155;sud-est;HTI
+1156;bács-kiskun;HUN
+1157;baranya;HUN
+1158;békés;HUN
+1159;borsod-abaúj-zemplén;HUN
+1160;budapest;HUN
+1161;csongrád;HUN
+1162;fejér;HUN
+1163;gyor-moson-sopron;HUN
+1164;hajdú-bihar;HUN
+1165;heves;HUN
+1166;jász-nagykun-szolnok;HUN
+1167;komárom-esztergom;HUN
+1168;nógrád;HUN
+1169;pest;HUN
+1170;somogy;HUN
+1171;szabolcs-szatmár-bereg;HUN
+1172;tolna;HUN
+1173;vas;HUN
+1174;veszprém;HUN
+1175;zala;HUN
+1176;aceh;IDN
+1177;bali;IDN
+1178;bangka belitung;IDN
+1179;banten;IDN
+1180;bengkulu;IDN
+1181;gorontalo;IDN
+1182;jakarta raya;IDN
+1183;jambi;IDN
+1184;jawa barat;IDN
+1185;jawa tengah;IDN
+1186;jawa timur;IDN
+1187;kalimantan barat;IDN
+1188;kalimantan selatan;IDN
+1189;kalimantan tengah;IDN
+1190;kalimantan timur;IDN
+1191;kepulauan riau;IDN
+1192;lampung;IDN
+1193;maluku;IDN
+1194;maluku utara;IDN
+1195;nusa tenggara barat;IDN
+1196;nusa tenggara timur;IDN
+1197;papua;IDN
+1198;papua barat;IDN
+1199;riau;IDN
+1200;sulawesi barat;IDN
+1201;sulawesi selatan;IDN
+1202;sulawesi tengah;IDN
+1203;sulawesi tenggara;IDN
+1204;sulawesi utara;IDN
+1205;sumatera barat;IDN
+1206;sumatera selatan;IDN
+1207;sumatera utara;IDN
+1208;yogyakarta;IDN
+1209;ayre;IMN
+1210;garff;IMN
+1211;glenfaba;IMN
+1212;michael;IMN
+1213;middle;IMN
+1214;rushen;IMN
+1215;andaman and nicobar;IND
+1216;andhra pradesh;IND
+1217;arunachal pradesh;IND
+1218;assam;IND
+1219;bihar;IND
+1220;chandigarh;IND
+1221;chhattisgarh;IND
+1222;dadra and nagar haveli;IND
+1223;daman and diu;IND
+1224;goa;IND
+1225;gujarat;IND
+1226;haryana;IND
+1227;himachal pradesh;IND
+1228;jammu and kashmir;IND
+1229;jharkhand;IND
+1230;karnataka;IND
+1231;kerala;IND
+1232;lakshadweep;IND
+1233;madhya pradesh;IND
+1234;maharashtra;IND
+1235;manipur;IND
+1236;meghalaya;IND
+1237;mizoram;IND
+1238;nagaland;IND
+1239;nct of delhi;IND
+1240;odisha;IND
+1241;puducherry;IND
+1242;punjab;IND
+1243;rajasthan;IND
+1244;sikkim;IND
+1245;tamil nadu;IND
+1246;telangana;IND
+1247;tripura;IND
+1248;uttar pradesh;IND
+1249;uttarakhand;IND
+1250;west bengal;IND
+1251;carlow;IRL
+1252;cavan;IRL
+1253;clare;IRL
+1254;cork;IRL
+1255;donegal;IRL
+1256;dublin;IRL
+1257;galway;IRL
+1258;kerry;IRL
+1259;kildare;IRL
+1260;kilkenny;IRL
+1261;laoighis;IRL
+1262;leitrim;IRL
+1263;limerick;IRL
+1264;longford;IRL
+1265;louth;IRL
+1266;mayo;IRL
+1267;meath;IRL
+1268;monaghan;IRL
+1269;offaly;IRL
+1270;roscommon;IRL
+1271;sligo;IRL
+1272;tipperary;IRL
+1273;waterford;IRL
+1274;westmeath;IRL
+1275;wexford;IRL
+1276;wicklow;IRL
+1277;alborz;IRN
+1278;ardebil;IRN
+1279;bushehr;IRN
+1280;chahar mahall and bakhtiari;IRN
+1281;east azarbaijan;IRN
+1282;esfahan;IRN
+1283;fars;IRN
+1284;gilan;IRN
+1285;golestan;IRN
+1286;hamadan;IRN
+1287;hormozgan;IRN
+1288;ilam;IRN
+1289;kerman;IRN
+1290;kermanshah;IRN
+1291;khuzestan;IRN
+1292;kohgiluyeh and buyer ahmad;IRN
+1293;kordestan;IRN
+1294;lorestan;IRN
+1295;markazi;IRN
+1296;mazandaran;IRN
+1297;north khorasan;IRN
+1298;qazvin;IRN
+1299;qom;IRN
+1300;razavi khorasan;IRN
+1301;semnan;IRN
+1302;sistan and baluchestan;IRN
+1303;south khorasan;IRN
+1304;tehran;IRN
+1305;west azarbaijan;IRN
+1306;yazd;IRN
+1307;zanjan;IRN
+1308;al-anbar;IRQ
+1309;al-basrah;IRQ
+1310;al-muthannia;IRQ
+1311;al-qadisiyah;IRQ
+1312;an-najaf;IRQ
+1313;arbil;IRQ
+1314;as-sulaymaniyah;IRQ
+1315;at-ta'mim;IRQ
+1316;babil;IRQ
+1317;baghdad;IRQ
+1318;dhi-qar;IRQ
+1319;dihok;IRQ
+1320;diyala;IRQ
+1321;karbala';IRQ
+1322;maysan;IRQ
+1323;ninawa;IRQ
+1324;sala ad-din;IRQ
+1325;wasit;IRQ
+1326;austurland;ISL
+1327;hálshreppur;ISL
+1328;höfuðborgarsvæði;ISL
+1329;norðurland vestra;ISL
+1330;suðurland;ISL
+1331;suðurnes;ISL
+1332;vestfirðir;ISL
+1333;vesturland;ISL
+1334;golan;ISR
+1335;hadarom;ISR
+1336;haifa;ISR
+1337;hamerkaz;ISR
+1338;hazafon;ISR
+1339;jerusalem;ISR
+1340;tel aviv;ISR
+1341;abruzzo;ITA
+1342;apulia;ITA
+1343;basilicata;ITA
+1344;calabria;ITA
+1345;campania;ITA
+1346;emilia-romagna;ITA
+1347;friuli-venezia giulia;ITA
+1348;lazio;ITA
+1349;liguria;ITA
+1350;lombardia;ITA
+1351;marche;ITA
+1352;molise;ITA
+1353;piemonte;ITA
+1354;sardegna;ITA
+1355;sicily;ITA
+1356;toscana;ITA
+1357;trentino-alto adige;ITA
+1358;umbria;ITA
+1359;valle d'aosta;ITA
+1360;veneto;ITA
+1361;clarendon;JAM
+1362;hanover;JAM
+1363;kingston;JAM
+1364;manchester;JAM
+1365;portland;JAM
+1366;saint andrew;JAM
+1367;saint ann;JAM
+1368;saint catherine;JAM
+1369;saint elizabeth;JAM
+1370;saint james;JAM
+1371;saint mary;JAM
+1372;saint thomas;JAM
+1373;trelawny;JAM
+1374;westmoreland;JAM
+1375;grouville;JEY
+1376;saint berlade;JEY
+1377;saint clement;JEY
+1378;saint helier;JEY
+1379;saint john;JEY
+1380;saint lawrence;JEY
+1381;saint martin;JEY
+1382;saint mary;JEY
+1383;saint ouen;JEY
+1384;saint peter;JEY
+1385;saint saviour;JEY
+1386;trinity;JEY
+1387;ajlun;JOR
+1388;amman;JOR
+1389;aqaba;JOR
+1390;balqa;JOR
+1391;irbid;JOR
+1392;jarash;JOR
+1393;karak;JOR
+1394;ma`an;JOR
+1395;madaba;JOR
+1396;mafraq;JOR
+1397;tafilah;JOR
+1398;zarqa;JOR
+1399;aichi;JPN
+1400;akita;JPN
+1401;aomori;JPN
+1402;chiba;JPN
+1403;ehime;JPN
+1404;fukui;JPN
+1405;fukuoka;JPN
+1406;fukushima;JPN
+1407;gifu;JPN
+1408;gunma;JPN
+1409;hiroshima;JPN
+1410;hokkaido;JPN
+1411;hyōgo;JPN
+1412;ibaraki;JPN
+1413;ishikawa;JPN
+1414;iwate;JPN
+1415;kagawa;JPN
+1416;kagoshima;JPN
+1417;kanagawa;JPN
+1418;kochi;JPN
+1419;kumamoto;JPN
+1420;kyoto;JPN
+1421;mie;JPN
+1422;miyagi;JPN
+1423;miyazaki;JPN
+1424;nagano;JPN
+1425;naoasaki;JPN
+1426;nara;JPN
+1427;niigata;JPN
+1428;oita;JPN
+1429;okayama;JPN
+1430;okinawa;JPN
+1431;osaka;JPN
+1432;saga;JPN
+1433;saitama;JPN
+1434;shiga;JPN
+1435;shimane;JPN
+1436;shizuoka;JPN
+1437;tochigi;JPN
+1438;tokushima;JPN
+1439;tokyo;JPN
+1440;tottori;JPN
+1441;toyama;JPN
+1442;wakayama;JPN
+1443;yamagata;JPN
+1444;yamaguchi;JPN
+1445;yamanashi;JPN
+1446;almaty;KAZ
+1447;aqmola;KAZ
+1448;aqtöbe;KAZ
+1449;atyrau;KAZ
+1450;east kazakhstan;KAZ
+1451;mangghystau;KAZ
+1452;north kazakhstan;KAZ
+1453;pavlodar;KAZ
+1454;qaraghandy;KAZ
+1455;qostanay;KAZ
+1456;qyzylorda;KAZ
+1457;south kazakhstan;KAZ
+1458;west kazakhstan;KAZ
+1459;zhambyl;KAZ
+1460;baringo;KEN
+1461;bomet;KEN
+1462;bungoma;KEN
+1463;busia;KEN
+1464;elgeyo-marakwet;KEN
+1465;embu;KEN
+1466;garissa;KEN
+1467;homa bay;KEN
+1468;isiolo;KEN
+1469;kajiado;KEN
+1470;kakamega;KEN
+1471;kericho;KEN
+1472;kiambu;KEN
+1473;kilifi;KEN
+1474;kirinyaga;KEN
+1475;kisii;KEN
+1476;kisumu;KEN
+1477;kitui;KEN
+1478;kwale;KEN
+1479;laikipia;KEN
+1480;lamu;KEN
+1481;machakos;KEN
+1482;makueni;KEN
+1483;mandera;KEN
+1484;marsabit;KEN
+1485;meru;KEN
+1486;migori;KEN
+1487;mombasa;KEN
+1488;murang'a;KEN
+1489;nairobi;KEN
+1490;nakuru;KEN
+1491;nandi;KEN
+1492;narok;KEN
+1493;nyamira;KEN
+1494;nyandarua;KEN
+1495;nyeri;KEN
+1496;samburu;KEN
+1497;siaya;KEN
+1498;taita taveta;KEN
+1499;tana river;KEN
+1500;tharaka-nithi;KEN
+1501;trans nzoia;KEN
+1502;turkana;KEN
+1503;uasin gishu;KEN
+1504;vihiga;KEN
+1505;wajir;KEN
+1506;west pokot;KEN
+1507;batken;KGZ
+1508;biškek;KGZ
+1509;chüy;KGZ
+1510;jalal-abad;KGZ
+1511;naryn;KGZ
+1512;osh;KGZ
+1513;osh (city);KGZ
+1514;talas;KGZ
+1515;ysyk-köl;KGZ
+1516;bântéay méanchey;KHM
+1517;batdâmbâng;KHM
+1518;kâmpóng cham;KHM
+1519;kâmpóng chhnang;KHM
+1520;kâmpóng spœ;KHM
+1521;kâmpóng thum;KHM
+1522;kâmpôt;KHM
+1523;kândal;KHM
+1524;kaôh kong;KHM
+1525;kep;KHM
+1526;krâchéh;KHM
+1527;krong pailin;KHM
+1528;krong preah sihanouk;KHM
+1529;môndól kiri;KHM
+1530;otdar mean chey;KHM
+1531;phnom penh;KHM
+1532;pouthisat;KHM
+1533;preah vihéar;KHM
+1534;prey vêng;KHM
+1535;rôtânôkiri;KHM
+1536;siemréab;KHM
+1537;stœng trêng;KHM
+1538;svay rieng;KHM
+1539;takêv;KHM
+1540;tbong khmum;KHM
+1541;christ church nichola town;KNA
+1542;saint anne sandy point;KNA
+1543;saint george basseterre;KNA
+1544;saint george gingerland;KNA
+1545;saint james windward;KNA
+1546;saint john capisterre;KNA
+1547;saint john figtree;KNA
+1548;saint mary cayon;KNA
+1549;saint paul capisterre;KNA
+1550;saint paul charlestown;KNA
+1551;saint peter basseterre;KNA
+1552;saint thomas lowland;KNA
+1553;saint thomas middle island;KNA
+1554;trinity palmetto point;KNA
+1555;busan;KOR
+1556;chungcheongbuk-do;KOR
+1557;chungcheongnam-do;KOR
+1558;daegu;KOR
+1559;daejeon;KOR
+1560;gangwon-do;KOR
+1561;gwangju;KOR
+1562;gyeonggi-do;KOR
+1563;gyeongsangbuk-do;KOR
+1564;gyeongsangnam-do;KOR
+1565;incheon;KOR
+1566;jeju;KOR
+1567;jeollabuk-do;KOR
+1568;jeollanam-do;KOR
+1569;sejong;KOR
+1570;seoul;KOR
+1571;ulsan;KOR
+1572;al ahmadi;KWT
+1573;al farwaniyah;KWT
+1574;al jahrah;KWT
+1575;al kuwayt;KWT
+1576;hawalli;KWT
+1577;mubarak al-kabeer;KWT
+1578;attapu;LAO
+1579;bokeo;LAO
+1580;bolikhamxai;LAO
+1581;champasak;LAO
+1582;houaphan;LAO
+1583;khammouan;LAO
+1584;louang namtha;LAO
+1585;louangphrabang;LAO
+1586;oudômxai;LAO
+1587;phôngsali;LAO
+1588;saravan;LAO
+1589;savannakhét;LAO
+1590;vientiane;LAO
+1591;vientiane [prefecture];LAO
+1592;xaignabouri;LAO
+1593;xaisômboun;LAO
+1594;xékong;LAO
+1595;xiangkhoang;LAO
+1596;akkar;LBN
+1597;baalbak - hermel;LBN
+1598;beirut;LBN
+1599;bekaa;LBN
+1600;mount lebanon;LBN
+1601;nabatiyeh;LBN
+1602;north;LBN
+1603;south;LBN
+1604;bomi;LBR
+1605;bong;LBR
+1606;gbapolu;LBR
+1607;grand cape mount;LBR
+1608;grandbassa;LBR
+1609;grandgedeh;LBR
+1610;grandkru;LBR
+1611;lofa;LBR
+1612;margibi;LBR
+1613;maryland;LBR
+1614;montserrado;LBR
+1615;nimba;LBR
+1616;river cess;LBR
+1617;river gee;LBR
+1618;sinoe;LBR
+1619;al butnan;LBY
+1620;al jabal al akhdar;LBY
+1621;al jabal al gharbi;LBY
+1622;al jifarah;LBY
+1623;al jufrah;LBY
+1624;al kufrah;LBY
+1625;al marj;LBY
+1626;al marqab;LBY
+1627;al wahat;LBY
+1628;an nuqat al khams;LBY
+1629;az zawiyah;LBY
+1630;benghazi;LBY
+1631;darnah;LBY
+1632;ghat;LBY
+1633;misratah;LBY
+1634;murzuq;LBY
+1635;nalut;LBY
+1636;sabha;LBY
+1637;surt;LBY
+1638;tripoli;LBY
+1639;wadi al hayat;LBY
+1640;wadi ash shati';LBY
+1641;anse-la-raye;LCA
+1642;canaries;LCA
+1643;castries;LCA
+1644;choiseul;LCA
+1645;dennery;LCA
+1646;gros islet;LCA
+1647;laborie;LCA
+1648;micoud;LCA
+1649;soufrière;LCA
+1650;vieux fort;LCA
+1651;balzers;LIE
+1652;eschen;LIE
+1653;gamprin;LIE
+1654;mauren;LIE
+1655;planken;LIE
+1656;ruggell;LIE
+1657;schaan;LIE
+1658;schellenberg;LIE
+1659;triesen;LIE
+1660;triesenberg;LIE
+1661;valduz;LIE
+1662;ampara;LKA
+1663;anuradhapura;LKA
+1664;badulla;LKA
+1665;batticaloa;LKA
+1666;colombo;LKA
+1667;galle;LKA
+1668;gampaha;LKA
+1669;hambantota;LKA
+1670;jaffna;LKA
+1671;kalutara;LKA
+1672;kandy;LKA
+1673;kegalle;LKA
+1674;kilinochchi;LKA
+1675;kurunegala;LKA
+1676;mannar;LKA
+1677;matale;LKA
+1678;matara;LKA
+1679;moneragala;LKA
+1680;mullaitivu;LKA
+1681;nuwara eliya;LKA
+1682;polonnaruwa;LKA
+1683;puttalam;LKA
+1684;ratnapura;LKA
+1685;trincomalee;LKA
+1686;vavuniya;LKA
+1687;berea;LSO
+1688;butha-buthe;LSO
+1689;leribe;LSO
+1690;mafeteng;LSO
+1691;maseru;LSO
+1692;mohale's hoek;LSO
+1693;mokhotlong;LSO
+1694;qacha's nek;LSO
+1695;quthing;LSO
+1696;thaba-tseka;LSO
+1697;alytaus;LTU
+1698;kauno;LTU
+1699;klaipedos;LTU
+1700;marijampoles;LTU
+1701;panevezio;LTU
+1702;šiauliai;LTU
+1703;taurages;LTU
+1704;telšiai;LTU
+1705;utenos;LTU
+1706;vilniaus;LTU
+1707;diekirch;LUX
+1708;grevenmacher;LUX
+1709;luxembourg;LUX
+1710;kurzeme;LVA
+1711;latgale;LVA
+1712;riga;LVA
+1713;vidzeme;LVA
+1714;zemgale;LVA
+1715;ilhas;MAC
+1716;macau;MAC
+1717;chaouia - ouardigha;MAR
+1718;doukkala - abda;MAR
+1719;fès - boulemane;MAR
+1720;gharb - chrarda - béni hssen;MAR
+1721;grand casablanca;MAR
+1722;guelmim - es-semara;MAR
+1723;laâyoune - boujdour - sakia el hamra;MAR
+1724;marrakech - tensift - al haouz;MAR
+1725;meknès - tafilalet;MAR
+1726;oriental;MAR
+1727;rabat - salé - zemmour - zaer;MAR
+1728;souss - massa - draâ;MAR
+1729;tadla - azilal;MAR
+1730;tanger - tétouan;MAR
+1731;taza - al hoceima - taounate;MAR
+1732;anenii noi;MDA
+1733;bălţi;MDA
+1734;basarabeasca;MDA
+1735;bender;MDA
+1736;briceni;MDA
+1737;cahul;MDA
+1738;calarasi;MDA
+1739;cantemir;MDA
+1740;causeni;MDA
+1741;chişinău;MDA
+1742;cimişlia;MDA
+1743;criuleni;MDA
+1744;donduseni;MDA
+1745;drochia;MDA
+1746;dubăsari;MDA
+1747;edineţ;MDA
+1748;făleşti;MDA
+1749;floreşti;MDA
+1750;găgăuzia;MDA
+1751;glodeni;MDA
+1752;hîncesti;MDA
+1753;ialoveni;MDA
+1754;leova;MDA
+1755;nisporeni;MDA
+1756;ocniţa;MDA
+1757;orhei;MDA
+1758;rezina;MDA
+1759;rîşcani;MDA
+1760;sîngerei;MDA
+1761;şoldăneşti;MDA
+1762;soroca;MDA
+1763;ştefan voda;MDA
+1764;străşeni;MDA
+1765;taraclia;MDA
+1766;teleneşti;MDA
+1767;transnistria;MDA
+1768;ungheni;MDA
+1769;antananarivo;MDG
+1770;antsiranana;MDG
+1771;fianarantsoa;MDG
+1772;mahajanga;MDG
+1773;toamasina;MDG
+1774;toliary;MDG
+1775;aguascalientes;MEX
+1776;baja california;MEX
+1777;baja california sur;MEX
+1778;campeche;MEX
+1779;chiapas;MEX
+1780;chihuahua;MEX
+1781;coahuila;MEX
+1782;colima;MEX
+1783;distrito federal;MEX
+1784;durango;MEX
+1785;guanajuato;MEX
+1786;guerrero;MEX
+1787;hidalgo;MEX
+1788;jalisco;MEX
+1789;méxico;MEX
+1790;michoacán;MEX
+1791;morelos;MEX
+1792;nayarit;MEX
+1793;nuevo león;MEX
+1794;oaxaca;MEX
+1795;puebla;MEX
+1796;querétaro;MEX
+1797;quintana roo;MEX
+1798;san luis potosí;MEX
+1799;sinaloa;MEX
+1800;sonora;MEX
+1801;tabasco;MEX
+1802;tamaulipas;MEX
+1803;tlaxcala;MEX
+1804;veracruz;MEX
+1805;yucatán;MEX
+1806;zacatecas;MEX
+1807;aerodrom;MKD
+1808;aracinovo;MKD
+1809;berovo;MKD
+1810;bitola;MKD
+1811;bogdanci;MKD
+1812;bogovinje;MKD
+1813;bosilovo;MKD
+1814;brvenica;MKD
+1815;butel;MKD
+1816;čair;MKD
+1817;čaška;MKD
+1818;centar;MKD
+1819;centar župa;MKD
+1820;češinovo-obleševo;MKD
+1821;čučer sandevo;MKD
+1822;debar;MKD
+1823;debarca;MKD
+1824;delčevo;MKD
+1825;demir hisar;MKD
+1826;demir kapija;MKD
+1827;dolneni;MKD
+1828;drugovo;MKD
+1829;gazi baba;MKD
+1830;gevgelija;MKD
+1831;gjorče petrov;MKD
+1832;gostivar;MKD
+1833;gradsko;MKD
+1834;ilinden;MKD
+1835;jegunovtse;MKD
+1836;karbinci;MKD
+1837;karpoš;MKD
+1838;kavadartsi;MKD
+1839;kičevo;MKD
+1840;kisela voda;MKD
+1841;kočani;MKD
+1842;konče;MKD
+1843;kratovo;MKD
+1844;kriva palanka;MKD
+1845;krivogaštani;MKD
+1846;kruševo;MKD
+1847;kumanovo;MKD
+1848;lake ohrid;MKD
+1849;lipkovo;MKD
+1850;lozovo;MKD
+1851;makedonska kamenica;MKD
+1852;makedonski brod;MKD
+1853;mavrovo and rostuša;MKD
+1854;mogila;MKD
+1855;negotino;MKD
+1856;novatsi;MKD
+1857;novo selo;MKD
+1858;ohrid;MKD
+1859;oslomej;MKD
+1860;pehčevo;MKD
+1861;petrovec;MKD
+1862;plasnica;MKD
+1863;prilep;MKD
+1864;probištip;MKD
+1865;radoviš;MKD
+1866;rankovce;MKD
+1867;resen;MKD
+1868;rosoman;MKD
+1869;saraj;MKD
+1870;sopište;MKD
+1871;star dojran;MKD
+1872;staro nagoričane;MKD
+1873;štip;MKD
+1874;struga;MKD
+1875;strumitsa;MKD
+1876;studeničani;MKD
+1877;šuto orizari;MKD
+1878;sveti nikole;MKD
+1879;tearce;MKD
+1880;tetovo;MKD
+1881;valandovo;MKD
+1882;vasilevo;MKD
+1883;veles;MKD
+1884;vevčani;MKD
+1885;vinitsa;MKD
+1886;vraneštica;MKD
+1887;vrapčište;MKD
+1888;zajas;MKD
+1889;zelenikovo;MKD
+1890;želino;MKD
+1891;zrnovci;MKD
+1892;bamako;MLI
+1893;gao;MLI
+1894;kayes;MLI
+1895;kidal;MLI
+1896;koulikoro;MLI
+1897;mopti;MLI
+1898;ségou;MLI
+1899;sikasso;MLI
+1900;timbuktu;MLI
+1901;ċentrali;MLT
+1902;għawdex;MLT
+1903;nofsinhar;MLT
+1904;tramuntana;MLT
+1905;xlokk;MLT
+1906;ayeyarwady;MMR
+1907;bago;MMR
+1908;chin;MMR
+1909;kachin;MMR
+1910;kayah;MMR
+1911;kayin;MMR
+1912;magway;MMR
+1913;mandalay;MMR
+1914;mon;MMR
+1915;naypyitaw;MMR
+1916;rakhine;MMR
+1917;sagaing;MMR
+1918;shan;MMR
+1919;tanintharyi;MMR
+1920;yangon;MMR
+1921;andrijevica;MNE
+1922;bar;MNE
+1923;berane;MNE
+1924;bijelo polje;MNE
+1925;budva;MNE
+1926;cetinje;MNE
+1927;danilovgrad;MNE
+1928;herceg novi;MNE
+1929;kolašin;MNE
+1930;kotor;MNE
+1931;mojkovac;MNE
+1932;nikšic;MNE
+1933;plav;MNE
+1934;pljevlja;MNE
+1935;plužine;MNE
+1936;podgorica;MNE
+1937;rožaje;MNE
+1938;šavnik;MNE
+1939;tivat;MNE
+1940;ulcinj;MNE
+1941;žabljak;MNE
+1942;arhangay;MNG
+1943;bayan-ölgiy;MNG
+1944;bayanhongor;MNG
+1945;bulgan;MNG
+1946;darhan-uul;MNG
+1947;dornod;MNG
+1948;dornogovi;MNG
+1949;dundgovi;MNG
+1950;dzavhan;MNG
+1951;govi-altay;MNG
+1952;govisümber;MNG
+1953;hentiy;MNG
+1954;hovd;MNG
+1955;hövsgöl;MNG
+1956;ömnögovi;MNG
+1957;orhon;MNG
+1958;övörhangay;MNG
+1959;selenge;MNG
+1960;sühbaatar;MNG
+1961;töv;MNG
+1962;ulaanbaatar;MNG
+1963;uvs;MNG
+1964;northern islands;MNP
+1965;rota;MNP
+1966;saipan;MNP
+1967;tinian;MNP
+1968;cabo delgado;MOZ
+1969;gaza;MOZ
+1970;inhambane;MOZ
+1971;manica;MOZ
+1972;maputo;MOZ
+1973;maputo city;MOZ
+1974;nampula;MOZ
+1975;nassa;MOZ
+1976;sofala;MOZ
+1977;tete;MOZ
+1978;zambezia;MOZ
+1979;adrar;MRT
+1980;assaba;MRT
+1981;brakna;MRT
+1982;dakhlet nouadhibou;MRT
+1983;gorgol;MRT
+1984;guidimaka;MRT
+1985;hodh ech chargui;MRT
+1986;hodh el gharbi;MRT
+1987;inchiri;MRT
+1988;nouakchott;MRT
+1989;tagant;MRT
+1990;tiris zemmour;MRT
+1991;trarza;MRT
+1992;saint anthon;MSR
+1993;saint georges;MSR
+1994;saint peter;MSR
+1995;fort-de-france;MTQ
+1996;le marin;MTQ
+1997;le trinité;MTQ
+1998;saint-pierre;MTQ
+1999;agalega islands;MUS
+2000;black river;MUS
+2001;flacq;MUS
+2002;grand port;MUS
+2003;moka;MUS
+2004;pamplemousses;MUS
+2005;plaines wilhems;MUS
+2006;port louis;MUS
+2007;rivière du rempart;MUS
+2008;rodriguez;MUS
+2009;saint brandon ;MUS
+2010;savanne;MUS
+2011;balaka;MWI
+2012;blantyre;MWI
+2013;chikwawa;MWI
+2014;chiradzulu;MWI
+2015;chitipa;MWI
+2016;dedza;MWI
+2017;dowa;MWI
+2018;karonga;MWI
+2019;kasungu;MWI
+2020;likoma;MWI
+2021;lilongwe;MWI
+2022;machinga;MWI
+2023;mangochi;MWI
+2024;mchinji;MWI
+2025;mulanje;MWI
+2026;mwanza;MWI
+2027;mzimba;MWI
+2028;neno;MWI
+2029;nkhata bay;MWI
+2030;nkhotakota;MWI
+2031;nsanje;MWI
+2032;ntcheu;MWI
+2033;ntchisi;MWI
+2034;phalombe;MWI
+2035;rumphi;MWI
+2036;salima;MWI
+2037;thyolo;MWI
+2038;zomba;MWI
+2039;johor;MYS
+2040;kedah;MYS
+2041;kelantan;MYS
+2042;kuala lumpur;MYS
+2043;labuan;MYS
+2044;melaka;MYS
+2045;negeri sembilan;MYS
+2046;pahang;MYS
+2047;perak;MYS
+2048;perlis;MYS
+2049;pulau pinang;MYS
+2050;putrajaya;MYS
+2051;sabah;MYS
+2052;sarawak;MYS
+2053;selangor;MYS
+2054;trengganu;MYS
+2055;acoua;MYT
+2056;bandraboua;MYT
+2057;bandrele;MYT
+2058;boueni;MYT
+2059;chiconi;MYT
+2060;chirongui;MYT
+2061;dembeni;MYT
+2062;dzaoudzi;MYT
+2063;kani-keli;MYT
+2064;koungou;MYT
+2065;m'tsangamouji;MYT
+2066;mamoudzou;MYT
+2067;mtsamboro;MYT
+2068;ouangani;MYT
+2069;pamandzi;MYT
+2070;sada;MYT
+2071;tsingoni;MYT
+2072;!karas;NAM
+2073;erongo;NAM
+2074;hardap;NAM
+2075;kavango;NAM
+2076;khomas;NAM
+2077;kunene;NAM
+2078;ohangwena;NAM
+2079;omaheke;NAM
+2080;omusati;NAM
+2081;oshana;NAM
+2082;oshikoto;NAM
+2083;otjozondjupa;NAM
+2084;zambezi;NAM
+2085;îles loyauté;NCL
+2086;nord;NCL
+2087;sud;NCL
+2088;agadez;NER
+2089;diffa;NER
+2090;dosso;NER
+2091;maradi;NER
+2092;niamey;NER
+2093;tahoua;NER
+2094;tillabéry;NER
+2095;zinder;NER
+2096;abia;NGA
+2097;adamawa;NGA
+2098;akwa ibom;NGA
+2099;anambra;NGA
+2100;bauchi;NGA
+2101;bayelsa;NGA
+2102;benue;NGA
+2103;borno;NGA
+2104;cross river;NGA
+2105;delta;NGA
+2106;ebonyi;NGA
+2107;edo;NGA
+2108;ekiti;NGA
+2109;enugu;NGA
+2110;federal capital territory;NGA
+2111;gombe;NGA
+2112;imo;NGA
+2113;jigawa;NGA
+2114;kaduna;NGA
+2115;kano;NGA
+2116;katsina;NGA
+2117;kebbi;NGA
+2118;kogi;NGA
+2119;kwara;NGA
+2120;lagos;NGA
+2121;nassarawa;NGA
+2122;niger;NGA
+2123;ogun;NGA
+2124;ondo;NGA
+2125;osun;NGA
+2126;oyo;NGA
+2127;plateau;NGA
+2128;rivers;NGA
+2129;sokoto;NGA
+2130;taraba;NGA
+2131;yobe;NGA
+2132;zamfara;NGA
+2133;atlántico norte;NIC
+2134;atlántico sur;NIC
+2135;boaco;NIC
+2136;carazo;NIC
+2137;chinandega;NIC
+2138;chontales;NIC
+2139;estelí;NIC
+2140;granada;NIC
+2141;jinotega;NIC
+2142;lago nicaragua;NIC
+2143;león;NIC
+2144;madriz;NIC
+2145;managua;NIC
+2146;masaya;NIC
+2147;matagalpa;NIC
+2148;nueva segovia;NIC
+2149;río san juan;NIC
+2150;rivas;NIC
+2151;drenthe;NLD
+2152;flevoland;NLD
+2153;friesland;NLD
+2154;gelderland;NLD
+2155;groningen;NLD
+2156;ijsselmeer;NLD
+2157;limburg;NLD
+2158;noord-brabant;NLD
+2159;noord-holland;NLD
+2160;overijssel;NLD
+2161;utrecht;NLD
+2162;zeeland;NLD
+2163;zeeuwse meren;NLD
+2164;zuid-holland;NLD
+2165;akershus;NOR
+2166;ãstfold;NOR
+2167;aust-agder;NOR
+2168;buskerud;NOR
+2169;finnmark;NOR
+2170;hedmark;NOR
+2171;hordaland;NOR
+2172;møre og romsdal;NOR
+2173;nord-trøndelag;NOR
+2174;nordland;NOR
+2175;oppland;NOR
+2176;oslo;NOR
+2177;rogaland;NOR
+2178;sogn og fjordane;NOR
+2179;sør-trøndelag;NOR
+2180;telemark;NOR
+2181;troms;NOR
+2182;vest-agder;NOR
+2183;vestfold;NOR
+2184;central;NPL
+2185;east;NPL
+2186;far-western;NPL
+2187;mid-western;NPL
+2188;west;NPL
+2189;aiwo;NRU
+2190;anabar;NRU
+2191;anetan;NRU
+2192;anibare;NRU
+2193;baiti;NRU
+2194;boe;NRU
+2195;buada;NRU
+2196;denigomodu;NRU
+2197;ewa;NRU
+2198;ijuw;NRU
+2199;meneng;NRU
+2200;nibok;NRU
+2201;uaboe;NRU
+2202;yaren;NRU
+2203;auckland;NZL
+2204;bay of plenty;NZL
+2205;canterbury;NZL
+2206;chatham islands;NZL
+2207;gisborne;NZL
+2208;hawke's bay;NZL
+2209;manawatu-wanganui;NZL
+2210;marlborough;NZL
+2211;nelson;NZL
+2212;northern islands;NZL
+2213;northland;NZL
+2214;otago;NZL
+2215;southern islands;NZL
+2216;southland;NZL
+2217;taranaki;NZL
+2218;tasman;NZL
+2219;waikato;NZL
+2220;wellington;NZL
+2221;west coast;NZL
+2222;ad dakhliyah;OMN
+2223;al batinah north;OMN
+2224;al batinah south;OMN
+2225;al buraymi;OMN
+2226;al dhahira;OMN
+2227;al wusta;OMN
+2228;ash sharqiyah north;OMN
+2229;ash sharqiyah south;OMN
+2230;dhofar;OMN
+2231;musandam;OMN
+2232;muscat;OMN
+2233;azad kashmir;PAK
+2234;baluchistan;PAK
+2235;f.a.t.a.;PAK
+2236;f.c.t.;PAK
+2237;n.w.f.p.;PAK
+2238;northern areas;PAK
+2239;punjab;PAK
+2240;sind;PAK
+2241;bocas del toro;PAN
+2242;chiriquí;PAN
+2243;coclé;PAN
+2244;colón;PAN
+2245;darién;PAN
+2246;emberá;PAN
+2247;herrera;PAN
+2248;kuna yala;PAN
+2249;los santos;PAN
+2250;ngöbe buglé;PAN
+2251;panamá;PAN
+2252;panamá oeste;PAN
+2253;veraguas;PAN
+2254;amazonas;PER
+2255;ancash;PER
+2256;apurímac;PER
+2257;arequipa;PER
+2258;ayacucho;PER
+2259;cajamarca;PER
+2260;callao;PER
+2261;cusco;PER
+2262;huancavelica;PER
+2263;huánuco;PER
+2264;ica;PER
+2265;junín;PER
+2266;la libertad;PER
+2267;lambayeque;PER
+2268;lima;PER
+2269;lima province;PER
+2270;loreto;PER
+2271;madre de dios;PER
+2272;moquegua;PER
+2273;pasco;PER
+2274;piura;PER
+2275;puno;PER
+2276;san martín;PER
+2277;tacna;PER
+2278;tumbes;PER
+2279;ucayali;PER
+2280;abra;PHL
+2281;agusan del norte;PHL
+2282;agusan del sur;PHL
+2283;aklan;PHL
+2284;albay;PHL
+2285;antique;PHL
+2286;apayao;PHL
+2287;aurora;PHL
+2288;basilan;PHL
+2289;bataan;PHL
+2290;batanes;PHL
+2291;batangas;PHL
+2292;benguet;PHL
+2293;biliran;PHL
+2294;bohol;PHL
+2295;bukidnon;PHL
+2296;bulacan;PHL
+2297;cagayan;PHL
+2298;camarines norte;PHL
+2299;camarines sur;PHL
+2300;camiguin;PHL
+2301;capiz;PHL
+2302;catanduanes;PHL
+2303;cavite;PHL
+2304;cebu;PHL
+2305;compostela valley;PHL
+2306;davao del norte;PHL
+2307;davao del sur;PHL
+2308;davao oriental;PHL
+2309;dinagat islands;PHL
+2310;eastern samar;PHL
+2311;guimaras;PHL
+2312;ifugao;PHL
+2313;ilocos norte;PHL
+2314;ilocos sur;PHL
+2315;iloilo;PHL
+2316;isabela;PHL
+2317;kalinga;PHL
+2318;la union;PHL
+2319;laguna;PHL
+2320;lanao del norte;PHL
+2321;lanao del sur;PHL
+2322;leyte;PHL
+2323;maguindanao;PHL
+2324;marinduque;PHL
+2325;masbate;PHL
+2326;metropolitan manila;PHL
+2327;misamis occidental;PHL
+2328;misamis oriental;PHL
+2329;mountain province;PHL
+2330;negros occidental;PHL
+2331;negros oriental;PHL
+2332;north cotabato;PHL
+2333;northern samar;PHL
+2334;nueva ecija;PHL
+2335;nueva vizcaya;PHL
+2336;occidental mindoro;PHL
+2337;oriental mindoro;PHL
+2338;palawan;PHL
+2339;pampanga;PHL
+2340;pangasinan;PHL
+2341;quezon;PHL
+2342;quirino;PHL
+2343;rizal;PHL
+2344;romblon;PHL
+2345;samar;PHL
+2346;sarangani;PHL
+2347;siquijor;PHL
+2348;sorsogon;PHL
+2349;south cotabato;PHL
+2350;southern leyte;PHL
+2351;sultan kudarat;PHL
+2352;sulu;PHL
+2353;surigao del norte;PHL
+2354;surigao del sur;PHL
+2355;tarlac;PHL
+2356;tawi-tawi;PHL
+2357;zambales;PHL
+2358;zamboanga del norte;PHL
+2359;zamboanga del sur;PHL
+2360;zamboanga sibugay;PHL
+2361;aimeliik;PLW
+2362;airai;PLW
+2363;angaur;PLW
+2364;hatohobei;PLW
+2365;kayangel;PLW
+2366;koror;PLW
+2367;melekeok;PLW
+2368;ngaraard;PLW
+2369;ngarchelong;PLW
+2370;ngardmau;PLW
+2371;ngatpang;PLW
+2372;ngchesar;PLW
+2373;ngeremlengui;PLW
+2374;ngiwal;PLW
+2375;peleliu;PLW
+2376;sonsorol;PLW
+2377;bougainville;PNG
+2378;central;PNG
+2379;chimbu;PNG
+2380;east new britain;PNG
+2381;east sepik;PNG
+2382;eastern highlands;PNG
+2383;enga;PNG
+2384;gulf;PNG
+2385;hela;PNG
+2386;jiwaka;PNG
+2387;madang;PNG
+2388;manus;PNG
+2389;milne bay;PNG
+2390;morobe;PNG
+2391;national capital district;PNG
+2392;new ireland;PNG
+2393;oro;PNG
+2394;sandaun;PNG
+2395;southern highlands;PNG
+2396;west new britain;PNG
+2397;western;PNG
+2398;western highlands;PNG
+2399;dolnośląskie;POL
+2400;kujawsko-pomorskie;POL
+2401;łódzkie;POL
+2402;lubelskie;POL
+2403;lubuskie;POL
+2404;małopolskie;POL
+2405;mazowieckie;POL
+2406;opolskie;POL
+2407;podkarpackie;POL
+2408;podlaskie;POL
+2409;pomorskie;POL
+2410;śląskie;POL
+2411;świętokrzyskie;POL
+2412;warmińsko-mazurskie;POL
+2413;wielkopolskie;POL
+2414;zachodniopomorskie;POL
+2415;adjuntas;PRI
+2416;aguada;PRI
+2417;aguadilla;PRI
+2418;aguas buenas;PRI
+2419;aibonito;PRI
+2420;añasco;PRI
+2421;arecibo;PRI
+2422;arroyo;PRI
+2423;barceloneta;PRI
+2424;barranquitas;PRI
+2425;bayamón;PRI
+2426;cabo rojo;PRI
+2427;caguas;PRI
+2428;camuy;PRI
+2429;canóvanas;PRI
+2430;carolina;PRI
+2431;cataño;PRI
+2432;cayey;PRI
+2433;ceiba;PRI
+2434;ciales;PRI
+2435;cidra;PRI
+2436;coamo;PRI
+2437;comerío;PRI
+2438;corozal;PRI
+2439;culebra;PRI
+2440;dorado;PRI
+2441;fajardo;PRI
+2442;florida;PRI
+2443;guánica;PRI
+2444;guayama;PRI
+2445;guayanilla;PRI
+2446;guaynabo;PRI
+2447;gurabo;PRI
+2448;hatillo;PRI
+2449;hormigueros;PRI
+2450;humacao;PRI
+2451;isabela;PRI
+2452;jayuya;PRI
+2453;juana díaz;PRI
+2454;juncos;PRI
+2455;lajas;PRI
+2456;lares;PRI
+2457;las marías;PRI
+2458;las piedras;PRI
+2459;loíza;PRI
+2460;luquillo;PRI
+2461;manatí;PRI
+2462;maricao;PRI
+2463;maunabo;PRI
+2464;mayagüez;PRI
+2465;moca;PRI
+2466;morovis;PRI
+2467;naguabo;PRI
+2468;naranjito;PRI
+2469;orocovis;PRI
+2470;patillas;PRI
+2471;peñuelas;PRI
+2472;ponce;PRI
+2473;quebradillas;PRI
+2474;rincón;PRI
+2475;río grande;PRI
+2476;sabana grande;PRI
+2477;salinas;PRI
+2478;san germán;PRI
+2479;san juan;PRI
+2480;san lorenzo;PRI
+2481;san sebastián;PRI
+2482;santa isabel;PRI
+2483;toa alta;PRI
+2484;toa baja;PRI
+2485;trujillo alto;PRI
+2486;utuado;PRI
+2487;vega alta;PRI
+2488;vega baja;PRI
+2489;vieques;PRI
+2490;villalba;PRI
+2491;yabucoa;PRI
+2492;yauco;PRI
+2493;chagang-do;PRK
+2494;hamgyŏng-bukto;PRK
+2495;hamgyŏng-namdo;PRK
+2496;hwanghae-bukto;PRK
+2497;hwanghae-namdo;PRK
+2498;kaesŏng;PRK
+2499;kangwŏn-do;PRK
+2500;kumgangsan;PRK
+2501;p'yŏngan-bukto;PRK
+2502;p'yŏngan-namdo;PRK
+2503;p'yŏngyang;PRK
+2504;rasŏn;PRK
+2505;ryanggang;PRK
+2506;sinŭiju;PRK
+2507;aveiro;PRT
+2508;azores;PRT
+2509;beja;PRT
+2510;braga;PRT
+2511;bragança;PRT
+2512;castelo branco;PRT
+2513;coimbra;PRT
+2514;évora;PRT
+2515;faro;PRT
+2516;guarda;PRT
+2517;leiria;PRT
+2518;lisboa;PRT
+2519;madeira;PRT
+2520;portalegre;PRT
+2521;porto;PRT
+2522;santarém;PRT
+2523;setúbal;PRT
+2524;viana do castelo;PRT
+2525;vila real;PRT
+2526;viseu;PRT
+2527;alto paraguay;PRY
+2528;alto paraná;PRY
+2529;amambay;PRY
+2530;asunción;PRY
+2531;boquerón;PRY
+2532;caaguazú;PRY
+2533;caazapá;PRY
+2534;canindeyú;PRY
+2535;central;PRY
+2536;concepción;PRY
+2537;cordillera;PRY
+2538;guairá;PRY
+2539;itapúa;PRY
+2540;misiones;PRY
+2541;ñeembucú;PRY
+2542;paraguarí;PRY
+2543;presidente hayes;PRY
+2544;san pedro;PRY
+2545;gaza;PSE
+2546;west bank;PSE
+2547;îles australes ;PYF
+2548;îles du vent;PYF
+2549;îles marquises;PYF
+2550;îles sous-le-vent;PYF
+2551;îles tuamotu-gambier;PYF
+2552;ad dawhah;QAT
+2553;al daayen;QAT
+2554;al khor;QAT
+2555;al wakrah;QAT
+2556;ar rayyan;QAT
+2557;madinat ash shamal;QAT
+2558;umm salal;QAT
+2559;saint-benoît;REU
+2560;saint-denis;REU
+2561;saint-paul;REU
+2562;saint-pierre;REU
+2563;alba;ROU
+2564;arad;ROU
+2565;argeș;ROU
+2566;bacău;ROU
+2567;bihor;ROU
+2568;bistrița-năsăud;ROU
+2569;botoșani;ROU
+2570;brașov;ROU
+2571;brăila;ROU
+2572;bucharest;ROU
+2573;buzău;ROU
+2574;călărași;ROU
+2575;caraș-severin;ROU
+2576;cluj;ROU
+2577;constanța;ROU
+2578;covasna;ROU
+2579;dâmbovița;ROU
+2580;dolj;ROU
+2581;galați;ROU
+2582;giurgiu;ROU
+2583;gorj;ROU
+2584;harghita;ROU
+2585;hunedoara;ROU
+2586;iași;ROU
+2587;ialomița;ROU
+2588;ilfov;ROU
+2589;maramureș;ROU
+2590;mehedinți;ROU
+2591;mureș;ROU
+2592;neamț;ROU
+2593;olt;ROU
+2594;prahova;ROU
+2595;sălaj;ROU
+2596;satu mare;ROU
+2597;sibiu;ROU
+2598;suceava;ROU
+2599;teleorman;ROU
+2600;timiș;ROU
+2601;tulcea;ROU
+2602;vâlcea;ROU
+2603;vaslui;ROU
+2604;vrancea;ROU
+2605;adygey;RUS
+2606;altay;RUS
+2607;amur;RUS
+2608;arkhangel'sk;RUS
+2609;astrakhan';RUS
+2610;bashkortostan;RUS
+2611;belgorod;RUS
+2612;bryansk;RUS
+2613;buryat;RUS
+2614;chechnya;RUS
+2615;chelyabinsk;RUS
+2616;chukot;RUS
+2617;chuvash;RUS
+2618;city of st. petersburg;RUS
+2619;dagestan;RUS
+2620;gorno-altay;RUS
+2621;ingush;RUS
+2622;irkutsk;RUS
+2623;ivanovo;RUS
+2624;kabardin-balkar;RUS
+2625;kaliningrad;RUS
+2626;kalmyk;RUS
+2627;kaluga;RUS
+2628;kamchatka;RUS
+2629;karachay-cherkess;RUS
+2630;karelia;RUS
+2631;kemerovo;RUS
+2632;khabarovsk;RUS
+2633;khakass;RUS
+2634;khanty-mansiy;RUS
+2635;kirov;RUS
+2636;komi;RUS
+2637;kostroma;RUS
+2638;krasnodar;RUS
+2639;krasnoyarsk;RUS
+2640;kurgan;RUS
+2641;kursk;RUS
+2642;leningrad;RUS
+2643;lipetsk;RUS
+2644;maga buryatdan;RUS
+2645;mariy-el;RUS
+2646;mordovia;RUS
+2647;moscow city;RUS
+2648;moskva;RUS
+2649;murmansk;RUS
+2650;nenets;RUS
+2651;nizhegorod;RUS
+2652;north ossetia;RUS
+2653;novgorod;RUS
+2654;novosibirsk;RUS
+2655;omsk;RUS
+2656;orel;RUS
+2657;orenburg;RUS
+2658;penza;RUS
+2659;perm';RUS
+2660;primor'ye;RUS
+2661;pskov;RUS
+2662;rostov;RUS
+2663;ryazan';RUS
+2664;sakha;RUS
+2665;sakhalin;RUS
+2666;samara;RUS
+2667;saratov;RUS
+2668;smolensk;RUS
+2669;stavropol';RUS
+2670;sverdlovsk;RUS
+2671;tambov;RUS
+2672;tatarstan;RUS
+2673;tomsk;RUS
+2674;tula;RUS
+2675;tuva;RUS
+2676;tver';RUS
+2677;tyumen';RUS
+2678;udmurt;RUS
+2679;ul'yanovsk;RUS
+2680;vladimir;RUS
+2681;volgograd;RUS
+2682;vologda;RUS
+2683;voronezh;RUS
+2684;yamal-nenets;RUS
+2685;yaroslavl';RUS
+2686;yevrey;RUS
+2687;zabaykal'ye;RUS
+2688;amajyaruguru;RWA
+2689;amajyepfo;RWA
+2690;iburasirazuba;RWA
+2691;iburengerazuba;RWA
+2692;umujyi wa kigali;RWA
+2693;`asir;SAU
+2694;al bahah;SAU
+2695;al hudud ash shamaliyah;SAU
+2696;al jawf;SAU
+2697;al madinah;SAU
+2698;al quassim;SAU
+2699;ar riyad;SAU
+2700;ash sharqiyah;SAU
+2701;ha'il;SAU
+2702;jizan;SAU
+2703;makkah;SAU
+2704;najran;SAU
+2705;tabuk;SAU
+2706;al jazirah;SDN
+2707;al qadarif;SDN
+2708;blue nile;SDN
+2709;central darfur;SDN
+2710;east darfur;SDN
+2711;kassala;SDN
+2712;khartoum;SDN
+2713;north darfur;SDN
+2714;north kurdufan;SDN
+2715;northern;SDN
+2716;red sea;SDN
+2717;river nile;SDN
+2718;sennar;SDN
+2719;south darfur;SDN
+2720;south kurdufan;SDN
+2721;west darfur;SDN
+2722;west kurdufan;SDN
+2723;white nile;SDN
+2724;dakar;SEN
+2725;diourbel;SEN
+2726;fatick;SEN
+2727;kaffrine;SEN
+2728;kaolack;SEN
+2729;kédougou;SEN
+2730;kolda;SEN
+2731;louga;SEN
+2732;matam;SEN
+2733;saint-louis;SEN
+2734;sédhiou;SEN
+2735;tambacounda;SEN
+2736;thiès;SEN
+2737;ziguinchor;SEN
+2738;central;SGP
+2739;east;SGP
+2740;north;SGP
+2741;north-east;SGP
+2742;west;SGP
+2743;ascension;SHN
+2744;saint helena;SHN
+2745;tristan da cunha;SHN
+2746;jan mayen;SJM
+2747;svalbard;SJM
+2748;central;SLB
+2749;choiseul;SLB
+2750;guadalcanal;SLB
+2751;honiara;SLB
+2752;isabel;SLB
+2753;makira ulawa;SLB
+2754;malaita;SLB
+2755;rennell and bellona;SLB
+2756;temotu;SLB
+2757;western;SLB
+2758;eastern;SLE
+2759;northern;SLE
+2760;southern;SLE
+2761;western;SLE
+2762;ahuachapán;SLV
+2763;cabañas;SLV
+2764;chalatenango;SLV
+2765;cuscatlán;SLV
+2766;la libertad;SLV
+2767;la paz;SLV
+2768;la unión;SLV
+2769;morazán;SLV
+2770;san miguel;SLV
+2771;san salvador;SLV
+2772;san vicente;SLV
+2773;santa ana;SLV
+2774;sonsonate;SLV
+2775;usulután;SLV
+2776;acquaviva;SMR
+2777;borgo maggiore;SMR
+2778;chiesanuova;SMR
+2779;domagnano;SMR
+2780;faetano;SMR
+2781;fiorentino;SMR
+2782;montegiardino;SMR
+2783;san marino;SMR
+2784;serravalle;SMR
+2785;awdal;SOM
+2786;bakool;SOM
+2787;banaadir;SOM
+2788;bari;SOM
+2789;bay;SOM
+2790;galguduud;SOM
+2791;gedo;SOM
+2792;hiiraan;SOM
+2793;jubbada dhexe;SOM
+2794;jubbada hoose;SOM
+2795;mudug;SOM
+2796;nugaal;SOM
+2797;sanaag;SOM
+2798;shabeellaha dhexe;SOM
+2799;shabeellaha hoose;SOM
+2800;sool;SOM
+2801;togdheer;SOM
+2802;woqooyi galbeed;SOM
+2803;miquelon-langlade;SPM
+2804;saint-pierre;SPM
+2805;borski;SRB
+2806;braničevski;SRB
+2807;grad beograd;SRB
+2808;jablanički;SRB
+2809;južno-bački;SRB
+2810;južno-banatski;SRB
+2811;kolubarski;SRB
+2812;mačvanski;SRB
+2813;moravički;SRB
+2814;nišavski;SRB
+2815;pčinjski;SRB
+2816;pirotski;SRB
+2817;podunavski;SRB
+2818;pomoravski;SRB
+2819;rasinski;SRB
+2820;raški;SRB
+2821;severno-bački;SRB
+2822;severno-banatski;SRB
+2823;srednje-banatski;SRB
+2824;sremski;SRB
+2825;šumadijski;SRB
+2826;toplički;SRB
+2827;zaječarski;SRB
+2828;zapadno-bački;SRB
+2829;zlatiborski;SRB
+2830;central equatoria;SSD
+2831;eastern equatoria;SSD
+2832;jungoli;SSD
+2833;lakes;SSD
+2834;north bahr-al-ghazal;SSD
+2835;unity;SSD
+2836;upper nile;SSD
+2837;warap;SSD
+2838;west bahr-al-ghazal;SSD
+2839;west equatoria;SSD
+2840;príncipe;STP
+2841;são tomé;STP
+2842;brokopondo;SUR
+2843;commewijne;SUR
+2844;coronie;SUR
+2845;marowijne;SUR
+2846;nickerie;SUR
+2847;para;SUR
+2848;paramaribo;SUR
+2849;saramacca;SUR
+2850;sipaliwini;SUR
+2851;wanica;SUR
+2852;banskobystrický;SVK
+2853;bratislavský;SVK
+2854;košický;SVK
+2855;nitriansky;SVK
+2856;prešovský;SVK
+2857;trenčiansky;SVK
+2858;trnavský;SVK
+2859;žilinský;SVK
+2860;gorenjska;SVN
+2861;goriška;SVN
+2862;jugovzhodna slovenija;SVN
+2863;koroška;SVN
+2864;notranjsko-kraška;SVN
+2865;obalno-kraška;SVN
+2866;osrednjeslovenska;SVN
+2867;podravska;SVN
+2868;pomurska;SVN
+2869;savinjska;SVN
+2870;spodnjeposavska;SVN
+2871;zasavska;SVN
+2872;blekinge;SWE
+2873;dalarna;SWE
+2874;gävleborg;SWE
+2875;gotland;SWE
+2876;halland;SWE
+2877;jämtland;SWE
+2878;jönköping;SWE
+2879;kalmar;SWE
+2880;kronoberg;SWE
+2881;norrbotten;SWE
+2882;orebro;SWE
+2883;östergötland;SWE
+2884;skåne;SWE
+2885;södermanland;SWE
+2886;stockholm;SWE
+2887;uppsala;SWE
+2888;värmland;SWE
+2889;västerbotten;SWE
+2890;västernorrland;SWE
+2891;västmanland;SWE
+2892;västra götaland;SWE
+2893;hhohho;SWZ
+2894;lubombo;SWZ
+2895;manzini;SWZ
+2896;shiselweni;SWZ
+2897;anse aux pins;SYC
+2898;anse boileau;SYC
+2899;anse étoile;SYC
+2900;anse royale;SYC
+2901;au cap;SYC
+2902;baie lazare;SYC
+2903;baie sainte anne;SYC
+2904;beau vallon;SYC
+2905;bel air;SYC
+2906;belombre;SYC
+2907;cascade;SYC
+2908;english river;SYC
+2909;glacis;SYC
+2910;grand' anse;SYC
+2911;grand'anse praslin;SYC
+2912;la digue and inner islands;SYC
+2913;les mamelles;SYC
+2914;mont buxton;SYC
+2915;mont fleuri;SYC
+2916;outer islands;SYC
+2917;plaisance;SYC
+2918;pointe la rue;SYC
+2919;port glaud;SYC
+2920;roche caïman;SYC
+2921;saint louis;SYC
+2922;takamaka;SYC
+2923;al ḥasakah;SYR
+2924;aleppo;SYR
+2925;ar raqqah;SYR
+2926;as suwayda';SYR
+2927;damascus;SYR
+2928;dar`a;SYR
+2929;dayr az zawr;SYR
+2930;hamah;SYR
+2931;hims;SYR
+2932;idlib;SYR
+2933;lattakia;SYR
+2934;quneitra;SYR
+2935;rif dimashq;SYR
+2936;tartus;SYR
+2937;grand turk;TCA
+2938;middle caicos;TCA
+2939;north caicos;TCA
+2940;providenciales and west caicos;TCA
+2941;salt cay;TCA
+2942;south caicos and east caicos;TCA
+2943;barh el ghazel;TCD
+2944;batha;TCD
+2945;borkou;TCD
+2946;chari-baguirmi;TCD
+2947;ennedi est;TCD
+2948;ennedi ouest;TCD
+2949;guéra;TCD
+2950;hadjer-lamis;TCD
+2951;kanem;TCD
+2952;lac;TCD
+2953;logone occidental;TCD
+2954;logone oriental;TCD
+2955;mandoul;TCD
+2956;mayo-kebbi est;TCD
+2957;mayo-kebbi ouest;TCD
+2958;moyen-chari;TCD
+2959;ouaddaï;TCD
+2960;salamat;TCD
+2961;sila;TCD
+2962;tandjilé;TCD
+2963;tibesti;TCD
+2964;ville de n'djamena;TCD
+2965;wadi fira;TCD
+2966;centre;TGO
+2967;kara;TGO
+2968;maritime;TGO
+2969;plateaux;TGO
+2970;savanes;TGO
+2971;amnat charoen;THA
+2972;ang thong;THA
+2973;bangkok metropolis;THA
+2974;bueng kan;THA
+2975;buri ram;THA
+2976;chachoengsao;THA
+2977;chai nat;THA
+2978;chaiyaphum;THA
+2979;chanthaburi;THA
+2980;chiang mai;THA
+2981;chiang rai;THA
+2982;chon buri;THA
+2983;chumphon;THA
+2984;kalasin;THA
+2985;kamphaeng phet;THA
+2986;kanchanaburi;THA
+2987;khon kaen;THA
+2988;krabi;THA
+2989;lampang;THA
+2990;lamphun;THA
+2991;loei;THA
+2992;lop buri;THA
+2993;mae hong son;THA
+2994;maha sarakham;THA
+2995;mukdahan;THA
+2996;nakhon nayok;THA
+2997;nakhon pathom;THA
+2998;nakhon phanom;THA
+2999;nakhon ratchasima;THA
+3000;nakhon sawan;THA
+3001;nakhon si thammarat;THA
+3002;nan;THA
+3003;narathiwat;THA
+3004;nong bua lam phu;THA
+3005;nong khai;THA
+3006;nonthaburi;THA
+3007;pathum thani;THA
+3008;pattani;THA
+3009;phangnga;THA
+3010;phatthalung;THA
+3011;phayao;THA
+3012;phetchabun;THA
+3013;phetchaburi;THA
+3014;phichit;THA
+3015;phitsanulok;THA
+3016;phra nakhon si ayutthaya;THA
+3017;phrae;THA
+3018;phuket;THA
+3019;prachin buri;THA
+3020;prachuap khiri khan;THA
+3021;ranong;THA
+3022;ratchaburi;THA
+3023;rayong;THA
+3024;roi et;THA
+3025;sa kaeo;THA
+3026;sakon nakhon;THA
+3027;samut prakan;THA
+3028;samut sakhon;THA
+3029;samut songkhram;THA
+3030;saraburi;THA
+3031;satun;THA
+3032;si sa ket;THA
+3033;sing buri;THA
+3034;songkhla;THA
+3035;sukhothai;THA
+3036;suphan buri;THA
+3037;surat thani;THA
+3038;surin;THA
+3039;tak;THA
+3040;trang;THA
+3041;trat;THA
+3042;ubon ratchathani;THA
+3043;udon thani;THA
+3044;uthai thani;THA
+3045;uttaradit;THA
+3046;yala;THA
+3047;yasothon;THA
+3048;dushanbe;TJK
+3049;gorno-badakhshan;TJK
+3050;khatlon;TJK
+3051;leninabad;TJK
+3052;tadzhikistan territories;TJK
+3053;anafu;TKL
+3054;fakaofo;TKL
+3055;nukunonu;TKL
+3056;ahal;TKM
+3057;aşgabat;TKM
+3058;balkan;TKM
+3059;chardzhou;TKM
+3060;mary;TKM
+3061;tashauz;TKM
+3062;aileu;TLS
+3063;ainaro;TLS
+3064;ambeno;TLS
+3065;baucau;TLS
+3066;bobonaro;TLS
+3067;covalima;TLS
+3068;dili;TLS
+3069;ermera;TLS
+3070;lautém;TLS
+3071;liquiçá;TLS
+3072;manatuto;TLS
+3073;manufahi;TLS
+3074;viqueque;TLS
+3075;'eua;TON
+3076;ha'apai;TON
+3077;niuas;TON
+3078;tongatapu;TON
+3079;vava'u;TON
+3080;arima;TTO
+3081;chaguanas;TTO
+3082;couva-tabaquite-talparo;TTO
+3083;diego martin;TTO
+3084;mayaro/rio claro;TTO
+3085;penal-debe;TTO
+3086;point fortin;TTO
+3087;port of spain;TTO
+3088;princes town;TTO
+3089;san fernando;TTO
+3090;san juan-laventille;TTO
+3091;sangre grande;TTO
+3092;siparia;TTO
+3093;tobago;TTO
+3094;tunapuna/piarco;TTO
+3095;ariana;TUN
+3096;béja;TUN
+3097;ben arous (tunis sud);TUN
+3098;bizerte;TUN
+3099;gabès;TUN
+3100;gafsa;TUN
+3101;jendouba;TUN
+3102;kairouan;TUN
+3103;kassérine;TUN
+3104;kebili;TUN
+3105;le kef;TUN
+3106;mahdia;TUN
+3107;manubah;TUN
+3108;médenine;TUN
+3109;monastir;TUN
+3110;nabeul;TUN
+3111;sfax;TUN
+3112;sidi bou zid;TUN
+3113;siliana;TUN
+3114;sousse;TUN
+3115;tataouine;TUN
+3116;tozeur;TUN
+3117;tunis;TUN
+3118;zaghouan;TUN
+3119;adana;TUR
+3120;adiyaman;TUR
+3121;afyon;TUR
+3122;agri;TUR
+3123;aksaray;TUR
+3124;amasya;TUR
+3125;ankara;TUR
+3126;antalya;TUR
+3127;ardahan;TUR
+3128;artvin;TUR
+3129;aydin;TUR
+3130;balikesir;TUR
+3131;bartın;TUR
+3132;batman;TUR
+3133;bayburt;TUR
+3134;bilecik;TUR
+3135;bingöl;TUR
+3136;bitlis;TUR
+3137;bolu;TUR
+3138;burdur;TUR
+3139;bursa;TUR
+3140;çanakkale;TUR
+3141;çankiri;TUR
+3142;çorum;TUR
+3143;denizli;TUR
+3144;diyarbakir;TUR
+3145;düzce;TUR
+3146;edirne;TUR
+3147;elazığ;TUR
+3148;erzincan;TUR
+3149;erzurum;TUR
+3150;eskisehir;TUR
+3151;gaziantep;TUR
+3152;giresun;TUR
+3153;gümüshane;TUR
+3154;hakkari;TUR
+3155;hatay;TUR
+3156;iğdır;TUR
+3157;isparta;TUR
+3158;istanbul;TUR
+3159;izmir;TUR
+3160;k. maras;TUR
+3161;karabük;TUR
+3162;karaman;TUR
+3163;kars;TUR
+3164;kastamonu;TUR
+3165;kayseri;TUR
+3166;kilis;TUR
+3167;kinkkale;TUR
+3168;kirklareli;TUR
+3169;kirsehir;TUR
+3170;kocaeli;TUR
+3171;konya;TUR
+3172;kütahya;TUR
+3173;malatya;TUR
+3174;manisa;TUR
+3175;mardin;TUR
+3176;mersin;TUR
+3177;mugla;TUR
+3178;mus;TUR
+3179;nevsehir;TUR
+3180;nigde;TUR
+3181;ordu;TUR
+3182;osmaniye;TUR
+3183;rize;TUR
+3184;sakarya;TUR
+3185;samsun;TUR
+3186;sanliurfa;TUR
+3187;siirt;TUR
+3188;sinop;TUR
+3189;sirnak;TUR
+3190;sivas;TUR
+3191;tekirdag;TUR
+3192;tokat;TUR
+3193;trabzon;TUR
+3194;tunceli;TUR
+3195;usak;TUR
+3196;van;TUR
+3197;yalova;TUR
+3198;yozgat;TUR
+3199;zinguldak;TUR
+3200;funafuti;TUV
+3201;nanumanga;TUV
+3202;nanumea;TUV
+3203;niulakita;TUV
+3204;niutao;TUV
+3205;nui;TUV
+3206;nukufetau;TUV
+3207;nukulaelae;TUV
+3208;vaitupu;TUV
+3209;fujian;TWN
+3210;kaohsiung;TWN
+3211;new taipei;TWN
+3212;taichung;TWN
+3213;tainan;TWN
+3214;taipei;TWN
+3215;taiwan;TWN
+3216;arusha;TZA
+3217;dar es salaam;TZA
+3218;dodoma;TZA
+3219;geita;TZA
+3220;iringa;TZA
+3221;kagera;TZA
+3222;katavi;TZA
+3223;kigoma;TZA
+3224;kilimanjaro;TZA
+3225;lindi;TZA
+3226;manyara;TZA
+3227;mara;TZA
+3228;mbeya;TZA
+3229;morogoro;TZA
+3230;mtwara;TZA
+3231;mwanza;TZA
+3232;njombe;TZA
+3233;pemba north;TZA
+3234;pemba south;TZA
+3235;pwani;TZA
+3236;rukwa;TZA
+3237;ruvuma;TZA
+3238;shinyanga;TZA
+3239;simiyu;TZA
+3240;singida;TZA
+3241;tabora;TZA
+3242;tanga;TZA
+3243;zanzibar north;TZA
+3244;zanzibar south and central;TZA
+3245;zanzibar west;TZA
+3246;adjumani;UGA
+3247;apac;UGA
+3248;arua;UGA
+3249;bugiri;UGA
+3250;bundibugyo;UGA
+3251;bushenyi;UGA
+3252;busia;UGA
+3253;gulu;UGA
+3254;hoima;UGA
+3255;iganga;UGA
+3256;jinja;UGA
+3257;kabale;UGA
+3258;kabarole;UGA
+3259;kaberamaido;UGA
+3260;kalangala;UGA
+3261;kampala;UGA
+3262;kamuli;UGA
+3263;kamwenge;UGA
+3264;kanungu;UGA
+3265;kapchorwa;UGA
+3266;kasese;UGA
+3267;katakwi;UGA
+3268;kayunga;UGA
+3269;kibale;UGA
+3270;kiboga;UGA
+3271;kisoro;UGA
+3272;kitgum;UGA
+3273;kotido;UGA
+3274;kumi;UGA
+3275;kyenjojo;UGA
+3276;lake albert;UGA
+3277;lake victoria;UGA
+3278;lira;UGA
+3279;luwero;UGA
+3280;masaka;UGA
+3281;masindi;UGA
+3282;mayuge;UGA
+3283;mbale;UGA
+3284;mbarara;UGA
+3285;moroto;UGA
+3286;moyo;UGA
+3287;mpigi;UGA
+3288;mubende;UGA
+3289;mukono;UGA
+3290;nakapiripirit;UGA
+3291;nakasongola;UGA
+3292;nebbi;UGA
+3293;ntungamo;UGA
+3294;pader;UGA
+3295;pallisa;UGA
+3296;rakai;UGA
+3297;rukungiri;UGA
+3298;sembabule;UGA
+3299;sironko;UGA
+3300;soroti;UGA
+3301;tororo;UGA
+3302;wakiso;UGA
+3303;yumbe;UGA
+3304;cherkasy;UKR
+3305;chernihiv;UKR
+3306;chernivtsi;UKR
+3307;crimea;UKR
+3308;dnipropetrovs'k;UKR
+3309;donets'k;UKR
+3310;ivano-frankivs'k;UKR
+3311;kharkiv;UKR
+3312;kherson;UKR
+3313;khmel'nyts'kyy;UKR
+3314;kiev;UKR
+3315;kiev city;UKR
+3316;kirovohrad;UKR
+3317;l'viv;UKR
+3318;luhans'k;UKR
+3319;mykolayiv;UKR
+3320;odessa;UKR
+3321;poltava;UKR
+3322;rivne;UKR
+3323;sevastopol';UKR
+3324;sumy;UKR
+3325;ternopil';UKR
+3326;transcarpathia;UKR
+3327;vinnytsya;UKR
+3328;volyn;UKR
+3329;zaporizhzhya;UKR
+3330;zhytomyr;UKR
+3331;baker;UMI
+3332;howland;UMI
+3333;jarvis island;UMI
+3334;johnston;UMI
+3335;kingman reef;UMI
+3336;midway;UMI
+3337;navassa;UMI
+3338;palmyra;UMI
+3339;wake;UMI
+3340;artigas;URY
+3341;canelones;URY
+3342;cerro largo;URY
+3343;colonia;URY
+3344;durazno;URY
+3345;flores;URY
+3346;florida;URY
+3347;lavalleja;URY
+3348;maldonado;URY
+3349;montevideo;URY
+3350;paysandú;URY
+3351;río negro;URY
+3352;rivera;URY
+3353;rocha;URY
+3354;salto;URY
+3355;san josé;URY
+3356;soriano;URY
+3357;tacuarembó;URY
+3358;treinta y tres;URY
+3359;alabama;USA
+3360;alaska;USA
+3361;arizona;USA
+3362;arkansas;USA
+3363;california;USA
+3364;colorado;USA
+3365;connecticut;USA
+3366;delaware;USA
+3367;district of columbia;USA
+3368;florida;USA
+3369;georgia;USA
+3370;hawaii;USA
+3371;idaho;USA
+3372;illinois;USA
+3373;indiana;USA
+3374;iowa;USA
+3375;kansas;USA
+3376;kentucky;USA
+3377;louisiana;USA
+3378;maine;USA
+3379;maryland;USA
+3380;massachusetts;USA
+3381;michigan;USA
+3382;minnesota;USA
+3383;mississippi;USA
+3384;missouri;USA
+3385;montana;USA
+3386;nebraska;USA
+3387;nevada;USA
+3388;new hampshire;USA
+3389;new jersey;USA
+3390;new mexico;USA
+3391;new york;USA
+3392;north carolina;USA
+3393;north dakota;USA
+3394;ohio;USA
+3395;oklahoma;USA
+3396;oregon;USA
+3397;pennsylvania;USA
+3398;rhode island;USA
+3399;south carolina;USA
+3400;south dakota;USA
+3401;tennessee;USA
+3402;texas;USA
+3403;utah;USA
+3404;vermont;USA
+3405;virginia;USA
+3406;washington;USA
+3407;west virginia;USA
+3408;wisconsin;USA
+3409;wyoming;USA
+3410;andijon;UZB
+3411;bukhoro;UZB
+3412;ferghana;UZB
+3413;jizzakh;UZB
+3414;karakalpakstan;UZB
+3415;kashkadarya;UZB
+3416;khorezm;UZB
+3417;namangan;UZB
+3418;navoi;UZB
+3419;samarkand;UZB
+3420;sirdaryo;UZB
+3421;surkhandarya;UZB
+3422;tashkent;UZB
+3423;tashkent city;UZB
+3424;charlotte;VCT
+3425;grenadines;VCT
+3426;saint andrew;VCT
+3427;saint david;VCT
+3428;saint george;VCT
+3429;saint patrick;VCT
+3430;amazonas;VEN
+3431;anzoátegui;VEN
+3432;apure;VEN
+3433;aragua;VEN
+3434;barinas;VEN
+3435;bolívar;VEN
+3436;carabobo;VEN
+3437;cojedes;VEN
+3438;delta amacuro;VEN
+3439;dependencias federales;VEN
+3440;distrito capital;VEN
+3441;falcón;VEN
+3442;guárico;VEN
+3443;lara;VEN
+3444;mérida;VEN
+3445;miranda;VEN
+3446;monagas;VEN
+3447;nueva esparta;VEN
+3448;portuguesa;VEN
+3449;sucre;VEN
+3450;táchira;VEN
+3451;trujillo;VEN
+3452;vargas;VEN
+3453;yaracuy;VEN
+3454;zulia;VEN
+3455;anegada;VGB
+3456;jost van dyke;VGB
+3457;other islands;VGB
+3458;tortola;VGB
+3459;virgin gorda;VGB
+3460;saint croix;VIR
+3461;saint john;VIR
+3462;saint thomas;VIR
+3463;an giang;VNM
+3464;bạc liêu;VNM
+3465;bắc giang;VNM
+3466;bắc kạn;VNM
+3467;bắc ninh;VNM
+3468;bến tre;VNM
+3469;bà rịa - vũng tàu;VNM
+3470;bình định;VNM
+3471;bình dương;VNM
+3472;bình phước;VNM
+3473;bình thuận;VNM
+3474;cần thơ;VNM
+3475;cà mau;VNM
+3476;cao bằng;VNM
+3477;đắk lắk;VNM
+3478;đắk nông;VNM
+3479;đồng nai;VNM
+3480;đồng tháp;VNM
+3481;đà nẵng;VNM
+3482;điện biên;VNM
+3483;gia lai;VNM
+3484;hải dương;VNM
+3485;hải phòng;VNM
+3486;hậu giang;VNM
+3487;hồ chí minh;VNM
+3488;hà giang;VNM
+3489;hà nội;VNM
+3490;hà nam;VNM
+3491;hà tĩnh;VNM
+3492;hoà bình;VNM
+3493;hưng yên;VNM
+3494;khánh hòa;VNM
+3495;kiên giang;VNM
+3496;kon tum;VNM
+3497;lạng sơn;VNM
+3498;lai châu;VNM
+3499;lâm đồng;VNM
+3500;lào cai;VNM
+3501;long an;VNM
+3502;nam định;VNM
+3503;nghệ an;VNM
+3504;ninh bình;VNM
+3505;ninh thuận;VNM
+3506;phú thọ;VNM
+3507;phú yên;VNM
+3508;quảng bình;VNM
+3509;quảng nam;VNM
+3510;quảng ngãi;VNM
+3511;quảng ninh;VNM
+3512;quảng trị;VNM
+3513;sóc trăng;VNM
+3514;sơn la;VNM
+3515;tây ninh;VNM
+3516;thừa thiên huế;VNM
+3517;thái bình;VNM
+3518;thái nguyên;VNM
+3519;thanh hóa;VNM
+3520;tiền giang;VNM
+3521;trà vinh;VNM
+3522;tuyên quang;VNM
+3523;vĩnh long;VNM
+3524;vĩnh phúc;VNM
+3525;yên bái;VNM
+3526;malampa;VUT
+3527;penama;VUT
+3528;sanma;VUT
+3529;shefa;VUT
+3530;tafea;VUT
+3531;torba;VUT
+3532;alo;WLF
+3533;singave;WLF
+3534;uvéa;WLF
+3535;a'ana;WSM
+3536;aiga-i-le-tai;WSM
+3537;atua;WSM
+3538;fa'asaleleaga;WSM
+3539;gaga'emauga;WSM
+3540;gagaifomauga;WSM
+3541;palauli;WSM
+3542;satupa'itea;WSM
+3543;tuamasaga;WSM
+3544;va'a-o-fonoti;WSM
+3545;vaisigano;WSM
+3546;akrotiri;XAD
+3547;dhekelia;XAD
+3548;đakovica;XKO
+3549;gnjilane;XKO
+3550;kosovska mitrovica;XKO
+3551;pećki;XKO
+3552;pristina;XKO
+3553;prizren;XKO
+3554;uroševac;XKO
+3555;gazimağusa;XNC
+3556;girne;XNC
+3557;güzelyurt;XNC
+3558;iskele;XNC
+3559;nicosia;XNC
+3560;`adan;YEM
+3561;abyan;YEM
+3562;al bayda';YEM
+3563;al dali';YEM
+3564;al hudaydah;YEM
+3565;al jawf;YEM
+3566;al mahrah;YEM
+3567;al mahwit;YEM
+3568;amanat al asimah;YEM
+3569;amran;YEM
+3570;dhamar;YEM
+3571;hadramawt;YEM
+3572;hajjah;YEM
+3573;ibb;YEM
+3574;lahij;YEM
+3575;ma'rib;YEM
+3576;raymah;YEM
+3577;sa`dah;YEM
+3578;san`a';YEM
+3579;shabwah;YEM
+3580;ta`izz;YEM
+3581;eastern cape;ZAF
+3582;free state;ZAF
+3583;gauteng;ZAF
+3584;kwazulu-natal;ZAF
+3585;limpopo;ZAF
+3586;mpumalanga;ZAF
+3587;north west;ZAF
+3588;northern cape;ZAF
+3589;western cape;ZAF
+3590;central;ZMB
+3591;copperbelt;ZMB
+3592;eastern;ZMB
+3593;luapula;ZMB
+3594;lusaka;ZMB
+3595;muchinga;ZMB
+3596;north-western;ZMB
+3597;northern;ZMB
+3598;southern;ZMB
+3599;western;ZMB
+3600;bulawayo;ZWE
+3601;harare;ZWE
+3602;manicaland;ZWE
+3603;mashonaland central;ZWE
+3604;mashonaland east;ZWE
+3605;mashonaland west;ZWE
+3606;masvingo;ZWE
+3607;matabeleland north;ZWE
+3608;matabeleland south;ZWE
+3609;midlands;ZWE
