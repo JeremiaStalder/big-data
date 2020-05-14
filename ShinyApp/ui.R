@@ -1,4 +1,3 @@
-
 ###############################################################################
 # Entrypoint for the shiny app
 #
@@ -50,5 +49,7 @@ ui = shiny::htmlTemplate(
   page3_box3_content1 = helpText("Mobility"),
   page3_box3_stat1 = helpText("400"),
   page3_box3_content2 = helpText("tsd data points on activity information"),
-  page3_box3_content3 = helpText("The dataset shows how visits and length of stay at different places change compared to a baseline. These changes are calculated, using the same kind of aggregated and anonymized data used to show popular times for places in Google Maps.")
-)
+  page3_box3_content3 = helpText("The dataset shows how visits and length of stay at different places change compared to a baseline. These changes are calculated, using the same kind of aggregated and anonymized data used to show popular times for places in Google Maps."),
+
+  page4_selector = selectInput( "city", label = "Select City", choices = d_clean$city %>% unique(), selected = "Auckland" ), 
+  )

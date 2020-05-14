@@ -1,7 +1,7 @@
 ###############################################################################
 # Defining Server Logic behind App
 #
-# Author Fabian Karst, Erik Senn, Jeremia Stadler
+# Author Fabian Karst, Erik Senn, Jeremia Stalder
 # Created 2019-01-30 20:32:44
 ###############################################################################
 
