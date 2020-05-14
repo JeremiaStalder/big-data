@@ -15,8 +15,8 @@ global_mobility_report <- read_delim("data/google_mobility/Global_Mobility_Repor
 
 ### Prepocessing ----
   # summary 
-    summary(is.na(global_mobility_report))
     summary(global_mobility_report)
+  # summary(is.na(global_mobility_report))
   
   # rename cols to match nationwide data
     colnames(global_mobility_report)[1] = "CountryCode" 
@@ -30,6 +30,15 @@ global_mobility_report <- read_delim("data/google_mobility/Global_Mobility_Repor
   # change subregions to lowercase letter
     global_mobility_report$sub_region_1 = tolower(global_mobility_report$sub_region_1)
   
+  # take daily means per subregion if multiple obs per subregion
+    global_mobility_report = group_by(global_mobility_report, Date, CountryCode, CountryName,sub_region_1) %>%
+      summarize(retail_and_recreation_percent_change_from_baseline = mean(retail_and_recreation_percent_change_from_baseline, na.rm=T),
+                grocery_and_pharmacy_percent_change_from_baseline = mean(grocery_and_pharmacy_percent_change_from_baseline, na.rm=T),
+                parks_percent_change_from_baseline = mean(parks_percent_change_from_baseline, na.rm=T),
+                transit_stations_percent_change_from_baseline = mean(transit_stations_percent_change_from_baseline, na.rm=T),
+                workplaces_percent_change_from_baseline = mean(workplaces_percent_change_from_baseline, na.rm=T),
+                residential_percent_change_from_baseline = mean(residential_percent_change_from_baseline, na.rm=T))
+    
   # drop observations with NA values for indices
     # drop if X or more indices are NA
     max_number_missing_indices = 6 # 0==all indices necessary, 6== no index necessary
@@ -39,10 +48,6 @@ global_mobility_report <- read_delim("data/google_mobility/Global_Mobility_Repor
                                                                is.na(transit_stations_percent_change_from_baseline) +
                                                                is.na(workplaces_percent_change_from_baseline) +
                                                                is.na(residential_percent_change_from_baseline))<=max_number_missing_indices)
-    
-
-    
-
     
   # shorten variable names
     mobility_variables_original = c("retail_and_recreation_percent_change_from_baseline",

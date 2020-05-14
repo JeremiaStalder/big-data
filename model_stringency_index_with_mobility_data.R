@@ -23,14 +23,10 @@ outpath = "./output/stringency_and_mobility/"
   global_mobility_report_clean <- read_csv("data/clean/global_mobility_report_clean.csv", 
                                            col_types = cols(Date = col_date(format = "%Y-%m-%d"), 
                                                             CountryCode = col_character(), 
-                                                            sub_region_1 = col_character(),
-                                                            sub_region_2 = col_character())) # load mobility data
+                                                            sub_region_1 = col_character()))
   
   global_mobility_report = fread("data/clean/global_mobility_report_clean.csv", header=TRUE, encoding = "UTF-8")
   global_mobility_report = setDF(global_mobility_report)
-  unique(global_mobility_report$sub_region_1)
-  
-  unique(global_mobility_report_clean$sub_region_1)
   
   # replace NA with "NA" country code
    global_mobility_report_clean = mutate(global_mobility_report_clean, CountryCode = ifelse(is.na(CountryCode) & CountryName=="Namibia", "NA", CountryCode)) # redo because "NA" is imported as NA    
@@ -49,13 +45,13 @@ outpath = "./output/stringency_and_mobility/"
 ###  Merge data (country level) ----
   
    # right join by CountryCode and Date. Remove obs where one of the datapoints is not given. Remove CountryName of nationwide data
-   merged_data_all = right_join(select(global_mobility_report_clean, -X1), select(nationwide_data_clean,-c("CountryName", "X1")), by = c("CountryCode", "Date")) 
+   merged_data_all = right_join(global_mobility_report_clean, select(nationwide_data_clean,-c("CountryName", "X1")), by = c("CountryCode", "Date")) 
    summary(merged_data_all) # dataset merged by country and data
     
   # working datasets
   merged_data_countries = filter(merged_data_all, is.na(sub_region_1))  
-  merged_data = inner_join(select(global_mobility_report_clean, -X1), select(nationwide_data_clean,-c("CountryName", "X1")), by = c("CountryCode", "Date"))  # dataset with goole data
-
+  merged_data = inner_join(global_mobility_report_clean, select(nationwide_data_clean,-c("CountryName", "X1")), by = c("CountryCode", "Date"))  # dataset with goole data
+  
 ### Descriptives ----
 
     
@@ -316,6 +312,7 @@ outpath = "./output/stringency_and_mobility/"
         summary(fit-train$StringencyIndex)
         
         r_squared_forest <- r_sq(train$StringencyIndex, fit)
+        print("R^2 In sample")
         r_squared_forest
         forest_model_evaluation
         
@@ -324,6 +321,7 @@ outpath = "./output/stringency_and_mobility/"
         summary(fit-test$StringencyIndex)
         
         r_squared_forest <- r_sq(test$StringencyIndex, fit)
+        print("R^2 Out-Of-Sample")
         r_squared_forest
         forest_model_evaluation
       
@@ -346,11 +344,17 @@ outpath = "./output/stringency_and_mobility/"
           # add necessary covariates to data
           merged_data_with_prediction = merged_data
           merged_data_with_prediction$Date_numeric = as.numeric(merged_data_with_prediction$Date)
+          
+          summary(merged_data_with_prediction)
+          test_Data = filter(merged_data_with_prediction, CountryCode =="US" & sub_region_1 == "alabama" ) %>%
+            arrange(sub_region_1, Date)
+          
+          test_Data2 = filter(test_Data, Date =='2020-03-02')
+          
+          
         
           # predict using forest
           merged_data_with_prediction$StringencyIndexPredicted = predict(forest_final, newdata = merged_data_with_prediction[,forest_covariates])$predictions
-          
-         
           
           # scale daily predicted index of subregions to match observed country index. Col StringencyIndex is country Stringency Index
           merged_data_with_prediction_with_countrymeans = group_by(merged_data_with_prediction, CountryCode, Date) %>%
@@ -380,7 +384,7 @@ outpath = "./output/stringency_and_mobility/"
                   geom_line(aes(y=StringencyIndexPredicted, color = sub_region_1))+
                   theme_bw()+
                   ggtitle(paste(title,sep=" ")) +
-                  ylab(label= "Pred. Stringency 3 Day Average") +
+                  ylab(label= "Pred. Stringency 3 Day Av.") +
                   theme(legend.title = element_blank()) +
                   theme(legend.position = "bottom") + 
                   theme(plot.title = element_text(size=10, face="bold"))+
@@ -388,18 +392,20 @@ outpath = "./output/stringency_and_mobility/"
                         axis.title=element_text(size=10,face="bold"))+
                   ggsave(file=paste0(outpath,title,".png"), width=6, height=4, dpi=600))
       
-          colnames(merged_data_with_prediction_with_countrymeans)
+
           
       # add stringencyIndex data for non-predicted countries
         merged_data_with_prediction_with_countrymeans_added_countries = left_join(nationwide_data_clean, 
                                                                              select(merged_data_with_prediction_with_countrymeans, 
-                                                                                    c("CountryCode",  "sub_region_1","sub_region_2", "Date", mobility_variables, "StringencyIndexFinalPrediction")),
+                                                                                    c("CountryCode",  "sub_region_1","Date", all_of(mobility_variables), "StringencyIndexFinalPrediction")),
                                                                              by = c("CountryCode", "Date"))
-        
-      # remove unnecessary variables
-        merged_data_with_prediction_with_countrymeans_final = mutate(merged_data_with_prediction_with_countrymeans_added_countries, StringencyIndex = ifelse((is.na(StringencyIndexFinalPrediction)==F), StringencyIndexFinalPrediction, StringencyIndex)) %>%
+
+      # Define StringencyIndex as predicted Stringency Index, oxford stringency index as StringencyIndexCountry
+        merged_data_with_prediction_with_countrymeans_final = mutate(merged_data_with_prediction_with_countrymeans_added_countries, StringencyIndexCountry = StringencyIndex,
+                                                                     StringencyIndex = ifelse((is.na(StringencyIndexFinalPrediction)==F), StringencyIndexFinalPrediction, StringencyIndex)) %>%
           ungroup() %>%
           select(-c("StringencyIndexFinalPrediction"))
+        
         
       # save predictions
         write.csv(merged_data_with_prediction_with_countrymeans_final,file="./data/clean/global_mobility_report_clean_with_predictions_stringency_index.csv")

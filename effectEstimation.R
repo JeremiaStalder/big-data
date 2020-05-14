@@ -84,7 +84,6 @@ outpath = "output/effectEstimation/" # output
                                                                             Region = col_character(), 
                                                                             CountryCode = col_character(), 
                                                                             sub_region_1 = col_character(),
-                                                                            sub_region_2 = col_character(), # load mobility data
                                                                             grocery_and_pharmacy = col_double(), 
                                                                             parks = col_double(), residential = col_double(), 
                                                                             retail_and_recreation = col_double(), 
@@ -97,7 +96,7 @@ outpath = "output/effectEstimation/" # output
   
     # CHOICE: analysis variable: airpollution value, weather model prediction - value, value - past years value
     analysis_variable_list = c("value","error_prediction", "value_difference")
-    analysis_variable = analysis_variable_list[1]
+    analysis_variable = analysis_variable_list[3]
     
     # CHOICE: save new regressions and update result table for presentation?
     update_result = T # make sure all tables for analysis_variable_list results exist in directory aber running estimimation. Change Analysis var to cover all
@@ -172,7 +171,7 @@ outpath = "output/effectEstimation/" # output
       summary(effect_data[effect_data$covid_time==1,])
       
       # remove outliers in stringencyIndex_difference, keep NAs
-      effect_data = filter(effect_data, StringencyIndex_difference > 25 | is.na(StringencyIndex_difference))
+      effect_data = filter(effect_data, (StringencyIndex_difference > 25 & StringencyIndex_difference < 100) | is.na(StringencyIndex_difference) )
       
       # remove outliers in change airpollution for so2
       if(analysis_variable=="value_difference" | analysis_variable=="value" ) {
