@@ -386,7 +386,7 @@ outpath = "output/effectEstimation/" # output
         write.csv(subregion_effects,file=paste0(outpath,"subregion_effects.csv"), row.names=FALSE)
         
       }
-      
+
       # add regions to dictionary
         # state_gadm_dict_cleaned <- read_csv("C:/Users/eriks/Desktop/state_gadm_dict_cleaned.csv")
         # state_gadm_dict_cleaned_with_regions <- left_join(state_gadm_dict_cleaned, unique(select(openaq_state_clean_ma, CountryCode, Region)), by="CountryCode")
