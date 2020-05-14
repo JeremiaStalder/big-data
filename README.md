@@ -76,12 +76,23 @@ unit-conversion pm to microg/m^3: https://www.ccohs.ca/oshanswers/chemicals/conv
 		
 	## "effectEstimation.R"
 	Input: global_mobility_report_clean_stringency_index.csv, open_state_clean.csv and other aggregated variants (_ma, country_difference_data (_standardized), subregion_difference_data (_standardized),)
-	Output: region_effects.csv, subregion_effects.csv (and 3 subfiles only containing the effect of one of the 3 analysis variables)
+	Output: region_effects.csv, subregion_effects.csv (and 3 subfiles only containing the effect of one of the 3 analysis variables): scatter plots with linear model
 	Description: 
 		Flexible Difference in Difference Estimation with Choices
-			Timeframe
+			Dataset
+			Timeframe for "before Covid" and "in Covid"
 			Analysis variable (value, error_prediciton, value_difference)
 			Selection on Regions / Countries (default: world)
+			Handling of Outliers / low number of observations 
+			Estimation Method: First Differences (pooled OLS implemented, but depreciated)
+		Findings
+			Value_difference
+				for particle: CO overall negative effects
+				for regions:
+					North America: negative significant effects for: co, o3, pm25, so2
+					Western Europe: positive significant effect for: pm25, pm10
+					Eastern Europe: positive significant effect for: o3
+					Asia(excl near East):  negative significant effect for: so2
 			
 
 

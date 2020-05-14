@@ -96,7 +96,7 @@ outpath = "output/effectEstimation/" # output
   
     # CHOICE: analysis variable: airpollution value, weather model prediction - value, value - past years value
     analysis_variable_list = c("value","error_prediction", "value_difference")
-    analysis_variable = analysis_variable_list[3]
+    analysis_variable = analysis_variable_list[2]
     
     # CHOICE: save new regressions and update result table for presentation?
     update_result = T # make sure all tables for analysis_variable_list results exist in directory aber running estimimation. Change Analysis var to cover all
