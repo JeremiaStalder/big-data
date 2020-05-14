@@ -61,7 +61,6 @@
                                                                                      Date = col_date(format = "%Y-%m-%d"), 
                                                                                      CountryCode = col_character(), 
                                                                                      sub_region_1 = col_character(),
-                                                                                     sub_region_2 = col_character(), # load mobility data
                                                                                      grocery_and_pharmacy = col_double(), 
                                                                                      parks = col_double(), residential = col_double(), 
                                                                                      retail_and_recreation = col_double(), 
@@ -277,13 +276,8 @@
     all_data_over_time = inner_join(global_mobility_report_clean_stringency_index, select(subregion_difference_data, -c("CountryCode", "Region")), by = c("sub_region_1","Date")) 
     
     # drop unnecessary vars
-    all_data_over_time = select(all_data_over_time, -c("value_last_year","prediction_indicator","value_last_year_indicator","X1","X1_1","sub_region_2", "LegacyStringencyIndex","LegacyStringencyIndexForDisplay")) %>%
+    all_data_over_time = select(all_data_over_time, -c("value_last_year","prediction_indicator","value_last_year_indicator","X1","X1_1", "LegacyStringencyIndex","LegacyStringencyIndexForDisplay")) %>%
       filter(Date >='2020-02-15' & Date <='2020-04-20')
-      
-    length(unique(all_data_over_time$Date))
-    length(unique(all_data_over_time$sub_region_1))
-    length(unique(all_data_over_time$parameter))
-    nrow(all_data_over_time)
     
   # save data
   write.csv(open_state_clean,file=paste0(outpath_files,"open_state_clean.csv"))
@@ -295,4 +289,3 @@
   write.csv(global_mobility_report_clean_stringency_index,file=paste0(outpath_files,"global_mobility_report_clean_to_merge_with_openaq.csv"))
   write.csv(countryListOpenaqStringencyMerged,file=paste0(outpath_files,"countryListOpenaqStringencyMerged.csv"))
   write.csv(all_data_over_time,file=paste0(outpath_files,"all_data_over_time.csv"))
-  
